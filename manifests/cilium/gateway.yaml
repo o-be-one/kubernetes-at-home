@@ -1,0 +1,35 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: GatewayClass
+metadata:
+  name: cilium
+spec:
+  controllerName: io.cilium/gateway-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: shared-gateway
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  gatewayClassName: cilium
+  listeners:
+  - name: shared-http
+    protocol: HTTP
+    port: 80
+    hostname: "*.menia.cc"
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: shared-https
+    protocol: HTTPS
+    port: 443
+    hostname: "*.menia.cc"
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: wildcard-menia-cc-tls

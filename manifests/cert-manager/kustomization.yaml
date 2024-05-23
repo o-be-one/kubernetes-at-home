@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.yaml
+- clusterissuers.yaml
+
+patches:
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: --feature-gates=ExperimentalGatewayAPISupport=true
+  target:
+    kind: Deployment
+    name: cert-manager
