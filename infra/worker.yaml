@@ -21,7 +21,7 @@ machine:
     #   - 192.168.0.10
     # Used to provide additional options to the kubelet.
     kubelet:
-        # image: ghcr.io/siderolabs/kubelet:v1.30.0 # The `image` field is an optional reference to an alternative kubelet image.
+        # image: ghcr.io/siderolabs/kubelet:v1.30.1 # The `image` field is an optional reference to an alternative kubelet image.
         # Enable container runtime default Seccomp profile.
         defaultRuntimeSeccompProfileEnabled: true
         # The `nodeIP` field is used to configure `--node-ip` flag for the kubelet.
@@ -388,7 +388,7 @@ cluster:
         # Disable kube-proxy deployment on cluster bootstrap.
         disabled: true
         # # The container image used in the kube-proxy manifest.
-        # image: registry.k8s.io/kube-proxy:v1.30.0
+        # image: registry.k8s.io/kube-proxy:v1.30.1
     # Configures cluster member discovery.
     discovery:
         # Enable the cluster membership discovery feature.
@@ -420,7 +420,7 @@ cluster:
 #     key: LS0tIEVYQU1QTEUgS0VZIC0tLQ==
 # # API server specific configuration options.
 # apiServer:
-#     image: registry.k8s.io/kube-apiserver:v1.30.0 # The container image used in the API server manifest.
+#     image: registry.k8s.io/kube-apiserver:v1.30.1 # The container image used in the API server manifest.
 #     # Extra arguments to supply to the API server.
 #     extraArgs:
 #         feature-gates: ServerSideApply=true
@@ -456,7 +456,7 @@ cluster:
 #             - level: Metadata
 # # Controller manager server specific configuration options.
 # controllerManager:
-#     image: registry.k8s.io/kube-controller-manager:v1.30.0 # The container image used in the controller manager manifest.
+#     image: registry.k8s.io/kube-controller-manager:v1.30.1 # The container image used in the controller manager manifest.
 #     # Extra arguments to supply to the controller manager.
 #     extraArgs:
 #         feature-gates: ServerSideApply=true
@@ -525,8 +525,8 @@ sops:
             Y1k2amVVMFBDSHRvekZrOEl6NytDVUEKyVNsHhQC/YVLVT3LTvdMVT8NabS51tZn
             aDuJR/XqSfnSHBVTBaawD/It0NZKWoPC/pNUna3jMqT9jY+Y8FWBEg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-05-23T01:19:59Z"
-    mac: ENC[AES256_GCM,data:Bh6ujvKJNfvhtkpO0ZbDvTqWdvRSNL2dpPnGfmPtVlZ2jMvemiIiOu+EDTZhMLercnaSnLwpI7Ccb3BpRplbjdJbLNSXETosxREgngVymToaKLYIdDb5HWBQoLETdTfrBN2sTksQQEXylQExU4xDD9DV24uZ21bCFng0CaJfKGk=,iv:GerxpBN8dBqZXi//q4rN3rNk1WfILO2c0PXW9/eI/mw=,tag:Si+b6Bqrti2vSfaJ8uqt4w==,type:str]
+    lastmodified: "2024-05-23T02:40:29Z"
+    mac: ENC[AES256_GCM,data:H6TRCWGDKKDkK6AXhRCdYNJJ0GglG6MCJ3PuKorw5zEKPJZlM87nDCGrj1wtlZz6PQHw9Vv0dmF6VrUpBQGQqVkFvXvZW5dgrh/a6n8vJy6MKV+JqoJzav1L1QBiRam1dvK3JGQU+eAWaWbFCNg/bqZNVeYtbKLspyA5VpDmKBo=,iv:tskML0vzi/vYt4I5GJCpvp2BUJLQTYooF6KdkgvtRFo=,tag:do6Szsad98TOlR0zZIt1Nw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret)$
     version: 3.8.1
