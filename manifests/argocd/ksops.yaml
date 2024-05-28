@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      # 1. Define an emptyDir volume which will hold the custom binaries
+      volumes:
+        - name: custom-tools
+          emptyDir: {}
+      # 2. Use an init container to download/copy custom binaries into the emptyDir
+      initContainers:
+        - name: install-ksops
+          image: viaductoss/ksops:v4.3.1
+          command: ["/bin/sh", "-c"]
+          args:
+            - echo "Installing KSOPS...";
+              mv ksops /custom-tools/;
+              mv kustomize /custom-tools/;
+              echo "Done.";
+          volumeMounts:
+            - mountPath: /custom-tools
+              name: custom-tools
+      containers:
+        - name: argocd-repo-server
+          volumeMounts:
+            - mountPath: /usr/local/bin/kustomize
+              name: custom-tools
+              subPath: kustomize
+            - mountPath: /usr/local/bin/ksops
+              name: custom-tools
+              subPath: ksops

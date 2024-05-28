@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/o-be-one/kubernetes-at-home.git
+      revision: HEAD
+      directories:
+      - path: 'manifests/*'
+      - path: 'manifests/examples/*'
+      - path: 'manifests/cert-manager'
+        exclude: true
+      - path: 'manifests/examples'
+        exclude: true
+  - pullRequest:
+      github:
+        # The GitHub organization or user.
+        owner: o-be-one
+        # The Github repository
+        repo: kubernetes-at-home
+        # Labels is used to filter the PRs that you want to target. (optional)
+        labels:
+        - preview
+      requeueAfterSeconds: 1800
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: "menia"
+      source:
+        repoURL: https://github.com/o-be-one/kubernetes-at-home.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basename}}'
