@@ -14,4 +14,4 @@ configMapGenerator:
   behavior: merge
 
 patches:
-- ksops.yaml
+- path: ksops.yaml

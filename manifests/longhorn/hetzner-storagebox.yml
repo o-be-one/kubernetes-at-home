@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: hetzner-storagebox
-  namespace: longhorn-system
-type: Opaque
-data:
-  CIFS_USERNAME: dTMxMDQ5My1zdWIx
-  CIFS_PASSWORD: cTZldGVuQkpQdmkzZnQ0eA==
