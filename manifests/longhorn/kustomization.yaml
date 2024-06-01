@@ -5,4 +5,6 @@ namespace: longhorn
 resources:
   - namespace.yaml
   - storageclass.yaml
-  - hetzner-storagebox.yaml
+
+generators:
+  - ../secret-generator.yaml

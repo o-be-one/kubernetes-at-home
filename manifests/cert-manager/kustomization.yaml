@@ -13,3 +13,6 @@ patches:
   target:
     kind: Deployment
     name: cert-manager
+
+generators:
+  - ../secret-generator.yaml
