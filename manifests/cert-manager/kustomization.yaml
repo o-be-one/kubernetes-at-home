@@ -15,4 +15,4 @@ patches:
     name: cert-manager
 
 generators:
-  - ../secret-generator.yaml
+  - secret-generator.yaml

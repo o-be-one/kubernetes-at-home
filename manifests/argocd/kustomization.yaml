@@ -17,4 +17,4 @@ patches:
 - path: ksops.yaml
 
 generators:
-  - ../secret-generator.yaml
+  - secret-generator.yaml
