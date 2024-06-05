@@ -13,9 +13,3 @@ spec:
   - backendRefs:
     - name: argocd-server
       port: 80
-  - filters:
-    - type: RequestRedirect
-      requestRedirect:
-        scheme: https
-        statusCode: 301
-        port: 443

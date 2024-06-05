@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
+- namespace.yaml
 - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/ha/install.yaml
 - httproutes.yaml
 - applicationset.yaml
@@ -12,9 +13,13 @@ configMapGenerator:
   literals:
   - kustomize.buildOptions=--enable-alpha-plugins --enable-exec
   behavior: merge
+- name: argocd-cmd-params-cm
+  literals:
+  - server.insecure=true
+  behavior: merge
 
 patches:
 - path: ksops.yaml
 
-generators:
-  - secret-generator.yaml
+# generators:
+#   - secret-generator.yaml
