@@ -35,6 +35,10 @@ Talos is one of the most impressive OS for Kubernetes, described as "Kubernetes 
 
 Every sensitive information are encrypted using Mozilla SOPS with age.
 
+### Helpful documentations
+
+[KSOPS 4.3.1](https://github.com/viaduct-ai/kustomize-sops/tree/v4.3.1)
+
 ## Cilium
 
 ```bash
@@ -44,7 +48,7 @@ helm repo update
 helm install \
           cilium \
           cilium/cilium \
-          --version 1.15.4 \
+          --version 1.15.5 \
           --namespace kube-system \
           --set=ipam.mode=kubernetes \
           --set=kubeProxyReplacement=true \
@@ -62,13 +66,13 @@ helm install \
 Reminder: helm can upgrade deployed stack. Example:
 
 ```bash
-helm upgrade cilium cilium/cilium --version 1.15.4 \
+helm upgrade cilium cilium/cilium --version 1.15.5 \
     --namespace kube-system \
     --reuse-values \
     --set ingressController.enabled=true \
     --set ingressController.loadbalancerMode=dedicated
 
-helm upgrade cilium cilium/cilium --version 1.15.4 \
+helm upgrade cilium cilium/cilium --version 1.15.5 \
     --namespace kube-system \
     --reuse-values \
     --set ingressController.loadbalancerMode=shared
@@ -97,6 +101,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v
 ```
 
 `kubectl kustomize manifests/cilium/ --enable-helm | kubectl apply -f -`
+
+If your gateway is stuck in "unknown" status, it may be because you don't have free IP available in your ip-pool.
 
 ## ArgoCD
 
