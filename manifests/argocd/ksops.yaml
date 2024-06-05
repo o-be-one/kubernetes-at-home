@@ -15,11 +15,19 @@ spec:
         - name: install-ksops
           image: viaductoss/ksops:v4.3.1
           command: ["/bin/sh", "-c"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: false 
+            seccompProfile:
+              type: RuntimeDefault
           args:
-            - echo "Installing KSOPS...";
-              mv ksops /custom-tools/;
-              mv kustomize /custom-tools/;
-              echo "Done.";
+            - |
+                echo "Installing KSOPS..."
+                cp ksops /custom-tools/
+                cp kustomize /custom-tools/
+                echo "Done."
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
