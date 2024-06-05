@@ -8,9 +8,13 @@ spec:
       volumes:
         - name: custom-tools
           emptyDir: {}
-        - name: sops-age
+        - name: age-key
           secret:
-            secretName: sops-age
+            secretName: argocd-age-key
+            defaultMode: 420
+            items:
+            - key: age-key
+              path: key.txt
       initContainers:
         - name: install-ksops
           image: viaductoss/ksops:v4.3.1
@@ -35,7 +39,7 @@ spec:
         - name: argocd-repo-server
           env:
             - name: SOPS_AGE_KEY_FILE
-              value: /.config/sops/age/keys.txt
+              value: /.config/sops/age/key.txt
           volumeMounts:
             - mountPath: /usr/local/bin/kustomize
               name: custom-tools
@@ -43,6 +47,6 @@ spec:
             - mountPath: /usr/local/bin/ksops
               name: custom-tools
               subPath: ksops
-            - mountPath: /.config/sops/age/keys.txt
-              name: sops-age
-              subPath: keys.txt
+            - name: age-key
+              mountPath: /.config/sops/age/key.txt
+              subPath: key.txt
