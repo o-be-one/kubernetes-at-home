@@ -31,7 +31,7 @@ spec:
   #     requeueAfterSeconds: 1800
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: '{{.path.basenameNormalized}}'
     spec:
       project: "menia"
       source:
@@ -40,4 +40,4 @@ spec:
         path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
+        namespace: '{{.path.basenameNormalized}}'
