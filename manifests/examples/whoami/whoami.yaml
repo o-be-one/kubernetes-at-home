@@ -1,38 +1,41 @@
 apiVersion: v1
 kind: Namespace
 metadata:
- name: whoami
+  name: whoami
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: whoami
- namespace: whoami
+  name: whoami
+  namespace: whoami
 spec:
- ports:
-   - name: web
-     port: 80
-     targetPort: web
- selector:
-   app: whoami
+  ports:
+  - name: web
+    port: 80
+    targetPort: web
+  selector:
+    app: whoami
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: whoami
- namespace: whoami
+  name: whoami
+  namespace: whoami
 spec:
- selector:
-   matchLabels:
-     app: whoami
- template:
-   metadata:
-     labels:
-       app: whoami
-   spec:
-     containers:
-       - name: whoami
-         image: traefik/whoami
-         ports:
-           - name: web
-             containerPort: 80
+  selector:
+    matchLabels:
+      app: whoami
+  template:
+    metadata:
+      labels:
+        app: whoami
+    spec:
+      containers:
+      - name: whoami
+        image: traefik/whoami
+        ports:
+        - name: web
+          containerPort: 80
+        envFrom:
+        - secretRef:
+          name: whoami-sops-secret

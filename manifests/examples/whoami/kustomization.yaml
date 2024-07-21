@@ -5,3 +5,6 @@ namespace: whoami
 resources:
   - whoami.yaml
   - httproutes.yaml
+
+generators:
+  - secret-generator.yaml
