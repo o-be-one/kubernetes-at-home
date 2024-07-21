@@ -11,11 +11,11 @@ spec:
       repoURL: https://github.com/o-be-one/kubernetes-at-home.git
       revision: HEAD
       directories:
-      - path: 'manifests/*'
-      - path: 'manifests/examples/*'
-      - path: 'manifests/cert-manager'
+      - path: '../*'
+      - path: '../examples/*'
+      - path: '../cert-manager'
         exclude: true
-      - path: 'manifests/examples'
+      - path: '../examples'
         exclude: true
   # - pullRequest:
   #     github:
@@ -33,7 +33,7 @@ spec:
     metadata:
       name: '{{.path.basenameNormalized}}'
     spec:
-      project: "menia"
+      project: "project"
       source:
         repoURL: https://github.com/o-be-one/kubernetes-at-home.git
         targetRevision: HEAD
@@ -41,3 +41,6 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basenameNormalized}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
