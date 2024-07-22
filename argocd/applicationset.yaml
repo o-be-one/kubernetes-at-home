@@ -11,11 +11,12 @@ spec:
       repoURL: https://github.com/o-be-one/kubernetes-at-home.git
       revision: HEAD
       directories:
-      - path: '../*'
-      - path: '../examples/*'
-      - path: '../cert-manager'
-        exclude: true
-      - path: '../examples'
+      - path: 'argocd'
+      - path: 'apps/**'
+      # - path: 'shared-resources/*'
+      # - path: 'shared-resources/cert-manager'
+      #   exclude: true
+      - path: 'apps/examples'
         exclude: true
   # - pullRequest:
   #     github:
@@ -37,7 +38,7 @@ spec:
       source:
         repoURL: https://github.com/o-be-one/kubernetes-at-home.git
         targetRevision: HEAD
-        path: '{{.path.path}}'
+        path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basenameNormalized}}'
