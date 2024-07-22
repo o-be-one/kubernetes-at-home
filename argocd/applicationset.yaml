@@ -17,6 +17,8 @@ spec:
       # - path: 'shared-resources/*'
       # - path: 'shared-resources/cert-manager'
       #   exclude: true
+      - path: 'apps/examples'
+        exclude: true
   # - pullRequest:
   #     github:
   #       # The GitHub organization or user.
