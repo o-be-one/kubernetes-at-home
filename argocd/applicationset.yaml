@@ -34,11 +34,11 @@ spec:
     metadata:
       name: '{{.path.basenameNormalized}}'
     spec:
-      project: "project"
+      project: "menia"
       source:
         repoURL: https://github.com/o-be-one/kubernetes-at-home.git
         targetRevision: HEAD
-        path: '{{path}}'
+        path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basenameNormalized}}'
