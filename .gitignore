@@ -1,1 +1,2 @@
-**/secret.yaml
+**/secret*.yaml
+!**/secret*.enc.yaml
