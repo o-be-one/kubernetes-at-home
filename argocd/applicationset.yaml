@@ -11,13 +11,12 @@ spec:
       repoURL: https://github.com/o-be-one/kubernetes-at-home.git
       revision: HEAD
       directories:
-      - path: 'argocd'
       - path: 'apps/**'
+      - path: 'apps/examples/*'
+      - path: 'argocd'
       # - path: 'shared-resources/*'
       # - path: 'shared-resources/cert-manager'
       #   exclude: true
-      - path: 'apps/examples'
-        exclude: true
   # - pullRequest:
   #     github:
   #       # The GitHub organization or user.
@@ -33,6 +32,8 @@ spec:
   template:
     metadata:
       name: '{{.path.basenameNormalized}}'
+      # annotations:
+      #   debug-info: '{{ toJson . }}' # help to see all available data, useful to debug and get also possible variables
     spec:
       project: "menia"
       source:
