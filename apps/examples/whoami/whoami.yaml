@@ -35,7 +35,7 @@ spec:
         image: traefik/whoami
         envFrom:
         - secretRef:
-            name: whoami-sops-secret
+            name: ksops-demo
         ports:
         - name: web
           containerPort: 80
