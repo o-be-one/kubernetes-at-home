@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami-funnel
+  namespace: whoami
+  annotations:
+    tailscale.com/funnel: "true"
+spec:
+  defaultBackend:
+    service:
+      name: whoami
+      port:
+        number: 80
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - funnel
