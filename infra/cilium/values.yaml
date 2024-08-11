@@ -19,6 +19,8 @@ ipam:
   mode: kubernetes
 gatewayAPI:
   enabled: true
+socketLB:
+  hostNamespaceOnly: true
 k8sServiceHost: localhost
 k8sServicePort: 7445
 kubeProxyReplacement: true
