@@ -1,2 +1,9 @@
+### Kubernetes ###
+# ksops dependencies
 **/secret*.yaml
 !**/secret*.enc.yaml
+!**/*generator*.yaml
+
+### Helm ###
+# Chart dependencies
+**/charts/
