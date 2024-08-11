@@ -7,7 +7,6 @@ helmCharts:
   releaseName: tailscale-operator
   namespace: tailscale
   version: 1.70.0
-  valuesFile: values.yaml
 
 generators:
   - secret-generator.yaml
