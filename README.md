@@ -41,6 +41,8 @@ Every sensitive information are encrypted using Mozilla SOPS with age.
 
 ## Cilium
 
+Following is related to my first experience with Cilium, but since I've made a Kustomization to handle and deploy Cilium, I'll keep it here for future reference.
+
 ```bash
 helm repo add cilium https://helm.cilium.io/
 helm repo update
