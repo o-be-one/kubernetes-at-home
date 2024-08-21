@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaresolverr
+  namespace: flaresolverr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaresolverr
+  template:
+    metadata:
+      labels:
+        app: flaresolverr
+    spec:
+      containers:
+      - name: flaresolverr
+        image: ghcr.io/flaresolverr/flaresolverr:3.3.21
+        ports:
+        - containerPort: 8191
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: LOG_HTML
+          value: "false"
+        - name: CAPTCHA_SOLVER
+          value: "none"
+        - name: PROMETHEUS_ENABLED
+          value: "false"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaresolverr
+  namespace: flaresolverr
+spec:
+  selector:
+    app: flaresolverr
+  ports:
+  - port: 8191
+    targetPort: 8191
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: flaresolverr-network-policy
+  namespace: flaresolverr
+spec:
+  podSelector:
+    matchLabels:
+      app: flaresolverr
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 192.168.0.0/16
+    - podSelector:
+        matchLabels:
+          tailscale.com/parent-resource: flaresolverr
+    ports:
+    - protocol: TCP
+      port: 8191
