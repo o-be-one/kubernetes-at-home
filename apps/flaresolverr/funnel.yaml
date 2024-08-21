@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flaresolverr
+  namespace: flaresolverr
+  annotations:
+    tailscale.com/funnel: "true"
+spec:
+  defaultBackend:
+    service:
+      name: flaresolverr
+      port:
+        number: 8191
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - flaresolverr
