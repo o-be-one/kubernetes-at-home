@@ -46,25 +46,3 @@ spec:
   ports:
   - port: 8191
     targetPort: 8191
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: flaresolverr-network-policy
-  namespace: flaresolverr
-spec:
-  podSelector:
-    matchLabels:
-      app: flaresolverr
-  policyTypes:
-  - Ingress
-  ingress:
-  - from:
-    - ipBlock:
-        cidr: 192.168.0.0/16
-    - podSelector:
-        matchLabels:
-          tailscale.com/parent-resource: flaresolverr
-    ports:
-    - protocol: TCP
-      port: 8191
