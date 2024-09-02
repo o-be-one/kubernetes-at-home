@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: backup-storage
+    namespace: longhorn-system
+type: Opaque
+data:
+    CIFS_USERNAME: ENC[AES256_GCM,data:9ibWEyLH9hNFVYtUUCbRpKL4+Xo=,iv:OAd1q2yBjsDdtCjfiut9dL/pGp4qOpb8rD06NP2tZCw=,tag:lTSkd+UiHK7u3zfIVnwIkQ==,type:str]
+    CIFS_PASSWORD: ENC[AES256_GCM,data:vfdbwaLCeDmy8N8sOE+EBGejGutTYBFU,iv:sMehelcf/8DIttqaFgsb9yVrcAaz3hJo6/zxbQg2isQ=,tag:a5DuPPa/yanx8YSf09Kvsw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1ngkdczpldhxhx8qchl0v7c9eq06vnc5yea3mhsuy0n20hvyescpqv3w2xy
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBydnVCZmI4U2VjaW81WXhj
+            Q1FsK09aT3ZsZDJvVGRoOVZ5Qk1BaHVsZXg4CnNFUE00NmFTdFdWcFh6emZIQk9Z
+            cUxHamdmNFVRYUVjZ0U0MVF5ZnRSQlEKLS0tIGtJUWlDT2FBRVFPcERtemt4eHY5
+            WnRyZWkzc2pWQlNjbUo3RmozaDNoODAK5npChK7Ya8aIpMHeabnpYMvNpf1pY9lK
+            du85bMc/fCOFOHsWCOe5uJgWNqT///eB6v7FfoeEWODq6GrDvjcBsg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1xzxw8fsvdz53aa3r8z6t4zns2cqadjm4ep88w5jf4zw3yhcflvesxgkxlc
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRY2MzMm94M21UZnpsZ0FH
+            UnNKYlQ3K2xUdUdMenUzK2JSMjEraFRjNzE0Ck9KbFk4WVZPVEp2TEJXT3BNOHgr
+            bzVMZ1hibld0aDJtRHd5Y1ZSdUNiN28KLS0tIEtxTWlkN3Zjb21GT3FJa3pBL3VZ
+            cjR5d0Nnb2E5dTA3UURSSktmaGgzdU0KLpNIH4amclis19XE2JUy545AuLLRrr06
+            voN1eQ2/hGvRI4d9ZwkeKYa2rCbFOiCbhTuoKnReyYpATVCQQIWEJg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-09-02T01:34:09Z"
+    mac: ENC[AES256_GCM,data:u68Imbr8PdzAucbjVKVno+v/uqFFZK0BBvPfvrP8iL4mrk5/PDKtoOU2bztU6cZqqvGyTvoUxWK3x01ngm+9+cme5NVipeMbFwVzW91vqntQy4NARpkulWh1QVsHpmLu6cWgxCmUY3uZp8zBNxyBGyXQRc9pyCseY87QgAJT8OU=,iv:l7f0jE2yAin3+yaFyGr68MCgBV9F+RReNl1pU8A2Zh4=,tag:wROVU0hbxK6tzvVMZ4fgww==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
+    version: 3.9.0
