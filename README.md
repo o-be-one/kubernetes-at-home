@@ -39,7 +39,9 @@ Every sensitive information are encrypted using Mozilla SOPS with age.
 
 [KSOPS 4.3.1](https://github.com/viaduct-ai/kustomize-sops/tree/v4.3.1)
 
-## Cilium
+## Core components
+
+### Cilium
 
 Following is related to my first experience with Cilium, but since I've made a Kustomization to handle and deploy Cilium, I'll keep it here for future reference.
 
@@ -86,7 +88,7 @@ kubectl -n kube-system rollout restart ds/cilium
 And to get current values:
 `helm get values cilium -n kube-system -o yaml`
 
-## Gateway API
+### Gateway API
 
 As I put all of this in the cilium kustomization, you can just run:
 `kubectl kustomize infra/cilium/ --enable-helm | kubectl apply -f -`
@@ -110,7 +112,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v
 ```
 If your gateway is stuck in "unknown" status, it may be because you don't have free IP available in your ip-pool.
 
-## ArgoCD
+### ArgoCD
 
 Reach ArgoCD using kubectl proxy feature:
 `kubectl port-forward svc/argocd-server -n argocd 8080:443`
@@ -119,4 +121,34 @@ To push your sops private key, use:
 ```bash
 cat <your_key_file> | kubectl create secret generic sops-age --namespace=argocd \
 --from-file=key.txt=/dev/stdin
+```
+
+### Longhorn
+
+Longhorn will be our default storage solution. It was challenging to choose one but considering how small is my clsuter and how little experience I have with storage layer, this one looked the most relevant. It's also important to consider that it's still considered in beta and it comes with limitation when using with Talos (see [here](https://longhorn.io/docs/1.7.0/advanced-resources/os-distro-specific/talos-linux-support/)).
+
+For Longhorn to work, we need to ensure that:
+- kernel extensions are loaded on Talos nodes
+- we mount /var/lib/longhorn on each node
+- we use `--preserve` flag when upgrading Talos nodes to keep data related to persistent volumes
+
+For all information, see [Longhorn docs](https://longhorn.io/docs/1.7.0/deploy/install/install-with-helm/).
+
+## Upgrading
+
+### Talos
+
+Because of Longhorn, it's really important to use images from Talos factory that embeds following kernet extensions:
+- siderolabs/iscsi-tools
+- siderolabs/util-linux-tools
+
+And again, because of Longhorn, it's upgrade needs to have `--preserve` flag to keep data related to persistent volumes or you will need to rebuild them.
+
+References:
+- [Longhorn docs for Talos](https://longhorn.io/docs/1.7.0/advanced-resources/os-distro-specific/talos-linux-support/)
+- [Image factory (preset)](https://factory.talos.dev/?arch=amd64&board=undefined&cmdline-set=true&extensions=-&extensions=siderolabs%2Fiscsi-tools&extensions=siderolabs%2Futil-linux-tools&platform=metal&target=metal)
+
+Example of upgrade command:
+```bash
+talosctl upgrade -n 192.168.200.112 --image factory.talos.dev/installer/613e1592b2da41ae5e265e8789429f22e121aab91cb4deb6bc3c0b6262961245:v1.7.6 --preserve
 ```
