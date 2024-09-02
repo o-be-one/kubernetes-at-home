@@ -48,6 +48,14 @@ machine:
         #         - bind
         #         - rshared
         #         - rw
+        extraMounts:
+            - destination: /var/lib/longhorn
+              type: bind
+              source: /var/lib/longhorn
+              options:
+                - bind
+                - rshared
+                - rw
         # # The `extraConfig` field is used to provide kubelet configuration overrides.
         # extraConfig:
         #     serverTLSBootstrap: true
