@@ -3,22 +3,8 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
+  - https://raw.githubusercontent.com/longhorn/longhorn/v1.7.0/deploy/longhorn.yaml
   - storageclass.yaml
-
-helmCharts:
-  - name: longhorn
-    repo: https://charts.longhorn.io
-    version: 1.7.0
-    releaseName: longhorn
-    namespace: longhorn-system
-    includeCRDs: true
-    valuesInline:
-      persistence:
-        defaultClass: true
-      defaultSettings:
-        defaultReplicaCount: 2
-        defaultDataPath: /var/lib/longhorn
-        backupTargetCredentialSecret: backup-storage
 
 generators:
   - secret-generator.yaml
