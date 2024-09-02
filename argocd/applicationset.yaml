@@ -14,8 +14,6 @@ spec:
       - path: 'apps/**'
       - path: 'argocd'
       - path: 'shared-resources/*'
-      - path: 'shared-resources/longhorn'
-        exclude: true
       - path: 'infra/cilium'
   # - pullRequest:
   #     github:
