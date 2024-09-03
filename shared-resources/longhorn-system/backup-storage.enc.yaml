@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: backup-storage
-    namespace: longhorn-system
 type: Opaque
 data:
     CIFS_USERNAME: ENC[AES256_GCM,data:9ibWEyLH9hNFVYtUUCbRpKL4+Xo=,iv:OAd1q2yBjsDdtCjfiut9dL/pGp4qOpb8rD06NP2tZCw=,tag:lTSkd+UiHK7u3zfIVnwIkQ==,type:str]
@@ -31,8 +30,8 @@ sops:
             cjR5d0Nnb2E5dTA3UURSSktmaGgzdU0KLpNIH4amclis19XE2JUy545AuLLRrr06
             voN1eQ2/hGvRI4d9ZwkeKYa2rCbFOiCbhTuoKnReyYpATVCQQIWEJg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-09-02T01:34:09Z"
-    mac: ENC[AES256_GCM,data:u68Imbr8PdzAucbjVKVno+v/uqFFZK0BBvPfvrP8iL4mrk5/PDKtoOU2bztU6cZqqvGyTvoUxWK3x01ngm+9+cme5NVipeMbFwVzW91vqntQy4NARpkulWh1QVsHpmLu6cWgxCmUY3uZp8zBNxyBGyXQRc9pyCseY87QgAJT8OU=,iv:l7f0jE2yAin3+yaFyGr68MCgBV9F+RReNl1pU8A2Zh4=,tag:wROVU0hbxK6tzvVMZ4fgww==,type:str]
+    lastmodified: "2024-09-03T16:00:06Z"
+    mac: ENC[AES256_GCM,data:zHIx91q81l9JauH5g5lCJ1oPqN11ZZEMD/2JTXvsAcvgPEeBh46ai3jSSXqO84TmuHc/5hZuODwk4R5ZqUoJ72fSj+h2Dc7m7EmsED5IKaLhqdWM9DrhFaqm8UUdOhxkJ7NQ5hZmACkxt1vBWjQCGQ7m0XtbNXQkye1h0YxYILk=,iv:k7ojzAlErXQfeAiXUnE21sQpj+6hB7Yo0TD+msJRt+c=,tag:0B3Ty+IlCh3LVZg1XlB1mA==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
     version: 3.9.0
