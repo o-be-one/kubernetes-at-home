@@ -10,7 +10,7 @@ spec:
     namespace: default
   rules:
   - backendRefs:
-    - name: longhorn
+    - name: longhorn-frontend
       port: 80
     matches:
     - path:
