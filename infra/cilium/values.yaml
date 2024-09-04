@@ -24,6 +24,11 @@ socketLB:
 k8sServiceHost: localhost
 k8sServicePort: 7445
 kubeProxyReplacement: true
+hubble:
+  ui:
+    enabled: true
+  relay:
+    enabled: true
 securityContext:
   capabilities:
     ciliumAgent:
