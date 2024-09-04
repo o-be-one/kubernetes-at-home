@@ -11,7 +11,7 @@ spec:
   rules:
   - backendRefs:
     - name: glance
-      port: http
+      port: 8080
     matches:
     - path:
         type: PathPrefix
