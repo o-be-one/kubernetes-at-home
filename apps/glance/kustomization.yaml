@@ -9,6 +9,5 @@ resources:
 
 configMapGenerator:
   - name: glance-config
-    behavior: replace
     files:
       - configs/glance.yml
