@@ -1,13 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: whoami
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: whoami
-  namespace: whoami
 spec:
   selector:
     matchLabels:
@@ -24,7 +18,7 @@ spec:
         - secretRef:
             name: ksops-demo
         ports:
-        - name: web
+        - name: http
           containerPort: 80
         resources:
           limits:
@@ -35,11 +29,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: whoami
-  namespace: whoami
 spec:
   ports:
-  - name: web
+  - name: http
     port: 80
-    targetPort: web
+    targetPort: http
   selector:
     app: whoami
