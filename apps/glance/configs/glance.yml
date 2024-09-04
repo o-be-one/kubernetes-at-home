@@ -11,21 +11,14 @@ pages:
             cache: 3h
             feeds:
               - url: https://ciechanow.ski/atom.xml
-              - url: https://www.joshwcomeau.com/rss.xml
-                title: Josh Comeau
+              - url: https://feeds.macrumors.com/MacRumors-Front
+              - url: https://www.teslarati.com/feed/
               - url: https://samwho.dev/rss.xml
-              - url: https://awesomekling.github.io/feed.xml
-              - url: https://ishadeed.com/feed.xml
-                title: Ahmad Shadeed
 
           - type: twitch-channels
             channels:
-              - theprimeagen
-              - cohhcarnage
-              - christitustech
-              - blurbs
-              - asmongold
-              - jembawls
+              - Nidouille77
+              - euuhhh__
 
       - size: full
         widgets:
@@ -33,6 +26,12 @@ pages:
 
           - type: videos
             channels:
+              - UCVRJ6D343dX-x730MRP8tNw # cocadmin
+              - UCA6rJQnIFgQOcjO-xtNV7lg # Hardisk
+              - UC18RieOQuuvjWcHADpZqOFQ # Danfield
+              - UC6sYueSaa1TwougrKgyuLvQ # Basti Sans MS
+              - UCIh7PDUAP226Pa_NtjN9Jqw # Legend
+              - UCYcJNtSv9jSCB0tWMb09O_Q # euuhhh
               - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
               - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome
               - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
@@ -40,10 +39,13 @@ pages:
           - type: reddit
             subreddit: selfhosted
 
+          - type: reddit
+            subreddit: geforcenow
+
       - size: small
         widgets:
           - type: weather
-            location: London, United Kingdom
+            location: Montreal, Canada
 
           - type: markets
             markets:
@@ -55,11 +57,7 @@ pages:
                 name: NVIDIA
               - symbol: AAPL
                 name: Apple
-              - symbol: MSFT
-                name: Microsoft
-              - symbol: GOOGL
-                name: Google
+              - symbol: TSLA
+                name: Tesla
               - symbol: AMD
                 name: AMD
-              - symbol: RDDT
-                name: Reddit
