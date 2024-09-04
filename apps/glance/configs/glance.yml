@@ -19,12 +19,13 @@ pages:
               - euuhhh__
 
       - size: full
-        - type: search
-          search-engine: duckduckgo
-          bangs:
-            - title: YouTube
-              shortcut: "!yt"
-              url: https://www.youtube.com/results?search_query={QUERY}
+        widgets:
+          - type: search
+            search-engine: duckduckgo
+            bangs:
+              - title: YouTube
+                shortcut: "!yt"
+                url: https://www.youtube.com/results?search_query={QUERY}
 
           - type: videos
             channels:
