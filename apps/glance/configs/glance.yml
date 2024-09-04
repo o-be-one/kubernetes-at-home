@@ -10,10 +10,8 @@ pages:
             collapse-after: 3
             cache: 3h
             feeds:
-              - url: https://ciechanow.ski/atom.xml
               - url: https://feeds.macrumors.com/MacRumors-Front
               - url: https://www.teslarati.com/feed/
-              - url: https://samwho.dev/rss.xml
 
           - type: twitch-channels
             channels:
@@ -32,12 +30,6 @@ pages:
               - UC6sYueSaa1TwougrKgyuLvQ # Basti Sans MS
               - UCIh7PDUAP226Pa_NtjN9Jqw # Legend
               - UCYcJNtSv9jSCB0tWMb09O_Q # euuhhh
-              - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
-              - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome
-              - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
-
-          - type: reddit
-            subreddit: selfhosted
 
           - type: reddit
             subreddit: geforcenow
@@ -61,3 +53,43 @@ pages:
                 name: Tesla
               - symbol: AMD
                 name: AMD
+
+  - name: Tech
+    columns:
+      - size: small
+        widgets:
+
+          - type: rss
+            limit: 10
+            collapse-after: 3
+            cache: 3h
+            feeds:
+              - url: https://ciechanow.ski/atom.xml
+              - url: https://www.joshwcomeau.com/rss.xml
+                title: Josh Comeau
+              - url: https://samwho.dev/rss.xml
+              - url: https://awesomekling.github.io/feed.xml
+              - url: https://ishadeed.com/feed.xml
+                title: Ahmad Shadeed
+
+          - type: twitch-channels
+            channels:
+              - theprimeagen
+              - cohhcarnage
+              - christitustech
+              - blurbs
+              - asmongold
+              - jembawls
+
+      - size: full
+        widgets:
+          - type: hacker-news
+
+          - type: videos
+            channels:
+              - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+              - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome
+              - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
+
+          - type: reddit
+            subreddit: selfhosted
