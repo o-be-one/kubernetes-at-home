@@ -12,6 +12,7 @@ pages:
             feeds:
               - url: https://feeds.macrumors.com/MacRumors-Front
               - url: https://www.teslarati.com/feed/
+              - url: https://noted.lol/rss/
 
           - type: twitch-channels
             channels:
