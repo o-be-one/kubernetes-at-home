@@ -9,6 +9,15 @@ spec:
   - name: shared-gateway
     namespace: default
   rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301
   - backendRefs:
     - name: whoami
       port: 80
