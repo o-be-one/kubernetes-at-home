@@ -15,6 +15,7 @@ configMapGenerator:
       - storageclass.yaml
     behavior: replace
     options:
+      disableNameSuffixHash: true
       labels:
         app.kubernetes.io/name: longhorn
         app.kubernetes.io/instance: longhorn-system
