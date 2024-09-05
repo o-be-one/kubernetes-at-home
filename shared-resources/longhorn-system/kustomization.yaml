@@ -13,6 +13,7 @@ configMapGenerator:
   - name: longhorn-storageclass
     files:
       - storageclass.yaml
+    behavior: replace
     options:
       labels:
         app.kubernetes.io/name: longhorn
