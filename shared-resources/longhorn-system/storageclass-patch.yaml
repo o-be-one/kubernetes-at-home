@@ -17,7 +17,7 @@ data:
     parameters:
       numberOfReplicas: "2"
       staleReplicaTimeout: "2880"
-      diskSelector: "ssd"
+      diskSelector: "ssd,nvme"
       fromBackup: ""
       fsType: "ext4"
       dataLocality: "disabled"

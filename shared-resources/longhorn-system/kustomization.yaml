@@ -3,12 +3,19 @@ kind: Kustomization
 namespace: longhorn-system
 
 resources:
-  - https://raw.githubusercontent.com/longhorn/longhorn/v1.7.0/deploy/longhorn.yaml
+  - https://raw.githubusercontent.com/longhorn/longhorn/v1.7.1/deploy/longhorn.yaml
   - httproutes.yaml
 
 patches:
   - path: namespace.yaml
-  - path: storageclass-patch.yaml
+
+configMapGenerator:
+- name: longhorn-storageclass
+  behavior: merge
+  files:
+  - storageclass-patch.yaml
+  options:
+    disableNameSuffixHash: true
 
 generators:
   - secret-generator.yaml
