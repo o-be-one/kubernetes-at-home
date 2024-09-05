@@ -9,8 +9,15 @@ resources:
 patches:
   - path: namespace.yaml
 
-patchesStrategicMerge:
-  - storageclass-patch.yaml
+configMapGenerator:
+  - name: longhorn-storageclass
+    files:
+      - storageclass.yaml
+    options:
+      labels:
+        app.kubernetes.io/name: longhorn
+        app.kubernetes.io/instance: longhorn-system
+        app.kubernetes.io/version: v1.7.0
 
 generators:
   - secret-generator.yaml
