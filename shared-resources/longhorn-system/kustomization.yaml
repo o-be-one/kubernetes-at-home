@@ -5,10 +5,10 @@ namespace: longhorn-system
 resources:
   - https://raw.githubusercontent.com/longhorn/longhorn/v1.7.0/deploy/longhorn.yaml
   - httproutes.yaml
-  - storageclass.yaml
-
+  
 patches:
   - path: namespace.yaml
+  - path: storageclass-patch.yaml
 
 generators:
   - secret-generator.yaml
