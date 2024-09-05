@@ -12,8 +12,7 @@ patches:
 configMapGenerator:
   - name: longhorn-storageclass
     files:
-      - storageclass.yaml
-    behavior: replace
+      - storageclass.yaml=storageclass.yaml
     options:
       disableNameSuffixHash: true
       labels:
