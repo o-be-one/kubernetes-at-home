@@ -8,17 +8,7 @@ resources:
 
 patches:
   - path: namespace.yaml
-
-configMapGenerator:
-  - name: longhorn-storageclass
-    files:
-      - storageclass.yaml=storageclass.yaml
-    options:
-      disableNameSuffixHash: true
-      labels:
-        app.kubernetes.io/name: longhorn
-        app.kubernetes.io/instance: longhorn-system
-        app.kubernetes.io/version: v1.7.0
+  - path: storageclass-patch.yaml
 
 generators:
   - secret-generator.yaml
