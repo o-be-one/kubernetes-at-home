@@ -1,0 +1,27 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: windmill
+spec:
+  hostnames:
+  - windmill.menia.cc
+  parentRefs:
+  - name: shared-gateway
+    namespace: default
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301
+  - backendRefs:
+    - name: windmill
+      port: 5678
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
