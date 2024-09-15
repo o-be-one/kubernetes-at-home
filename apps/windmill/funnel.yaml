@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: windmill
+  annotations:
+    tailscale.com/funnel: "true"
+spec:
+  defaultBackend:
+    service:
+      name: windmill
+      port:
+        number: 5678
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - windmill
