@@ -1,8 +1,15 @@
 # Home
 
-## DISCLAIMER
 !!! warning
     WORK IN PROGRESS! At this time project itself and documentation are really experimental.
+
+## Why I do that?
+
+I host my own servers since more than 10 years, mostly for non profit organizations and communities. I had to pay monthly fees for non load balanced servers hosted with different providers. I've always been into the topic of self-reliance, and more recently, the topic of self-hosting.
+
+Since few year, high speed internet connection became more and more available and affordable. I started to host my own servers at home and wanted to take advantage of a technology stack built to be resilient and scalable at its core. Overall, with UPS batteries, the only SPOF is the Internet connection. Cost side, lets be honest, it's still more expensive than using a cloud provider at the beginning but I now have more room to host bigger solutions.
+
+I've opened this project to share my experience and to get feedback from the community, also to help other people to get started with their own Kubernetes cluster at home and on bare metal.
 
 ## Infrastructure
 
@@ -16,26 +23,29 @@ My network is entirely managed using Ubiquiti Unifi products:
 And the cluster hardware is:
 
 - 3 x Control Plane: Trigkey G4 with Intel N100 (4 cores, 4 threads), 16GB DDR4, and 500GB NVMe
-- 2 x Workers: Beelink SER5 with AMD 5560U (6 cores, 12 threads), 16GB DDR4, and 500GB NVMe
+- 2 x Workers: Beelink SER5 with AMD 5560U (6 cores, 12 threads), 16GB DDR4, and 500GB NVMe - I may had a third at some point
+- I'm thinking to add a NAS soon, so I keep backups locally and I can also host a local S3
 
 ### Network
 
-My Internet connection is 1.5 Gbps down / 900 Mbps up with a dynamic public IP.
+My Internet connection is 1.5 Gbps down / 900 Mbps up with a dynamic public IP. I also use a VPN solution made to open HTTP access to public ([Tailscale funnel](https://tailscale.com/) / [Cloudflare Argo Tunnel](https://www.cloudflare.com/)) We will see later how I deal with that.
 
-The whole cluster is under a managed dedicated VLAN. My Internet connection is 1.5 Gbps down / 900 Mbps up with a dynamic public IP.
-
+I've provisionned a dedicated VLAN on my network for the cluster, with DHCP and LAN DNS managed by Unifi Dream Machine. Folowing are the IPs used:
 
 - 192.168.200.101 to 192.168.200.103: Control Planes
 - 192.168.200.111 to 192.168.200.112: Workers
 
-### Machines
-
-- 3 x Control Plane: Trigkey G4 with Intel N100 (4 cores, 4 threads), 16GB DDR4, and 500GB NVMe
-- 2 x Workers: Beelink SER5 with AMD 5560U (6 cores, 12 threads), 16GB DDR4, and 500GB NVMe
-
 ### Software
 
-Talos is one of the most impressive OS for Kubernetes, described as "Kubernetes OS". Talos expose an API that provides near experience to Kubernetes, and disable SSH. You configure it using their tool, talosctl, that helps generate config file that can be used in cloud-init or that can be applied using talosctl. It embeds several features like easy upgrades.
+I've challenged several solutions. I started with Alpine Linux and k3s previous year, then I moved to a solution available on GitHub to automatically [deploy a cluster on Hetzner using Terraform](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner). The solution for Hetzner was using [MicroOS from SUSE](https://microos.opensuse.org/). When I've looked why they would use MicrOS, I've discovered that some OS are names "Container OS" and started to look more about [Flatcar](https://www.flatcar.org/) and alternatives. And then, a friend told me about another option.
+
+I now use [Talos OS](https://www.talos.dev/). Talos is one of the most impressive OS for Kubernetes, described as "Kubernetes OS". Talos expose an API that provides similar experience to Kubernetes where you control it using an API. SSH is not available on this OS, instead you configure it using their tool named talosctl. Talos CLI will also helps you to generate config files that can be used in cloud-init or that can be applied using talosctl command directly.
+
+
+
+
+
+
 
 ## Security
 
