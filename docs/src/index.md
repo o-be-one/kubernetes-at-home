@@ -12,7 +12,7 @@ I host my own servers since more than 10 years, mostly for non profit organizati
 
 Since few years, high speed internet connection came to be more available and affordable. I started to host my own servers at home and wanted to take advantage of a technology stack built to be resilient and scalable at its core. Overall, with UPS batteries, the only SPOF is the Internet connection. I would not say it's cheaper than paying for hosting, but I have more power to host anything and more room to add servers for hard workloads like AI.
 
-With my Kubernetes journey, I wanted to be more involved into opensource projects and I really hope this one will help you along your first steps into _Kubernetes at Home_.
+With my Kubernetes journey, I wanted to be more involved into opensource projects and practice more GitHub. I really hope this little project will help you along your first steps into _Kubernetes at Home_.
 
 ## Infrastructure
 
