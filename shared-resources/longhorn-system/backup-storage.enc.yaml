@@ -4,8 +4,9 @@ metadata:
     name: backup-storage
 type: Opaque
 data:
-    CIFS_USERNAME: ENC[AES256_GCM,data:9CICatfkmV1/Z0PIdX6HQyKShbo=,iv:CcbRBXOKu7BNT4p4ti2TfyQMQS48L3ueu9ONlhsqAw0=,tag:L3Dgb7xQ461IHhxh957Zmg==,type:str]
-    CIFS_PASSWORD: ENC[AES256_GCM,data:ndH2S0zV/6pU/9i4Et6STZlocInrFyQT,iv:FQE+gPZ7GSucZPOw6bJzhhI73SMB4HyhFFwPgiHORP0=,tag:CEbqv4axuBxg2Broe7nz7Q==,type:str]
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:GeM8N0HkMjU9O+mV/Lv6Eij/YMuSJyy3J/Ed/O6jO97xlD6y,iv:7b1fhcbd4XrjKfBLbzp4QxBV6/ApVkiHJNNBVUkqpZ0=,tag:XMndG5NJzBUei60Mo0+kZA==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:R5sMZyqbx73nxr9QRNZFe9qOVT/d6S5BkmKS3epiiH0dnlY5+OlyTQ+V1AA=,iv:/CgZjIoxOWkQN7nle6F5mPujh/HqtNYe6qxQza9r5t0=,tag:9bhEnvZIhRdLf9+cubsHqA==,type:str]
+    AWS_ENDPOINTS: ENC[AES256_GCM,data:mPmK8e+vZkjK2+OSkU1l0RwtgWF1a25FEns5OE24KWXYAJPbPEBm7LaeQjEjkzPJnuY8ww==,iv:Dhhs3WGSyvsK937jnYPP9uh0wKZCNl/KwFWLUWw3aYw=,tag:7Pr/EVnuruTBXU+U2kQbsA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -30,8 +31,8 @@ sops:
             T2x4TzRIL0M4eHN3WjY1U1lOY1llSmsKpwMl5sRvmGMAeIdHwNJr4pphaMZ6h8Jq
             TeotfC83MYLoQD3ZkEr1IP9aXWKvFKq9VRUU3lG29smAsAlUUAR0YQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-09-08T17:43:47Z"
-    mac: ENC[AES256_GCM,data:qYpOrmDPgnw40V3bgsvqaXdFv0H4DW9Jbhju20CdK0IyQoflUMNFPLnB4juPBk2RmlQ47XJib79z0on2rRAFlov1mv8dTl1i/jZ46RdQyNp25+b7qpJ5qlM3jameI6OgKhNHqyxdAUtj3nR1/7CcljdLgM3D88yF/6gHgquYAu0=,iv:TOT51rNcx6CLx+SIXQWovzxyUfhJrULN3VCKfrWBdnQ=,tag:NC2hmzL5T5wp9H6pSfNiiw==,type:str]
+    lastmodified: "2024-10-03T02:06:50Z"
+    mac: ENC[AES256_GCM,data:erKMc1Y7BOosIDJN4CTBlX0uGSHf0Q6SrYn2WTzHfAWRuOu7VuTBP6BaaJetTo5Mhm3sr/zQ/u8v5WvTimiCaw7luXaXw7f7pX9MnsbmtljEleEMinr3MKnxRJZxo1+5uj56lObLPy6WWEw2OkTS1e8n+U/0kuuWfFvxgUnfha0=,iv:kgQUwPMg5u62LWbjx1nt0A/s68BvkDBtkyc0zFc4N5Y=,tag:PHnzYR9OqfhU4Gage9vayA==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
     version: 3.9.0
