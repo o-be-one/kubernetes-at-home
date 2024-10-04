@@ -6,6 +6,10 @@
 version: 2
 updates:
   - package-ecosystem: "docker" # See documentation for possible values
-    directory: "apps/*" # Location of package manifests
+    directories:
+      - "apps/*"
+      - "shared-resources/*"
     schedule:
       interval: "weekly"
+    assignees:
+      - "o-be-one"
