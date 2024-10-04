@@ -1,6 +1,6 @@
 site_name: Kubernetes at Home
 repo_url: https://github.com/o-be-one/kubernetes-at-home
-site_description: I'm running Kubernetes at home for on criticial prod apps and want to share how I did it to everyone.
+site_description: I'm running Kubernetes at home for non criticial prod apps and want to share how I did it to everyone.
 site_author: Meddy Brai aka o_be_one
 docs_dir: src
 site_dir: site
