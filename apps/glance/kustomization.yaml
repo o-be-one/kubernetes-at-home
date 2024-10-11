@@ -4,7 +4,7 @@ namespace: glance
 
 resources:
   - glance.yaml
-  - httproutes.yaml
+  - httproute.yaml
   - funnel.yaml
 
 configMapGenerator:

@@ -4,7 +4,7 @@ namespace: whoami
 
 resources:
   - whoami.yaml
-  - httproutes.yaml
+  - httproute.yaml
   - funnel.yaml
 
 generators:

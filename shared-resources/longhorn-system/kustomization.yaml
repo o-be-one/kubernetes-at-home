@@ -4,7 +4,7 @@ namespace: longhorn-system
 
 resources:
   - https://raw.githubusercontent.com/longhorn/longhorn/v1.7.1/deploy/longhorn.yaml
-  - httproutes.yaml
+  - httproute.yaml
 
 patches:
   - path: namespace.yaml
