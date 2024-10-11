@@ -1,15 +1,15 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: argocd
-  namespace: argocd
+  name: longhorn-https
 spec:
   hostnames:
-  - argocd.menia.cc
+  - longhorn.menia.cc
   parentRefs:
   - name: shared-gateway
     namespace: default
+    sectionName: shared-https
   rules:
   - backendRefs:
-    - name: argocd-server
+    - name: longhorn-frontend
       port: 80

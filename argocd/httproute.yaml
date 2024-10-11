@@ -1,0 +1,15 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: argocd-https
+spec:
+  hostnames:
+  - argocd.menia.cc
+  parentRefs:
+  - name: shared-gateway
+    namespace: default
+    sectionName: shared-https
+  rules:
+  - backendRefs:
+    - name: argocd-server
+      port: 80

@@ -1,18 +1,15 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: longhorn
+  name: glance-https
 spec:
   hostnames:
-  - longhorn.menia.cc
+  - glance.menia.cc
   parentRefs:
   - name: shared-gateway
     namespace: default
+    sectionName: shared-https
   rules:
   - backendRefs:
-    - name: longhorn-frontend
-      port: 80
-    matches:
-    - path:
-        type: PathPrefix
-        value: /
+    - name: glance
+      port: 8080
