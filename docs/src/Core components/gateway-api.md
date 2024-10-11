@@ -22,3 +22,15 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_tlsroutes.yaml
 ```
 If your gateway is stuck in "unknown" status, it may be because you don't have free IP available in your ip-pool.
+
+## HTTP to HTTPS redirect
+
+All HTTP routes are automatically redirected to HTTPS using a 302 status code. This redirection is managed by the `http-to-https-redirect` HTTPRoute, which is located in the same namespace as the shared gateway.
+
+If you genuinely need your services to handle HTTP traffic, you have two options:
+
+1. Remove the redirection route entirely. It's kind of a default behavior that will allow all your apps to be accessible via HTTP.
+
+2. Keep the redirection as the default behavior, but customize specific routes. To do this, simply remove the `sectionName: shared-https` line from the HTTPRoute specifications of the apps you want to make accessible over HTTP.
+
+This approach provides you with flexibility to manage HTTP and HTTPS traffic according to your specific needs.
