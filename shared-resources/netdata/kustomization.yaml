@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: netdata
+
+helmCharts:
+  - name: netdata
+    repo: https://netdata.github.io/helmchart/
+    releaseName: netdata
+    namespace: netdata
+    valuesInline:
+      ingress: false
+      k8sState:
+        podAnnotationAppArmor:
+          enabled: false
+      child:
+        podAnnotationAppArmor:
+          enabled: false
+
+resources:
+  - namespace.yaml
+  - httproute.yaml
