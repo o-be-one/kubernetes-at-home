@@ -192,9 +192,6 @@ machine:
         # # Allows for supplying additional system extension images to install on top of base Talos image.
         # extensions:
         #     - image: ghcr.io/siderolabs/gvisor:20220117.0-v1.0.0 # System extension image.
-        extensions:
-            - image: ghcr.io/siderolabs/iscsi-tools:v0.1.5
-            - image: ghcr.io/siderolabs/util-linux-tools:2.40.2
     # Used to configure the machine's container image registry mirrors.
     registries: {}
     # # Specifies mirror configuration for each registry host namespace.
@@ -540,8 +537,8 @@ sops:
             dXd2dnVaS29CS3hNb3p5dWdmQ1BLaHcKwLPI9qRiB2mdBp3H/ZwlZya+pbz9MKCe
             v8cd2yc34oM1wV1cqnGDtmGjqAXg1AgCHlei2k9s3o6J6aZsW5pdUg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-10-14T15:04:20Z"
-    mac: ENC[AES256_GCM,data:jEMHz2TOk2d++aGTFeIUNJh21rq7AOGhGFWoqWwxXFtzi0r1+mxDWOIT2NX69jacKEcOL8pqnAXaHpVk1YWl5vDaxZ0Ak9HH2daOyPsebTfwQ4fEb1TWkM1REUmvpo20o8UiihAZulp6t6/ukO8cN/0LfKzSF8VvO2oGngrJlB4=,iv:FZooYgwcd48itIvBB5DeFA3UOI4rUB6cu72+MmfozPI=,tag:b0kfnA761bK8UaeCEKq3ag==,type:str]
+    lastmodified: "2024-10-14T15:21:48Z"
+    mac: ENC[AES256_GCM,data:d8R3ZMUbKkqmK+vW4qvDExJ/BaI2tnrCkRNJ7vRk4L1MKfd9vM9Gm8WaIHp3tTK/CiOZPfSVAH6tN1tlwGA16jhDTDRL08kMSlqSfojynqQinthnac5W9i+EUjkDfxIknaI6PWOB0BTKrXIwopZE+jmQ5ZZfU/NDaAOP1lOKJWU=,iv:6mhQXjKaCZKeHzcNwfYqWmBS+x1gfKGkBGOBGC3vy8g=,tag:IMycHDyLGrLtW/SRLV+GGw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
     version: 3.9.1
