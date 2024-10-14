@@ -1,9 +1,13 @@
-# Kubernetes #
+# Infrastructure
+**/controlplane.yaml
+**/worker.yaml
+
+# Kubernetes
 **/secret*.yaml
 !**/secret*.enc.yaml
 !**/*generator*.yaml
 
-# Helm #
+# Helm
 **/charts/
 
 # MkDocs
