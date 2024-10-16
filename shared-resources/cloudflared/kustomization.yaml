@@ -12,6 +12,9 @@ helmCharts:
     cloudflare:
       secretRef:
         name: cloudflared-api
+        apiTokenKey: api_token
+        accountIDKey: account_id
+        tunnelNameKey: tunnel_name
 
 generators:
   - secret-generator.yaml
