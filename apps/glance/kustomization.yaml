@@ -5,7 +5,7 @@ namespace: glance
 resources:
   - glance.yaml
   - httproute.yaml
-  - funnel.yaml
+  - cloudflared.yaml
 
 configMapGenerator:
   - name: glance-config

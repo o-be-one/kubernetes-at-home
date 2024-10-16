@@ -5,7 +5,7 @@ namespace: whoami
 resources:
   - whoami.yaml
   - httproute.yaml
-  - funnel.yaml
+  - cloudflared.yaml
 
 generators:
   - secret-generator.yaml
