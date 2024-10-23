@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cluster-apps
+  name: apps
   namespace: argocd
 spec:
   goTemplate: true
@@ -12,30 +12,9 @@ spec:
       revision: HEAD
       directories:
       - path: 'apps/**'
-      - path: 'argocd'
-      - path: 'shared-resources/*'
-      - path: 'infra/cilium'
-  # - pullRequest:
-  #     github:
-  #       # The GitHub organization or user.
-  #       owner: o-be-one
-  #       # The Github repository
-  #       repo: kubernetes-at-home
-  #       # Reference to a Secret containing an access token. (optional)
-  #       # tokenRef:
-  #       #   secretName: github-token
-  #       #   key: token
-  #       # (optional) use a GitHub App to access the API instead of a PAT.
-  #       # appSecretName: github-repo-creds
-  #       # Labels is used to filter the PRs that you want to target. (optional)
-  #       labels:
-  #       - preview
-  #     requeueAfterSeconds: 1800
   template:
     metadata:
       name: '{{.path.basenameNormalized}}'
-      # annotations:
-      #   debug-info: '{{ toJson . }}' # help to see all available data, useful to debug and get also possible variables
     spec:
       project: "menia"
       source:
@@ -52,7 +31,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cluster-apps-preview
+  name: apps-preview
   namespace: argocd
 spec:
   goTemplate: true
@@ -60,17 +39,8 @@ spec:
   generators:
   - pullRequest:
       github:
-        # The GitHub organization or user.
         owner: o-be-one
-        # The Github repository
         repo: kubernetes-at-home
-        # Reference to a Secret containing an access token. (optional)
-        # tokenRef:
-        #   secretName: github-token
-        #   key: token
-        # (optional) use a GitHub App to access the API instead of a PAT.
-        # appSecretName: github-repo-creds
-        # Labels is used to filter the PRs that you want to target. (optional)
         labels:
         - preview
       requeueAfterSeconds: 1800
@@ -78,7 +48,7 @@ spec:
     metadata:
       name: 'pr-{{.branch_slug}}-{{.number}}'
       annotations:
-        debug-info: '{{ toJson . }}' # help to see all available data, useful to debug and get also possible variables
+        debug-info: '{{ toJson . }}'
     spec:
       project: "menia"
       source:

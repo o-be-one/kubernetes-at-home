@@ -77,3 +77,21 @@ I've heard about ArgoCD at some point (who into Kubernetes did not?) and I used 
 Longhorn will be our default storage solution. It was challenging to choose one but considering how small is my clsuter and how little experience I have with storage layer, this one looked the most relevant. It's also important to consider that it's still considered in beta and comes with limitation when used with Talos (see [here](https://longhorn.io/docs/1.7.0/advanced-resources/os-distro-specific/talos-linux-support/)).
 
 [Know more about how I setup and maintain Longhorn](Core%20components/longhorn.md).
+
+## Repository Structure
+
+The project repository is organized as follows:
+
+- `apps/`: Contains the definitions of applications deployed on the cluster.
+  - Each subdirectory represents a specific application.
+- `core-components/`: Contains the essential components of the cluster.
+  - Includes subdirectories for components such as ArgoCD, Longhorn, etc.
+- `infra/`: Contains infrastructure-related configurations.
+  - For example, Cilium-specific configurations.
+- `available/`: Contains inactive resources that are not currently deployed.
+  - Contains apps and core components that are not currently in use but may be of interest to the audience.
+- `docs/`: Contains the project documentation, including this index.md file.
+
+Each main folder (`apps`, `core-components`, `infra`) typically contains an `applicationset.yaml` file. These files are used by ArgoCD to manage the deployment of applications and components in a declarative and automated manner.
+
+This structure allows for a clear and modular organization of the cluster, facilitating the management and maintenance of various components and applications.
