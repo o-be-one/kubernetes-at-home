@@ -6,7 +6,9 @@ resources:
 - namespace.yaml
 - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/ha/install.yaml
 - httproute.yaml
-- applicationset.yaml
+- ../applicationset.yaml
+- ../../apps/applicationset.yaml
+- ../../infra/cilium/applicationset.yaml
 
 configMapGenerator:
 - name: argocd-cm
