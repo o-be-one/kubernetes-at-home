@@ -6,6 +6,8 @@
 
 ## Installation
 
+https://docs.cilium.io/en/stable/installation/k8s-install-helm/
+
 Following is related to my first experience with Cilium, but since I've made a Kustomization to handle and deploy Cilium, I'll keep it here for future reference.
 
 ```bash
