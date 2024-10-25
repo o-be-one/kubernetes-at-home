@@ -1,4 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  description: "Regular workloads"
+  sourceRepos:
+    - "*"
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: apps
@@ -8,17 +27,19 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: https://github.com/o-be-one/kubernetes-at-home.git
+      repoURL: https://github.com/o-be-one/kubernetes-at-home
       revision: HEAD
       directories:
       - path: 'apps/**'
   template:
     metadata:
       name: '{{.path.basenameNormalized}}'
+      finalizers:
+        - resources-finalizer.argocd.menia.cc # allow ressource deletion when app is deleted
     spec:
-      project: "menia"
+      project: "apps"
       source:
-        repoURL: https://github.com/o-be-one/kubernetes-at-home.git
+        repoURL: https://github.com/o-be-one/kubernetes-at-home
         targetRevision: HEAD
         path: '{{.path.path}}'
       destination:
@@ -50,7 +71,7 @@ spec:
       annotations:
         debug-info: '{{ toJson . }}'
     spec:
-      project: "menia"
+      project: "apps"
       source:
         repoURL: https://github.com/o-be-one/kubernetes-at-home.git
         targetRevision: '{{.head_sha}}'
