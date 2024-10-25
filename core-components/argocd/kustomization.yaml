@@ -4,11 +4,12 @@ namespace: argocd
 
 resources:
 - namespace.yaml
-- https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/ha/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v2.12.6/manifests/ha/install.yaml
 - httproute.yaml
-- ../applicationset.yaml
-- ../../apps/applicationset.yaml
-- ../../infra/cilium/applicationset.yaml
+- appset-cilium.yaml
+- appset-core.yaml
+- appset-apps.yaml
+# - repo-github.yaml # this is required to allow access to your repo even if it's public
 
 configMapGenerator:
 - name: argocd-cm
