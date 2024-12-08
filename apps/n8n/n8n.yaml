@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: n8n
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: n8n-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n8n
+spec:
+  selector:
+    matchLabels:
+      app: n8n
+  template:
+    metadata:
+      labels:
+        app: n8n
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: n8n-data
+      containers:
+      - name: n8n
+        image: docker.n8n.io/n8nio/n8n:1.56.2
+        envFrom:
+        - secretRef:
+            name: n8n-secret
+        env:
+        - name: TZ
+          value: America/Montreal
+        - name: N8N_BASIC_AUTH_ACTIVE
+          value: "true"
+        - name: N8N_BASIC_AUTH_USER
+          value: "n8n"
+        - name: N8N_BASIC_AUTH_PASSWORD
+          value: "n8n"
+        - name: N8N_PORT
+          value: "5678"
+        - name: N8N_PROTOCOL
+          value: "https"
+        - name: NODE_ENV
+          value: "production"
+        - name: WEBHOOK_URL
+          value: "https://n8n.menia.cc/"
+        ports:
+        - name: http
+          containerPort: 5678
+        volumeMounts:
+        - name: data
+          mountPath: /home/node/.n8n
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: n8n
+spec:
+  ports:
+  - name: http
+    port: 5678
+    targetPort: http
+  selector:
+    app: n8n
