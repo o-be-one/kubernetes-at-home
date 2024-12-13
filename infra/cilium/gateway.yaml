@@ -33,3 +33,18 @@ spec:
       mode: Terminate
       certificateRefs:
         - name: wildcard-menia-cc-tls
+---
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: http-to-https-redirect
+  namespace: default
+spec:
+  parentRefs:
+  - name: shared-gateway
+    sectionName: shared-http
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https

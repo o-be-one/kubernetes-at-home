@@ -4,4 +4,5 @@ namespace: flaresolverr
 
 resources:
 - flaresolverr.yaml
-- httproutes.yaml
+- httproute.yaml
+- cloudflared.yaml

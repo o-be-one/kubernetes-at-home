@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: cloudflared-ingress-controller
+
+helmCharts:
+- name: cloudflare-tunnel-ingress-controller
+  repo: https://helm.strrl.dev
+  releaseName: cloudflare-tunnel-ingress-controller
+  namespace: cloudflared-ingress-controller
+  version: 0.0.13
+  valuesInline:
+    cloudflare:
+      secretRef:
+        name: cloudflared-api
+        apiTokenKey: api_token
+        accountIDKey: account_id
+        tunnelNameKey: tunnel_name
+
+generators:
+  - secret-generator.yaml

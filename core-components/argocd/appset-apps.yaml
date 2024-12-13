@@ -1,0 +1,84 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  description: "Regular workloads"
+  sourceRepos:
+    - "*"
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/o-be-one/kubernetes-at-home
+      revision: HEAD
+      directories:
+      - path: 'apps/**'
+  template:
+    metadata:
+      name: '{{.path.basenameNormalized}}'
+      finalizers:
+        - resources-finalizer.argocd.menia.cc # allow ressource deletion when app is deleted
+    spec:
+      project: "apps"
+      source:
+        repoURL: https://github.com/o-be-one/kubernetes-at-home
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basenameNormalized}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-preview
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - pullRequest:
+      github:
+        owner: o-be-one
+        repo: kubernetes-at-home
+        labels:
+        - preview
+      requeueAfterSeconds: 1800
+  template:
+    metadata:
+      name: 'pr-{{.branch_slug}}-{{.number}}'
+      annotations:
+        debug-info: '{{ toJson . }}'
+    spec:
+      project: "apps"
+      source:
+        repoURL: https://github.com/o-be-one/kubernetes-at-home.git
+        targetRevision: '{{.head_sha}}'
+        path: apps/
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'pr-{{.branch_slug}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true

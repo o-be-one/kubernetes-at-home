@@ -43,6 +43,7 @@ securityContext:
     - FOWNER
     - SETGID
     - SETUID
+    # - SYS_MODULE # unsupported in Talos https://docs.cilium.io/en/stable/installation/k8s-install-helm/
     cleanCiliumState:
     - NET_ADMIN
     - SYS_ADMIN
