@@ -51,3 +51,5 @@ spec:
         - CreateNamespace=true
         - PruneLast=true
         - PrunePropagationPolicy=foreground
+        - Replace=false
+        - PreserveResourcesOnDeletion=true
