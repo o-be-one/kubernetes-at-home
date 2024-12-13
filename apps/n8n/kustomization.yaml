@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: n8n
+
+resources:
+  - n8n.yaml
+  # - httproutes.yaml # Seems n8n doesn't like this way but works perfectly with cloudflare tunnel
+  - cloudflared.yaml
+
+generators:
+  - secret-generator.yaml

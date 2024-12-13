@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: n8n-cloudflared
+spec:
+  ingressClassName: cloudflare-tunnel
+  rules:
+  - host: n8n.btrcloud.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: n8n
+            port:
+              number: 5678
+        path: /
+        pathType: Prefix
