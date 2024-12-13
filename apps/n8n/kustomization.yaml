@@ -4,8 +4,8 @@ namespace: n8n
 
 resources:
   - n8n.yaml
-  - httproutes.yaml
-  - funnel.yaml
+  # - httproutes.yaml # Seems n8n doesn't like this way but works perfectly with cloudflare tunnel
+  - cloudflared.yaml
 
-# generators:
-#   - secret-generator.yaml
+generators:
+  - secret-generator.yaml
