@@ -23,7 +23,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: core-components
+  name: core
   namespace: argocd
 spec:
   goTemplate: true
@@ -33,7 +33,7 @@ spec:
       repoURL: https://github.com/o-be-one/kubernetes-at-home
       revision: HEAD
       directories:
-      - path: 'core-components/**'
+      - path: 'core/**'
   template:
     metadata:
       name: '{{.path.basenameNormalized}}'
