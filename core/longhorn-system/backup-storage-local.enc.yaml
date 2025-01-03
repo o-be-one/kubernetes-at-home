@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: backup-storage-local
+type: Opaque
+data:
+    #ENC[AES256_GCM,data:KMJoBprDx4zYr8eA1UCdqhVS,iv:EmhIcAeJKw7UmgwvuSTyAa6C/r9KNElaXtIiQ+MFYQ4=,tag:9CLYMsEly8aIOpFj9r76kA==,type:comment]
+    CIFS_USERNAME: ENC[AES256_GCM,data:ABI7tvCwH7MYazzZ67USce5waOx3ri8E,iv:iSEF3E3mNq4kWxX2sdH+KD6Q3Z/C3pf0iz/jFamyCW0=,tag:Ek+8J9GJtvTTzu3PvD8MQw==,type:str]
+    CIFS_PASSWORD: ENC[AES256_GCM,data:wSNAhzplXtI2+1FBa2N0J2LP+JbfP0vpUSx+aw==,iv:+Da4tKhrBS2tJh8kR0zEDNVx1XEhpYlJ2Pvma/pIe50=,tag:+JMP8l4DyVLI3bE3alzQUg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1ngkdczpldhxhx8qchl0v7c9eq06vnc5yea3mhsuy0n20hvyescpqv3w2xy
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB4TVRMT0tkODNtSVkweGNH
+            dmQrMmJrbkJnOFJPM3U5V0Irb3A0ZlBQQnlJCmE4a09reWFob3ZodnJxRkZaenVO
+            YkNOd3Z0Nlhqa0xyTXdHckJTbzZYQTQKLS0tIHdudUJiOHlKclRyaUpoNGZQc0c1
+            QXVscjBYRmdRSGFCd3dKZlZlR1dqb00KaU/isoKPWDEys6KaXYbYdTD7JZaChEDR
+            B/bmttRetZ7TGvaM94UAIyEi+xwQ7xd68oRJRyU6pKSlXctyJQB/+w==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1xzxw8fsvdz53aa3r8z6t4zns2cqadjm4ep88w5jf4zw3yhcflvesxgkxlc
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFNndwT3FueDRmcGxmcVJL
+            RVZpR2RqeW53K2RydDFnNW5WQTd6QTN3L25BCk5pUUdDWnM3OEw1TWdyYUs0dHAy
+            QWE1b056aFRjamdKeXBiRFA2SU5kazgKLS0tIEdZeHE3eXNnOGloT3Z4Y2ZxcTEw
+            SVFWQTQxUWVMOVRuUDlGdTcrVzc4eGcKpzhYvYp+0PR40Z73fULYGkLSGDrB7/0m
+            7KSHA41Lw/mbogziSnuNFwzo2pvhoRe2f2hSCma9XJ16dwgx1Zrbpg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-12-26T23:33:31Z"
+    mac: ENC[AES256_GCM,data:80tcXMPgpi8hnoNdyvQ/j/Y6fvtKSlIF0zo+bfEJ4jFaBZ0Fnaf5Q1vRBbPI4pUDsUDjiX7lb82Fe5V+szd6tsVNHY4Y7BvCYeqibhjYofPvzdkm+4NcFKySIkMlBWNwEq8wfwk+6x9sOduVjYbO1j9hWQegCiZt/ktbufCZcNo=,iv:tsVLDsAKNKOLDOdCpXVOg7b9MVu78/eiLhUnPgfroEM=,tag:anOKRe9MRFPVyYfD9dR5VQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
+    version: 3.9.1
