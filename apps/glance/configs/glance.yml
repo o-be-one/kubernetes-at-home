@@ -5,14 +5,8 @@ pages:
         widgets:
           - type: calendar
 
-          - type: rss
-            limit: 10
-            collapse-after: 3
-            cache: 3h
-            feeds:
-              - url: https://feeds.macrumors.com/MacRumors-Front
-              - url: https://www.teslarati.com/feed/
-              - url: https://noted.lol/rss/
+          - type: reddit
+            subreddit: geforcenow
 
           - type: twitch-channels
             channels:
@@ -20,6 +14,8 @@ pages:
               - euuhhh__
               - JeanBaptisteShow
               - AdrienLinuxtricks
+              - BastiUi
+              - Hardisk
 
       - size: full
         widgets:
@@ -29,6 +25,9 @@ pages:
               - title: YouTube
                 shortcut: "!yt"
                 url: https://www.youtube.com/results?search_query={QUERY}
+              - title: Kagi
+                shortcut: "!k"
+                url: https://kagi.com/search?q={QUERY}
 
           - type: videos
             channels:
@@ -42,9 +41,20 @@ pages:
               - UCNiauGTV7XhkOpUAIXod4xA # Leo Duff
               - UCXuqSBlHAE6Xw-yeJA0Tunw # LinusTechTips
               - UCBJycsmduvYEL83R_U4JriQ # MKBHD
+              - UCwN_MU6-sDwOMArIlYIsKXA # JeanBaptisteShow
+              - UCwN_MU6-sDwOMArIlYIsKXA # JeanBaptistePlay
 
-          - type: reddit
-            subreddit: geforcenow
+          - type: rss
+            limit: 15
+            collapse-after: 7
+            cache: 3h
+            feeds:
+              - url: https://feeds.macrumors.com/MacRumors-Front
+              - url: https://www.teslarati.com/feed/
+              - url: https://noted.lol/rss/
+              - url: https://www.theverge.com/rss/index.xml
+              - url: https://tldr.tech/api/rss/devops
+              - url: https://korben.info/feed
 
       - size: small
         widgets:
@@ -55,8 +65,6 @@ pages:
             markets:
               - symbol: SPY
                 name: S&P 500
-              - symbol: BTC-USD
-                name: Bitcoin
               - symbol: NVDA
                 name: NVIDIA
               - symbol: AAPL
@@ -65,6 +73,8 @@ pages:
                 name: Tesla
               - symbol: AMD
                 name: AMD
+              - symbol: BTC-USD
+                name: Bitcoin
 
   - name: Tech
     columns:
