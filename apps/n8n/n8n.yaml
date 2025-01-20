@@ -41,7 +41,7 @@ spec:
             mountPath: /data
       containers:
       - name: n8n
-        image: docker.n8n.io/n8nio/n8n:1.72.1
+        image: docker.n8n.io/n8nio/n8n:1.74.3
         envFrom:
         - secretRef:
             name: n8n-secret
