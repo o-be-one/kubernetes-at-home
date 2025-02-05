@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: operators
+  namespace: argocd
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: "Kubernetes operators"
+  sourceRepos:
+    - "https://github.com/o-be-one/kubernetes-at-home"
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: operators
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/o-be-one/kubernetes-at-home
+      revision: HEAD
+      directories:
+      - path: 'operators/**'
+  template:
+    metadata:
+      name: '{{.path.basenameNormalized}}'
+    spec:
+      project: "operators"
+      source:
+        repoURL: https://github.com/o-be-one/kubernetes-at-home
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basenameNormalized}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
