@@ -9,6 +9,7 @@ resources:
 - appset-cilium.yaml
 - appset-core.yaml
 - appset-apps.yaml
+- appset-operators.yaml
 # - secret-github.yaml # this is required to allow access to your repo even if it's public
 
 configMapGenerator:
