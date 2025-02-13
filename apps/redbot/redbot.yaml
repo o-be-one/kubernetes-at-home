@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: redbot
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redbot-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redbot
+  template:
+    metadata:
+      labels:
+        app: redbot
+    spec:
+      containers:
+      - name: redbot
+        image: ghcr.io/o-be-one/red-discordbot-container:v0.10-redbot3.5.16
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
+        env:
+        - name: REDBOT_NAME
+          value: 'r0x'
+        - name: REDBOT_PREFIX
+          value: '-'
+        - name: REDBOT_OWNER
+          value: '174585686945562624'
+        volumeMounts:
+        - name: redbot-data
+          mountPath: /home/redbot/
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: "0.25"
+            memory: 256Mi
+        readinessProbe:
+          exec:
+            command:
+            - redbot
+            - --version
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          timeoutSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          exec:
+            command:
+            - redbot
+            - --version
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 10
+          failureThreshold: 3
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - name: redbot-data
+        persistentVolumeClaim:
+          claimName: redbot-pvc
