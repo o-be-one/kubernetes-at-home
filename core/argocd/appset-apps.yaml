@@ -48,6 +48,9 @@ spec:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basenameNormalized}}'
       syncPolicy:
+        automated:
+          prune: false # if true remove resources not present in source
+          selfHeal: true # if true sync if different from source
         syncOptions:
         - CreateNamespace=true
 ---
