@@ -23,7 +23,7 @@ spec:
           value: America/Montreal
         volumeMounts:
         - name: config
-          mountPath: /app/glance.yml
+          mountPath: /app/config/glance.yml
           subPath: glance.yml
         ports:
         - name: web
