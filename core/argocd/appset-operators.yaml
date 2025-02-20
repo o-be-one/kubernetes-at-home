@@ -53,7 +53,7 @@ spec:
         - ApplyOutOfSyncOnly=true
 
 ---
-# ApplicationSet pour les applications avec ServerSideApply
+# For operators with ServerSideApply
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
