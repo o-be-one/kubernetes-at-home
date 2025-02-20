@@ -20,6 +20,7 @@ spec:
     - group: '*'
       kind: '*'
 ---
+# For regular operators
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -49,3 +50,37 @@ spec:
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
+        - ApplyOutOfSyncOnly=true
+---
+# For operators with ServerSideApply
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: operators-serverside
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/o-be-one/kubernetes-at-home
+      revision: HEAD
+      directories:
+      - path: 'operators/serverside/**'
+  template:
+    metadata:
+      name: '{{.path.basenameNormalized}}-serverside'
+    spec:
+      project: "operators"
+      source:
+        repoURL: https://github.com/o-be-one/kubernetes-at-home
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basenameNormalized}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+        - ApplyOutOfSyncOnly=true
+        - ServerSideApply=true
