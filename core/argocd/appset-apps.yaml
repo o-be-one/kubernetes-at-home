@@ -90,7 +90,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: apps-preview
+  name: apps-preview # WORK IN PROGRESS
   namespace: argocd
 spec:
   goTemplate: true
