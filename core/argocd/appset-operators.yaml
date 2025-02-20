@@ -51,7 +51,6 @@ spec:
         syncOptions:
         - CreateNamespace=true
         - ApplyOutOfSyncOnly=true
-
 ---
 # For operators with ServerSideApply
 apiVersion: argoproj.io/v1alpha1
