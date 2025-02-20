@@ -31,6 +31,8 @@ spec:
       revision: HEAD
       directories:
       - path: 'apps/**'
+      - path: 'apps/serverside'
+        exclude: true
   template:
     metadata:
       name: '{{.path.basenameNormalized}}'
@@ -48,6 +50,42 @@ spec:
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-serverside
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/o-be-one/kubernetes-at-home
+      revision: HEAD
+      directories:
+      - path: 'apps/serverside/*'
+  template:
+    metadata:
+      name: '{{.path.basenameNormalized}}'
+      finalizers:
+        - resources-finalizer.argocd.menia.cc # allow ressource deletion when app is deleted
+    spec:
+      project: "apps"
+      source:
+        repoURL: https://github.com/o-be-one/kubernetes-at-home
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.path.basenameNormalized}}'
+      syncPolicy:
+        automated:
+          prune: false # if true remove resources not present in source
+          selfHeal: true # if true sync if different from source
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
