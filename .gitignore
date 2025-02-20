@@ -3,7 +3,7 @@
 **/worker.yaml
 
 # Kubernetes
-**/secret*.yaml
+secret*.yaml
 !**/secret*.enc.yaml
 !**/*generator*.yaml
 
