@@ -34,7 +34,9 @@ spec:
       repoURL: https://github.com/o-be-one/kubernetes-at-home
       revision: HEAD
       directories:
-      - path: 'operators/**'
+      - path: 'operators/*'
+      - path: 'operators/serverside'
+        exclude: true
   template:
     metadata:
       name: '{{.path.basenameNormalized}}'
@@ -48,9 +50,11 @@ spec:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basenameNormalized}}'
       syncPolicy:
+        automated:
+          prune: false # if true remove resources not present in source
+          selfHeal: true # if true sync if different from source
         syncOptions:
         - CreateNamespace=true
-        - ApplyOutOfSyncOnly=true
 ---
 # For operators with ServerSideApply
 apiVersion: argoproj.io/v1alpha1
@@ -66,7 +70,7 @@ spec:
       repoURL: https://github.com/o-be-one/kubernetes-at-home
       revision: HEAD
       directories:
-      - path: 'operators/serverside/**'
+      - path: 'operators/serverside/*'
   template:
     metadata:
       name: '{{.path.basenameNormalized}}-serverside'
@@ -80,7 +84,9 @@ spec:
         server: https://kubernetes.default.svc
         namespace: '{{.path.basenameNormalized}}'
       syncPolicy:
+        automated:
+          prune: false # /!\ if true remove resources not present in source
+          selfHeal: true # /!\ if true sync if different from source
         syncOptions:
         - CreateNamespace=true
-        - ApplyOutOfSyncOnly=true
         - ServerSideApply=true
