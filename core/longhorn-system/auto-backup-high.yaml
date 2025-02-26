@@ -1,0 +1,14 @@
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: auto-backup-high
+  namespace: longhorn-system
+spec:
+  cron: "0 3 * * *" # every days 3am
+  task: "backup"
+  groups:
+  - auto-backup
+  retain: 60
+  concurrency: 2
+  labels:
+    backup-frequency: high
