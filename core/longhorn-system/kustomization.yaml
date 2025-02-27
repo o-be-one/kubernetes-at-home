@@ -5,6 +5,10 @@ namespace: longhorn-system
 resources:
   - https://raw.githubusercontent.com/longhorn/longhorn/v1.7.1/deploy/longhorn.yaml
   - httproute.yaml
+  - auto-backup-high.yaml
+  - auto-backup-low.yaml
+  - auto-snapshot-high.yaml
+  - auto-snapshot-low.yaml
 
 patches:
   - path: namespace.yaml

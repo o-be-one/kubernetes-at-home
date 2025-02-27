@@ -1,0 +1,14 @@
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: auto-snapshot-high
+  namespace: longhorn-system
+spec:
+  cron: "0 2,14 * * *" # every 12 hours
+  task: "snapshot"
+  groups:
+  - auto-snapshot
+  retain: 60
+  concurrency: 2
+  labels:
+    snapshot-frequency: high
