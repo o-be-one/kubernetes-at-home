@@ -8,7 +8,8 @@ updates:
   - package-ecosystem: "docker" # See documentation for possible values
     directories:
       - "apps/*"
-      - "shared-resources/*"
+      - "core/*"
+      - "operators/*"
     schedule:
       interval: "weekly"
     assignees:
