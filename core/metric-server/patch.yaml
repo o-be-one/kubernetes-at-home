@@ -1,0 +1,7 @@
+# Required by metrics-server on Talos
+# if your nodes don't have this yet, apply this patch
+# talosctl -n <node_IP_address> patch machineconfig -p @patch.yaml
+machine:
+  kubelet:
+    extraArgs:
+      rotate-server-certificates: true
