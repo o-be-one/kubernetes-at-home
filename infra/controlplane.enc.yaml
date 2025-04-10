@@ -8,11 +8,11 @@ machine:
     # Defines the role of the machine within the cluster.
     type: controlplane
     # The `token` is used by a machine to join the PKI of the cluster.
-    token: ENC[AES256_GCM,data:RMxTklaCjYU4Kvp9eiiVkNn4YsTVne8=,iv:cj9VojFyxTgJd5qjXz7re/4KN1s/KzMcX0JQDWu5QuI=,tag:Jgi6ygnLtZ8X16Adbdagsg==,type:str]
+    token: ENC[AES256_GCM,data:IYQAa5IHwq3DBddZA0WGEdycAyuZ6Ig=,iv:JZO94QxWbfuE3EDo7MYz00nuaigkk0PAnIYQpbBKOS4=,tag:ZhxHuqOv6M8R8X8phpIN5w==,type:str]
     # The root certificate authority of the PKI.
     ca:
-        crt: ENC[AES256_GCM,data:bn1plTW4FHUtgHp9IoBPBjDnxWAP7qJVPJThMDmleivgJkFk4rkP7RpaW17p2gSd8G9wH6FTOe2G54R37GzOnIOYl3joCmRSEIfGZAeKWOibUWt/2KmE5GRhneMVH2TO3ux+71vlnu+UqYzNkvJaOwOWg3cUB0s6+devZpYIp//PqUSJQMiFjl0h2B0SaddhRAQjkhRrp5lN8l1q6GdlRhhKNUUK/Nh1AmLyW1ebKwjaxAh56lFbgO7MUEEMQmqLn+KAdv0qknwY8Eg1OpEZ4V+oeqj6/1LBwmpv3Wve/DnCrQE2YKytsExJgk/WrZS4B8oWweQlZVi/Z4cS3zR7ihnlaFB5TGbiD++gHvJWYmVDyto2jq8ReKMWLwegpXEJYecPm7lAYdnP/NCrGEitBHJ/R99Xq5MnjAy8m1kThoIfa2kudGZUSzGV1ZDlPZi0p2HOm3/bcAQS95j960uFW7SXY5kypEUGQp6GQAmjigiRzURBBkphNI5UWfpSKRU5XiR1SIH1Cw/eWjEcjD24IzGgEg5l+x9vgKfErUuRCtUp84O9bTi1w79MoKnfcXiix+Ar0zDaHGUUccQdJySUkAOKFR8HInLuwwdVHLdDnIS89SLFENvqMyfUt0t/tZRnqh8w8DmB1qfXk0gnhDv9h7RFypWMTdhIM0wpr3Voz65VooHvzL42nkCL+yngvjIfQ4lykTW9PirVFs97KPMNo6F4H/YJQEdURseQKPPXFqTNwm5PFRhHMMEevSfOS5BUasGWTlsj6qxF+V1GoCaC1eQiTPL9KTx82dUj2z2OTKgUgIkavqb4wWq5jpRDMwit1AclmCDnibz4LO0oDy++0z+3J7cAllxc7lk/hoZ3YDibCxPU,iv:KHXSFoAVTWkmM4GtrQFrivTA98IhDm/CTyiLAI2lah0=,tag:r7eNyRQHeJ0wXDA3zRB/AQ==,type:str]
-        key: ENC[AES256_GCM,data:W0TDzcAqSkSOy5gXuIFN953NCGtvnA0Spr9nB7gNCtdE1zZF/dRWWhQbaNHWU7y1FoDGSOAglo0ed4pMi+108ckC0dy2/Oc++m/StT2BBcEgikWo1M/Q/kMiP84K794kHwioW3CACDPH6YLNpvFq2zpw4Ui3we8xMDsvCZzIChrIUpw/5Jfv3sGD9b7wdgRnD58iOXlUnZ7hDQ/58xxsdFVmf88shE+zj5p4+7wDQKVg/m5B,iv:WnxfebwzxJCyz6T5+w8dKM+Pk2jK1Blipi5Eaixf9rU=,tag:xBmG4mBV/03oN+vI15jSMw==,type:str]
+        crt: ENC[AES256_GCM,data:7cRgj5YPJ7kq9uGEm35ewWngX3GF2JufM+/vfMUNnyUWMozPMTB0QnlQ+DzVpYkbPLPwQ1fhCXhEZxlDbO0W705nezWtEKfJBFz9Zw3MiwUOJDwH9e4KnSjvQh9X029d7XPdnJi3OykwvsMSjQns+6tfQ0WLXkf9f9DRWgnk8U/qh1EoETWoLn20s/lQ3337AcWHrAgY5JJgxLJuqegk+N2g9sYMHYsPAB2M5T/BRBEUhsfGhsNvzp58zPaF60qokOK2fEbjccdjdflR6xKaVdNZnHk9QZwxoNlckKMh2Fj7OGQcnMZZtAcGFx6Uq4E/RknkJzwJs3aRW5dV5i0lx81fPyd8NaLE+qI0eKsu8Jdu0RV+wBov43p7t0DIETW3k5JGWy4uT+iBvzSqckWlMEK6oy3s8KUvISRamiPkQyjFWTNx7q2pP3HyowO/hJGgZ0KXCkki+gKxo3OMmNlPAqbCO82w8mrc05fkcKMa1FkCz96RxdTuBV0fVQPH7BzGuoo5LXOe2IFwfG2tRjoaCUP/TztyszCNAdzWKj4cnVCET6uzrvuIkf5MU/yyszPEdCmle8hOp5Ez5841G7rHOCu1PfbB+vyDP2cWlUgTq02EfBIuKs6iRFcYxEq7AHaBjgU27QdXXo4nAWjzGwfkamRKCw9E0wE5nt20EacHoAYVYDSowgAtv2zJMLhvhVLr1AyN2wvkrjzzKQX0nJ7Pt1H8IAnMBqSFKa7J3SAJng0uANHfYW6ab1zN/w/aM/GzZFigFe6n33edM09AWCVtcQ/HZEehwlNYUa8NJkWTp7slT6HjJDSS8apZbM0ywoCvWjwAW7hc6jHForJhPpizdQHJB90UF3vFYC9q48qBOh8UkGSy,iv:UyFC6Qq36EpKUsu0yo+ZDd8oJ5t2Mr2zhvE8+zqrCls=,tag:1XPAUr+BACmNaQJ5v0JmEg==,type:str]
+        key: ENC[AES256_GCM,data:CAMC+wSy3SS4Z0+W1fizj1apfVQQm5X9ccNx/4Srz3eMHh4rVRKTxDJJTMmWeczBueQIe9o6x9edqNnHV12zhjYzBxtOJT6rm0J75Bc8c3tGed0q6hd5sKdLGjt4VO3rwBK7jCSAmq+rL9fRpOFhDAOSitQH6rIeGhI4+s3aYD6zw6h6rQ6+desW4PENGDs7590BGMyMp6b+Kfe+GyltuFU0uLR2atkHgt06XGV5HhLsO58D,iv:29A23WF2PheMROa6Y6EAPzKKQ1Rb0Bx5t4qAUMN5tCw=,tag:/p0j8I+gmipU04fT/fWsMA==,type:str]
     # Extra certificate subject alternative names for the machine's certificate.
     certSANs: []
     #   # Uncomment this to enable SANs.
@@ -38,6 +38,8 @@ machine:
         # # The `extraArgs` field is used to provide additional flags to the kubelet.
         # extraArgs:
         #     key: value
+        extraArgs:
+            rotate-server-certificates: true
         # # The `extraMounts` field is used to add additional mounts to the kubelet container.
         # extraMounts:
         #     - destination: /var/lib/example # Destination is the absolute path where the mount will be placed in the container.
@@ -177,8 +179,9 @@ machine:
         # Talos image factory generated link with following extensions:
         # - iscsi-tools
         # - util-linux-tools
+        # - gVisor
         # - i915 (required for Intel iGPU -we have n100 for controlplane-, else error DMAR)
-        image: factory.talos.dev/installer/0751f1135eff2bc906854a62cc450c94f3dc65428d42110fc7998db8959dd5e5:v1.9.5
+        image: factory.talos.dev/installer/4db74588f5f5e0a277cd58181df6bb200b1f98a054b6193b158229d4c3d8d266:v1.9.5
         # Indicates if the installation disk should be wiped at installation time.
         wipe: false
         # # Look up disk using disk attributes like model, size, serial and others.
@@ -368,9 +371,9 @@ machine:
 # Provides cluster specific configuration options.
 cluster:
     # Globally unique identifier for this cluster (base64 encoded random 32 bytes).
-    id: ENC[AES256_GCM,data:mxISu+s2GJQ3p5VeyuqVNxKi/4Ld6pLqLTNvcpjXPhe4rdq1JxPhKTM+G/M=,iv:wJE9PQkRPsUTBX1bYdtGIJVNfPNsPwLjdBeyU0wudMk=,tag:YV6wPQWOO02EOSiIQ6gL8w==,type:str]
+    id: ENC[AES256_GCM,data:CCZB/S+MqIkyRJzYJHDTQ66ROArKAywt5ifpRqfYByp+yo3FrbUq00XpA5A=,iv:IvNbaUErCy3LbfmTNVCDTqcWaa7+tKlpV9ryOSgtaFk=,tag:PwQmLIjvL6RI62TfbhagfQ==,type:str]
     # Shared secret of cluster (base64 encoded random 32 bytes).
-    secret: ENC[AES256_GCM,data:nIuCOte1uxij+0qurda2JFjghl2xuwTRzGs60GwA5A4npr98CNo1dypinjk=,iv:mtm/cxuthd8EplpNZh1sr/6MqlsjNn8ZSuy7cVRAISI=,tag:YLI3ccQFZGsTZY6eoAkJPA==,type:str]
+    secret: ENC[AES256_GCM,data:WwwI8vgYo4+86Z6KGmd1IBC0WAYYh1D3R51EVZvz8XZBAqG2RkNUCocvMes=,iv:zGYjy4HXnH0ERx/6zDFlifB+5GBjzse/kOzqLYXaGpM=,tag:H9Wq7jHZ3hcun3nb5oA2Kw==,type:str]
     # Provides control plane specific configuration options.
     controlPlane:
         # Endpoint is the canonical controlplane endpoint, which can be an IP address or a DNS hostname.
@@ -392,20 +395,20 @@ cluster:
         serviceSubnets:
             - 10.96.0.0/12
     # The [bootstrap token](https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/) used to join the cluster.
-    token: ENC[AES256_GCM,data:ERtZhnh+c4nRjCLsSQKiL39ho5cnP0A=,iv:upfd2GlpG273ZvBXBeYK3/dJzLU7x4UpWVAYY0t6BWM=,tag:x8xoMJ5JzdlGCiQzw/lLcg==,type:str]
+    token: ENC[AES256_GCM,data:Gv3ersFgJayVP9o0uVn9Dtp7T8C1r3Y=,iv:nRIrodIFrwaj2kLAdHmQY2Sdiq1pT6xxuQCpPV74YXM=,tag:S7rUf7lLYxaoVSxcxAgYJA==,type:str]
     # A key used for the [encryption of secret data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
-    secretboxEncryptionSecret: ENC[AES256_GCM,data:mwrO9NYBjIqlcRlPK94QEry2+NJwLklLdAO9BSGpJvqoCkjo2YkcqeYZHSI=,iv:YD/XdDV3t+XVrgfrGp2jX4VdK/Ricah6Hxti8moKbvw=,tag:JTIhdPfW5J26uwb8gXTxjA==,type:str]
+    secretboxEncryptionSecret: ENC[AES256_GCM,data:ORoo24Oa+tPl2qE9+N1OsjyIuivCONtcxKADAMaSLPrSwEQQ9fs1PY+k01M=,iv:3/3Va6XY6/W0ChT6Ohxs22KlU16lGz732DnTMg4rUA8=,tag:bZTQW9zL0W58E2rjkDMl5A==,type:str]
     # The base64 encoded root certificate authority used by Kubernetes.
     ca:
-        crt: ENC[AES256_GCM,data:kpoBzkMQTX5I5oUgOHF8c1EQt5Q443EYCjpEm4Ha3U8rUO/hGfDiH7q4E71Vx7337ciVz4zcmAu70dMG/x7t4kUcH36BRYv85ret/452OiDZhW5OGV7iYFIICNp3hr7MxhWxBVT3490/Uh/4ZXlZs0bHjYIYVu6F7aLCPWrN7M7L6CGzTsxSROe6bbn4wQeO2+gHBrMGiD3Dikn6cKjQ5IvPZliIiY8UEaiTJprbpKjA1KbN5x1BLPF0vWOUyGxZaOuyRp9hoBaE7RsUvOGayHTzHEn/IHTgwU7gV5bYF1ekJo9ME3L+ES9Ytap7XAjfIjzA2LZQeCbBq8BRxDJlDrEz3nSu19CrBP2sUfykfhehHfjZxgET9q+/C5T1yaM3+WKKYzcAIn5UuDEZrMtWTNh1ODVtwc3SiV0ZFO/hjWqx7Ccfa5B5lSbPCLBCq6U9K2/vWe8DZ6WgcyavWTn91b1EAIgmmYP1oGXa0F0KdorP8XZiMF/jDHCmaQ3AXfHFjjx/aFgWBIJ+qa4UFosazRI1oqj20PChPpaGKOsaH3bToXCliJyHI4evndvsKedXDRod/3miaJ8zitSFXSnBLZ2Ax3LngBUbHdIK5UBg5h+ofUD8lbLvt5+XpTYMHJ6fw8BjAOJZfDS52dYlNBnBPTlG1922+jaxgX2R8hi0+w6f4dwmsbd6qgohN9Ra/dqzSW4EvF7ZvHG6jRJU4h/TYLOcwe2Gln88ixZHNnVOD+W1x9bGirQP4Y19w8kHjS5q/BzY73Yt1N2HRvmq1Sqo1uOBKMT7UI9QMQv7geOGT86J11iJuVEg0wov3pJV9z0qv6iSUFeRT4Aarv5u330KgE8n3tg2qbMwsm3wtBvWiVX6csnAJ0iMFuuNqd3bXLMsTQWl/FpniUzVhe8blYf7bPjzPWv49pQkexy23+FxKAEI+qFuO6A4k1ALliPbHGdzBL+KUiMUtVDwpOa5iCegoywzMuRm52Qp/dlVX2FvvI/U8qX7r1ODPG7bPUFOfdYVQSZOkfZqB+kcARfA+Gl62O4d+NpK5QWsiRpGnw==,iv:tB3MD3CNtSTWaBw4k2xORyFZyCF7syD/UH84fqLALkI=,tag:5KTOa2dFhEAw1X2hTOemFQ==,type:str]
-        key: ENC[AES256_GCM,data:bzIxf102VvFohckzwsyCTK4Vju3dkYrU5f6CB/Bxu3JFrvQqcea1HZsGecfsX7SeS1EpRL03EK87QB4HzzDvW6zhwgVlQyDH67qsuWrSlLLHJLEsnF1SMfWkfLy+HUwja34fBei0SMDOxuDO7BO9uDkQX4/J7PwwX1qO3Whanl4T1/T0J+Tt3OFgo8uIEQTpVeDSO+Zm0vclZTBWowRW6TyCmNe59Ih3P5KytYGcOXhp1ckmS/cawjRQVuXZoXQRDENUo88Ji4zk0O362d9SryEuSxOGEcJy1uo0rF4zCRcgXUDkSWm/shoRc9NXWwmWP9S7jiiA1IOADlSP3HbxAmpR+sWwRSt5vNbl2vnxPuDE7MIFHmUj/PgUf8ofu2IY5WIYcm+JeCxvqomBnA3e1Q==,iv:ZUBaq6HcrQO72IWgBoB5sDtLTbhapscZ+ALEOXbIuPI=,tag:1G16j7pXRYGKAmu86atdXw==,type:str]
+        crt: ENC[AES256_GCM,data:zcDGdWEOERo6mRR+jaot83LLr25G4FXKK0vT0mHu9wAvYZZ371FA+lVC+M7pLLWv5HrfiaZ89HyGrQPaiU//uuNQBbzlvdWanb9FV4sbq+OGKsqSc+ZArpZKzy9Nur03YP+LBftIc4ZzH1F3EVtncV3/P6jqf2HAfIvUpLR+SnjPfYkP/tepcGJMpOeYSpUqMwrndFgjeUqR+LIxkNTQtKz27syIhirWa+eN35cWhW/bnBQi3t8pgyK3TVkjVuspxKTzgaDcqsrmHnU/bax9DY2gEmpBclJL6cH5s/3f9Pa/KtjGth0ft2hNIDfjo2UqBLFIs77Nl0Qed6bXweitnLbYW9yQyBNYCqL0NYT3w6+OQnr666j6UllHAGlOu+UKupucZJ03RX0SQf0DYEK/8+AYzsoILpDvmfjFFMPJ3n8zaSbkx+WK658sXm98D0Drx9hU4CH+Mdya1K9wafy5Fe2O8ckhZ9oQa6QRKa+aSjoNX7bjBoAb/7B/RrUgETXuVn5JqyzQmgO0SCdIVaRMCVBlrHL8QBQXHzkcCSPdzDX/bcrLAuwSjlRmwdvI4ZxdfkpuML8P1cDdecb21cHP402gUx7Nq4xhx1/qFrHMrRwbgsZWFgLgfNEb/mYasRqeAqG8hNXOlveZiKO4nHTCG2ocANotZduYuat4TOXTRGFNeuqNjTsRFC3HKHC7J9J0FKPuHtda+lQAxGwHvgAinj+tpHvdR+JzIcH2uNo5AyzZCvv+NxgAzx0E2IGCfB3sFGFft/5P+3tyZPDWBY0PgTGuZqIY2owJSc/bbut/bsGTPsdBSvMwQJ+fEhqSBwlRzm3Xg3ifk8eR4QO+XF1n8ik1zo8tvdxt4Obnn9qedV5/YBNv0KoNUPm0JsR0XY9r/vnWK/ld/u9vW59rN5F2eBCM+6/5SUkXz9j7aS5gHMqYLHaWzqhS2fP6vvjCc3onp2mndKyt+O8luaaA4LUFTpvV5r2/CBs2RVkXZW9c5wL1eZTQ5hsxxUBKhhh3wddfxW4A4KbnQpcYsurciH6bJMxSA+hSCnKbLBjQNQ==,iv:TTohRoMEld6rcU1pSzU+afqycazH2pqwWVGlspHJOyI=,tag:XbcayU/kKPyy6wt1euUveg==,type:str]
+        key: ENC[AES256_GCM,data:EYaj9LbahH23Pxs/H/iGgWtytNi8CiGW+N9bbMBIzyhr8NJPb7x/Yvx8s/EH1R9+6cOj57PQQM6IYsLHWkwT8SSS0IW1/tPafWXyjphxO8Zyu5zk1WWoABKl9PSJTNFwPL9c/6l3HOunfQ8lBGTa8ZbymAc4YhI0PL4VoMrVbGctcfkxV8dg4WA+iYReF6Mq2o9y9e8gqgJsVSp4Py1fGr3jV3wzuPMiSRX5BYBZJDbfvj/giRsAZLxV0Ft6vwhpcz/6osSmQxQBzSHty+8COVsSfa2JNjvLULn42j1FHuReBY5YZ5g7OEQ//Jsz0JxNRAEz3IGaJkBFcvCqNUhvyrSx3Wf0f6/VnsFqPxRaS+AETUtthVCtZiRvvQDfEHkEo8g93lj6Eho0zHjctJt8Sg==,iv:1UAfxPVy9Fs/9ZIM4to1I2PI/e6t1ChvlIAVkYwNPws=,tag:Gakewq6/KvDV9RQUhHSivA==,type:str]
     # The base64 encoded aggregator certificate authority used by Kubernetes for front-proxy certificate generation.
     aggregatorCA:
-        crt: ENC[AES256_GCM,data:f546sa0bl3IAzlbCgrhbVt2Uuso34mu/INXEHwTfGEmzOjmyAKUD6Gy+qG7FTtFs0qnBDFGyl/Y3/PdaCn1R1T++80DahTabtqVhMM8JOORtrMCNVeRzpgjLIn8lF7fMrsS3shSVDl8MP6r/QS90nebvQgIgTCJs3VIpE4gDag4fP6B+WP+RQukyYyFH58c5Dmx+w3GnZAV8J6Jid3pjJ6Uovr0ky6pwk5/6UuQ0vf/WotN9j6DW68dbsHB/wFbAAUqZSa4g+SmWezl2Hq5EkjsS1lvoNWVDMbV1n2vdSaFW8Pe9VSWdwILy+ZGqed35tqwGBqj+P6I840QgQed/3YVcoAIPOX5Jr7VyrzKWs3l6+jw4+7VKHSDD8nZS/fnO+bWxsvx7GNc97g8HCmI3EM7JydPGhZRorgPgozfC3q9lvMY7MtJSthFNZ97qMgGA0NBQVbd8HVb/mca0HM3Ns5iPAgfz001VdAeZN5vQjdu7gQtwrblDH88VOp5k16TfUxl4BJcn+BKEZwBomC4Hpgp+2NoJyEB2PjeFRQQDyRvzldUOwlIuORROL8BCb6y1SZG86XHVYeZcBg6zLxaHrlc1HOZYeuGxWX43eMmMj6XWWyLES3hhh3/ZnQbYZ5tDoiNVUCmqrRHTFH7r6W3K4I6NTCLPNAleUGT5mBY9O00V6JUI4US73KL6EESWo2YZeg6iV/Zun+5SrZOGN25sus3w1GbcfUFdyxf79uqJEmeEDprFyQXi1G5hTUJA6VlC8w3SvbF62FqG2qfzDeNWwtu2LMSuJ1FVifZhrLlgEBPQlQfHD6R94p7JTjPYACKVz7NwZGMBE67v+3je2TWBF9Loctb56w/xfMHwAkyt0VSRThEFXReCDe1+UBqVYwHYJXN+KFl9iJ0R0BR7vCIUnuD77OSSwGwPZT/8QjznXYHiC/mz0kubZhftbPiaHWnt,iv:eZeYd5B6M9KDtpw4joWqA7qO5kKE4EbOEN7flbYxO+c=,tag:Geat722N5Xux/DAbAaySZA==,type:str]
-        key: ENC[AES256_GCM,data:132aDK8nSfBo5ehnW50zmpKQcQqH/gpOzZFh2e7aK6cQ7OCi6TeoQFHQX+a8n/BQVsBZma12iW9wnct3qK5w8mT+yBMDWh8M/RFtYMVwkfr0RXpflYkb1EK8o23WCDQZ6SHhfj2JZJhWqdUBvf1G1tODAi3ZlDWpIbzWt6Jegd78+Ys13kcub4GGntKgARubYfwZzRrHk/LQwrLn4xOZqLnmOA974CCaY6X+rgyidYwTYDeSO79nEwEz4qv+Xl+buUeAGVD1y9hon9P16TC8ft6kCN8gajdJUH1mc/t1MnkG2yP7QqdwyvUQaO+XaGEh0nCUJQDGYI8y1DoRnmvD7iAr1io2++5QNsoFZdkI+7dpBhLikwMNVSCmOt+hbDCHTB+DZBEVAT/OdPE8qaRqHw==,iv:C4/OqNOKaOrmD/LBBQ115loEJjJtfB4eG8kWWIpDAUw=,tag:UOyl15rz2xmztf8n9K6RWQ==,type:str]
+        crt: ENC[AES256_GCM,data:zxqb6j/L/5y7qdmFz+a/apd30onu9BUemLV402vrD3TDxYnY8fDWZLSBItQFljMdOUj+hHoXoPNJBSshi55bjTr3pSR+eXLVmf/OvQsoRi3DbR47H+QXyLith8EbDxhrAfTaRHY7JBAML+h9oljMPf/zZUUWkqzo2mBAIZ9Jzv4LIkzpmxHLLfveDV3UeRZzJmnR6y/A6p3mRHrpKxZb0a5JnN7nyGfRR20Esdf8qYQ4nFGWLwHQHOVbqEVtp0JfaMdrMPA6w992t5wfel0FZTISjEfoUu5GlS6IRwGK/VJJq48cQR7BaI+mistTcEHBBLXdE01JM4r972coeCP0mKhgcPDKFvGH5Cf6rMtu9KQj/F+JMCNNM5hLAzqN2mspWVWTs7hnQyS4Oylyrv1yeNBpxnGVJcjtdzsWV+4mwUHYmAFi3er2BqWTbJFTfPZsisNkebGKW07V8Qr2LYAMNU3IqJf4ZfkvCK/hJj350Sy6hNASnktdhPaRXaGytvlRY15u9dFwxlIbZNpMJDZ2da++Dnx3UuDtkY9C4FTSPNN/sOK2s1c95SLPAFyI6sv8SFB0iR7ReTpXaoJtnlat0h5q8hDyi7UQpreIjrww28iGflRsMgpJMT5awYuaQzQBihlxuoInaTwr3FdKRBmUkbpOghDAlcfY9ej/MlAiOkwM57PPJynK6KkB/Wki6BcBqEV9aHx+qNSZskvOK1ekQ46DApO+TieR8Dw5aP/ps+CJfwb2YOGlEjHur9Y9di1FGGS+ByM5V8zEPcz7ABRVK/uryzVmHThpUm6W5LFyodV+YvH5ZpRsYTz/lLM0Rn+NZBx49A0W2bUm96BB9RARnKdthDlQ+UAk3RQG1HphCfM/StAbx/kZVXP+CdUsiQTmce0uwPlEuGlrBoQh5U2xAd7DkA6YVGh5IoZvoGpQW5SsoHl24hYhfnYuYRdnqq2e,iv:C6N3enONX0y30xupdhZ/ZfUPTzO7fgnUpEo6qpGHeFg=,tag:JybdENFrhwz9haKuhOS7BA==,type:str]
+        key: ENC[AES256_GCM,data:787aJWBuaecyWTIv19TLmsqPnWJkbJl36+47bRlTgNWNZb8akRKF4d9ys/aRQiBeyZGt4Nl8np0T1REE2ea/Z1u816ZQXlhADsiWac6M3WMrYXuHF/4EPSfBofIRxlMZVd665gqwe/UELa2Y2HyLh/3C/71qphmkIYd16toF8P2CtRmm4rAjG0nsSLSV0lJ+G2EcyIteF9wjqwGbCR8XqTJO43wd0AHumTaVMqKaeOwMXw1BT3+5dcmiitQM16fOoQ2aKdr7KxXlT6+7s2Fo21/N6gMldztKvn7FxQCAdFwv2SJAuknmc3GaH9xhqLtA4flOKO/8ud+UVGxWF8tCzf9Ecw+wAXIhPmQW1kBS3xqk+8wLh3mXIZW1xYOV/cwqLGNEvl3vMEuMw4fQvGEHpQ==,iv:06HtwHmlFrP88gWe4MP95tyy6i213WeqdTT+aYYbLu8=,tag:eyUtyevEiNCGKuxFEAcXuw==,type:str]
     # The base64 encoded private key for service account token generation.
     serviceAccount:
-        key: ENC[AES256_GCM,data:ppxLi/Jg/JopRPCqFI1oEeCem2bN2ral0Yy42tjbwnYTLTgEmjbNoNNHXhKwz0clyaILbKv9hPM//3M/xiMibiEqlZl2g2c2Zn/ko1+6j/ZpY5zjECeSsfQGPLCwSJWxBR0JWrCAEZlFvdE0MXCbf05V0QeUPSxjsOyamQA+8mJl+F021B4Jzh+SMB/18jdS8CaE8SvH0SOyoMGZwd5KC2zQtPs/rXQfR1aALkF1cDQeGT2SHKarpQv4L/EwSmKG0GKxXdavifKjaEaJfQjzT3yU+L/btIZgI6kh/slnCA/9XuwjhmILwNlc8rCArrE1cgqAPUrc9IImMwjXfy2LZdbpmYV9GynWYNG0w+SER9dzsnMXSCs8+6Kxzt0b7dYtbvxVrUU+pLahSAX4Y8Ccgg==,iv:r8kX/7ooL+NaIW/dA/WndF8kEo33tuxR5sUfMDKx6Fo=,tag:Z36Mc+3pTBphgNUbjETwdg==,type:str]
+        key: ENC[AES256_GCM,data:pffE8oB+H5TQ/gQdQGhrZQXQ7VZKuhCph/sOXq6ha3Tx1sH1jZ4Sa0t5H0uXayMq0ELPmsJnd04Zai1yp7ztYO2Uyygjuf90WFj/Q0T6ldHDAC74RYcvzYM0gWDXzOBRox2FbAOeL7cI+fK3pg8McLqPBmIwhillybVnt2WVBFD0jgGpBeWJCNdqsvqerGTdvEQHZEbBPeBuAPsaytheYCzfRMxQak9Et8pZ94UqDF447l07VIVQ4EYyjHOvncQhM1N0J9f1gN4KaeEnuHZM2/6aJZaRxa19OfcqqT3pl/Rd4nxN46JQq7DAqTzGQKbR0xt92L3kyWVxctkRnbs/D6f/MSZUMtr/ny4OUNoT8gwEKeCj8+9kFQWCaPZdqpv/kQ3DywM4d2lQ1QII+81hQA==,iv:T15BGN4R8AgOJ6j3dcJDpYOmZuAtVORQHt6xhukvarM=,tag:+O45LsGtsrB0mfqGMQlG2Q==,type:str]
     # API server specific configuration options.
     apiServer:
         # The container image used in the API server manifest.
@@ -473,13 +476,13 @@ cluster:
     etcd:
         # The `ca` is the root certificate authority of the PKI.
         ca:
-            crt: ENC[AES256_GCM,data:78Lcms1hYkTcB2yGggwTEqMNXscQy7nnHkeQ3ws+x2L0v8DMG3A1pDENgQGFBu+4PN/04njit5TQLSZkONgv4FbiBD7R32go0GYrLQKR0iQ4KMJtFYjyhWFk+RGeUFuhUSLon7bkbfHn2c/C0l2BQ4ESm50xVZxMo7KsGAT9lJpXkDLs+90Nk5q/lBelOv3Y5UDP7jfyBQ3Dc/ap/a53zpuBc70Hpko+Z29Gv9XUq8RO1oHQ3rR/f625m7P/ZxuSFkTRbxaEVvC0u6ngrgMFpHbxiuLpugg3gQyWERM8TwO2D7Iopx+4LdVukdGNyvJIZc+vrRILDgH5fbpjAo35Z1lvX+GhBrhQx/ay1IcbYgNjhvKvz0iN/pZiXQufvdDBhITWprZ6sCnt2xquQtdDTR+AqItZgTSw8Km6yXk7OKaCHUKKvlQCV6A/qVO5nekxFq+MlA0BXyja9EGc15cq/zm1xUn55YTOZO9+Ws0Iq7Z9ZaO2LMeMQqlBXl1OV/3RKS5f5/yugsbO9iB6qqS42rMwfNa69/cCMHlHgn73ZI5BolO9jvd3t2l2akwMH/oBgtkcG/NsVnqq8tYJJSWz+Cq5IfdriJFDQLydL4MId8gtWuEjHgV4GN2BnaiakVfZ9j49pFDrxXOfpd8P1qJjJqHQVFXbvyVCtTd0hSHzxv6+rDfuNaeUN2YgNfh5kH49RF9P1sAQPWlS2rLOi9hvH+U6FX7Uy4AtqAHVR9nYFq3EgV1UME9Yf1nlchRR80RIL83DLwKRHF9ihAn7bPfT5tWhlxGNYJvVJA+dK8cfvp2nXaMUY4MnZhOkzwHURT8wSr8FCEyX449bDYdSxVq3bJUyxk9gG6Rw7903eYLwfOI6U7tglQhq8rpD3Ik4ojnulkMvFeoRd/xgQScojW0zZuDckLbkzFNm53h9AIPVV9oqLeKAa57+m4krJIjLRrmrQviCWw5CW3XMsMhrMX/s5KMakwaDdv2VLZ4KVJxQRPc0aIjwN2ve1HVr0vfN3eElBdSGYQ==,iv:t/tFR+YM2qVkBHFOzdNKHqh6Td4DJIbFFjcoNAWZR+8=,tag:5lxXLtMTRImqgnWUEKp/oA==,type:str]
-            key: ENC[AES256_GCM,data:7k37LZUFV0GZefjrzwfwmSPNYl2bkTTiavB020+ijMJAaDqs5ImTJ65XrhMcfMQn3h2ajmpxdC2t4rs+MspSj9rJYUzBNfdKGm/DafyjC04WeXX5S2jTTcAsXyJsfJrTyUOMlBd7rReXzWqqO1UaJIp4VquV55+YTEeOKodp8A/BP/8CnmckGkvlrXGnr+ENUuLrqczLZWPuMOj+4fW66jGANPBlwBEIuBz8D4+WmkQMxl2elfmDPOuEdz9IUWTb/3Xmw1+kDDeXwmxqTzEtXnzlEouGP/g9Ec0T+PVEo/K33GQsRtoAIkexjtsH4Rhqpo6jtuN9h6HnMqLRAIdPt2wi17sUcG8aichCa1aouthXQ6q1iqCoXNjNlukfAD18splNoi8az3Ze2A3GmyObKg==,iv:8uBm5MSCCUT7iLX5AyNXFUgyhqoio68oQjPkqrt3TZk=,tag:qCaB2/HAAyLH6SxIxHC+9A==,type:str]
-            #ENC[AES256_GCM,data:pkLwyfe5m35vouZhbpWM1rPyLTf5raZ7qYFqvT1crBNtamijXI5MgZ/7RxVjq7Ck1k6bt2jP0g==,iv:7zlTzpk6wlNv0A8EyVu50b3R8aW02I2eqtq1F0CavS8=,tag:n7mmFyIn59pNTiwnfEhAhg==,type:comment]
-            #ENC[AES256_GCM,data:b1VziwsGx6akJ9HdMlA750ZS4aUoA0I4dBDP48TLihGNMzkblo9mOCagzwdvJEVIGUA=,iv:5VZ0AVnVA8EO6evjS7rHv9S3+6ldlVVRl/1zXB6yos0=,tag:6W9c7S6kxGHbx/gAElsSTA==,type:comment]
-            #ENC[AES256_GCM,data:Qx3HRzCsElyt8YAn3xrWnIcM/XEKaV4u+mwxdzgsGq+gFw22wYjdb8B9zNkO2CaQuI8MqjDNgKC0iEIByaytJBnLAe3XwsASJDNKiOfTR4t5mlnGsl5V13A=,iv:KlfN0O3FRQa5dzkQEBTwGUc+DMlD9cuPfkH1CsNQY5E=,tag:uAZFOr3NCipK3XKqn7jlvQ==,type:comment]
-            #ENC[AES256_GCM,data:gQHXfKRipdC03+vzyAq0X7DPEg==,iv:ZICUO5YIlgvl9dGyaMBYI+/IzLyxZ3OQc6824Lkr4ds=,tag:xhskDoTSvrVK67gLUYgehA==,type:comment]
-            #ENC[AES256_GCM,data:kHNM+fZNAskl/RbryNVmX0o=,iv:TIXVgc4XflnjoxGWJ+k5XDA2hxyfUI1+pvhZP0FQSh8=,tag:4098Xk02qrqzyGWwx6X5qA==,type:comment]
+            crt: ENC[AES256_GCM,data:/rAbRrzbj51iPDJLT2DQ3keTRnyBE7FnRXl2UeqKE38ClekDBB/YMzYrSzLbHKFU85q882pegx8yQ0B6eJEypvoj7E6h2SHtZLQeTTUEloSYWq1ablsUa2JmXPFVjkfmGcAtBDbyEO1Vz+AfmylETvW8wqX/bgsZr5t0YrtorNZrBrM/NPA0fDiNg75d3Acnfy6Xl2uPyOeJ1FLWiPDuAwFJJWy9DK9ptCuCHWWIMCQiecqJrN9vcZzy4rd6YscwGq2XTt1+sDQjs3Sya8UnWmqI+Qdmqxu2IedrebDa/WkyGHe2PTlgVZBUOavFnLV5CyuKJrwl01/dUf9VgFqGUkRVsiWsjZlTc250jEp8Svvc3GH2nbez1j7Zu1/O1w81b/hollXS0sbfK2FnrafKFDEXNDtaU6oWIxwZWKF+LKqlZPnEc1Xjka45uQHRdqys2V5Z91GS4kvrVFZtqy7G1b8MOz6h6F8NpW0c/Zv6NiJOCznfWlr0rX5mkr2HhbUpLkYw/v8qOgWt2S6fe3/4ThSAlsOkYBtH/O1wtrsOWBYmx4VcRcvbEdvtOCpnBvjNO+lJrTgwa7SVDw2BgQ9LEPF2w6omJlWjIqnNwKegTY0p0kr2RSPEFfzVC1yhMQ8ahOFEBtBkHb49MujEUWDKGlTzWLsop9BtyNECPUD343nF79YmTW37VGITEjbrSVZIYlVyhq6LgNaaKmC4j/nRomq0AXduLIVoMZJ+GKfloQqR4Id6irab9ql7fOA4rMPsunQM4l/Oj8/3q21Vlu7vz7S0SY9uMrFsQ8PSLf8JsnkAj9JGBUPkdiR6oCO2SaAdTmMcVoE0ek2/sotzEQcEB1FMA3nNDDvKPjnE+Om3db8qUS0McCJCJ8bhnY/CVArSvz2hsQ8sm4a3z7zINJdGOt6MkGyWxXqiv/ZviuuI5abOjt8LOsyN41rW8bBMqZoYlI/BV7jIBKzl5Pc1GqceYryf4koAwonO5owVR0lb/WQv7wyE/7OT/nf31GeZ0aXaDX6UbA==,iv:TI5U7z9Cz9q7vKBS2p6acg0Ui+ibd+eJH2nmEST4+mE=,tag:vLEKkKv5G5SeAvZgDIaITg==,type:str]
+            key: ENC[AES256_GCM,data:jlNYP+heHa9aPEWa3J/Pkvtk14wsR5kbIiMR4uowKy8/kSpPNhzBLm2mOA570Uln4pcXFbBNzdu+LDdjRCV73PPOqbAk9a0b1cEF0LCS3o7anAV6Aq/9MJ6q/O3jN1LSdI/93Glt06TaFjCW3MAlmsnTKyyCpzpUVvTRVTVoqeB9V8O25mot3C8NeVl9rnRkuTLEAMGlJ7XfC9Z4IBlDmEq1J2yPUm0SY0xBG5VZMocywMlNgbsam1J0drWsqhrUrGQg1kNW2MouQoU9cFCp2E/odpfH02gchRThRFFpVYlKbw85vqiOaUJly9Pg0gt7lg9JdZC+EcR8GLH9T/22HMTsAFeCqYrLSze7wYFXZeSQ1uoW7X5jCWNghRUdkROIjBNFEAD6xhhewsWACXidqA==,iv:ebpxpXvjhe2LViSbjUmGvsqCi1j9rfZiF8pC/4WHlBY=,tag:i2Coa+FK1wS6vmyORdqS+w==,type:str]
+            #ENC[AES256_GCM,data:M6kQ/51/w6GZmZeAHtX4Pqes7hkcDPSUD1bBGHww6Pvo7gRNm9ue8y3t7mhamIVwg1kbaXTVHg==,iv:BFxG4P34sbtZalr1hlRZhUnOc/8nT7OI7SpP6uOk2kY=,tag:tqSBdAdU7Y6iskA5E1A0DQ==,type:comment]
+            #ENC[AES256_GCM,data:hTUMrF6W9bOK2qlpf2FraZ/2+DnkpdnfHzRY/clRXIm1lKDx+5jZs66m3EfYHTb5oro=,iv:SheZ97zE3DkhOulqRthJJ3VT3rtO9jX2RyDKKl6BuXw=,tag:6BB3buEJCTAqougMcLQW/g==,type:comment]
+            #ENC[AES256_GCM,data:/heSbHx+yrzBEAZiyu8cvEySTEkW0cO21NAuFT63yImf7o+0jJGJZ1U52ZyMK6DxiQKEgNOwshmIw+H2O8OhgLgDfcp21Va0tGTMnaRuPJmmZyWzt52O5GE=,iv:T/Gvr2XtzoggHSp+NQny8oYasoYCnFiuHA61EJA4IxY=,tag:CQTeG44cxpCiYbjxztDNyg==,type:comment]
+            #ENC[AES256_GCM,data:3xhJxGPDT6GUNOW9VxoL/FgbZg==,iv:r5gI4h4rcMiChfrexM2V7+NEuypoWO6MTzsy59ZkKYA=,tag:Gg13vqVBeTijEUl71CCDVg==,type:comment]
+            #ENC[AES256_GCM,data:m9nPioWdVbDbRqWXgw4CX40=,iv:Y1g/aUYEHJMq94JZLY2IDWn9ntoZpM+sapK9bfCQeWY=,tag:dOwO4ZVtmQDwbDjg4wJlSQ==,type:comment]
     # A list of urls that point to additional manifests.
     extraManifests: []
     #   - https://www.example.com/manifest1.yaml
@@ -523,23 +526,23 @@ sops:
         - recipient: age1ngkdczpldhxhx8qchl0v7c9eq06vnc5yea3mhsuy0n20hvyescpqv3w2xy
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDT1VNdkFQNURqS21BbHU1
-            aExKRExqNFIzTE5YRzNLSGh1V0lkZDlaSW0wCm5YcDR4VzVSdjJMU1Rwa1BFV0VG
-            MVRzcklBMVloamN0RGNhL25DdGIzUjQKLS0tIG03TmNhOTA1M3pVSlRiKzY3R1o2
-            UzhqbWNRL0NEVE9MTmQ2VWdadmtFdGMKahcaTJvf4bKpn1ujenO3rDrD56lk5vc5
-            ZEfDqcWaci5knO+i0rcVyi/EwV10GDLWl04gnc95sJEkG753uaDZMw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJWTA4bmFxQlJwMXlsWDh4
+            VE1RcEFWSEFXdElrN1BIdDRZd1pCaXlSazEwCm16K0h4QVJNVVlETUczeFdad2NJ
+            UFVJZWJFNGZCaTY2UlB6YWdDTzRrckkKLS0tIGxXekh1ZVJCUG5zdlNDUmFlcXNu
+            dGtQbm1URjNRT3p4MFR5dHlWaGNkY3cKMwbhZUSboiJUL8gCQF2Ws7YwNOK1/ZJE
+            0Dqnf/14qTPUAQ0+cTcKPPjSaZxu5zqHHjazp0JxmWMP3kwHt9nddA==
             -----END AGE ENCRYPTED FILE-----
         - recipient: age1xzxw8fsvdz53aa3r8z6t4zns2cqadjm4ep88w5jf4zw3yhcflvesxgkxlc
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKb1d6M1Z3SzdydHdIdXFL
-            OGhIQ052T0dJM1hqNmR0VnFyaVh6N1hsaDJBCmpOMDRIUXZRM3ptTEVQLys3cjNt
-            S1BPMGU0d014ZG1vNGZuaVcvNmc0cTQKLS0tIFBRWDB4Z1N4UDFFRHlpQUhPUjVC
-            LzlnNFFTOXZGc2hiaExmbzBpbk5HNlUK1jH0srUYe/oINtXfRDbl8s3Js2+m3gGT
-            31gy31JatmE+MIZkNtwpRx70MsqSDuDwjoJsc6zxF8NIlvzSzZGrNg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArUStxaloyYjVYQU5kZ2dU
+            TUI4UHVyTW45NnpOQ29mVkFLSTd5TFNyNVFNCk9EM000aGtQN1NhZ3hsdU9vMTB5
+            ZXBHVmlsb1NzMENHcXlFK3BzZklhS2MKLS0tIDFPejhNM0dXK0NFaTl1cEZaM3k3
+            SEdxYXVlRVA0dXRzYWliOFBtcUtmdkUK8PBn7MvroyEsGGXJPYKQIxvjOZmn4H12
+            WDHTndmId/Di4cMl4Rzw7up2/6irl+Bb8A9Odd8VtPnk6ltdYabkfw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-04-10T14:17:40Z"
-    mac: ENC[AES256_GCM,data:PNtdVCSvl1jW1VlVEswdy3aenZ0hXswZiP4VBuvXkHdmJdJW54hI0YQX7I4/airlOpR8tAXtbJRzbXRhdVzbGxYkvTz3AGxtHPtDIdg1NNiGKK1+i8leYzJqN0tGmywRZlQg3J4ez3KrQjVcUWWMG9eQzr7WlyHK4LsaAKjUDIw=,iv:JCACnitb2o0VWnbhN/uD+p9bJClrQNs+kv0ZvEpVzFg=,tag:FdEdCIWIo1iGefi9NCMn8Q==,type:str]
+    lastmodified: "2025-04-10T20:15:01Z"
+    mac: ENC[AES256_GCM,data:aOMlUw4/9oxnkJkiQeweBkh4KWjwrCay+SFxoNqWuu2swx2yl9gp/N5PeUtRi9YW/YLtS6yD38t4cqzk/M8XDuLxG63d6AU1d4tYcqFOtKLaueZG9ho5Yq+gaM9xYjw/geQk8AcInANPOAVv1m4FRE0lV5Hv1tKxADUXAjQxCzc=,iv:L0CHJgOSKi+L4nKr6aRZawRUOmTmIT8AlYJ8ms8s2kE=,tag:3d5yiyk2/lRmm97ubrd3rw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
     version: 3.9.4
