@@ -1,0 +1,64 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-claim
+  namespace: synology-csi
+spec:
+  storageClassName: syno-storage
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 5G
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: read
+  namespace: synology-csi
+spec:
+  template:
+    metadata:
+      name: read
+      labels:
+        app: speedtest
+        job: read
+    spec:
+      containers:
+      - name: read
+        image: ubuntu:xenial
+        command: ["dd","if=/mnt/pv/test.img","of=/dev/null","bs=8k"]
+        volumeMounts:
+        - mountPath: "/mnt/pv"
+          name: test-volume
+      volumes:
+      - name: test-volume
+        persistentVolumeClaim:
+          claimName: test-claim
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: write
+  namespace: synology-csi
+spec:
+  template:
+    metadata:
+      name: write
+      labels:
+        app: speedtest
+        job: write
+    spec:
+      containers:
+      - name: write
+        image: ubuntu:xenial
+        command: ["dd","if=/dev/zero","of=/mnt/pv/test.img","bs=1G","count=1","oflag=dsync"]
+        volumeMounts:
+        - mountPath: "/mnt/pv"
+          name: test-volume
+      volumes:
+      - name: test-volume
+        persistentVolumeClaim:
+          claimName: test-claim
+      restartPolicy: Never
