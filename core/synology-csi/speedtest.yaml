@@ -24,9 +24,10 @@ spec:
         app: speedtest
         job: read
     spec:
+      # runtimeClassName: gvisor
       containers:
       - name: read
-        image: ubuntu:xenial
+        image: ubuntu:noble
         command: ["dd","if=/mnt/pv/test.img","of=/dev/null","bs=8k"]
         volumeMounts:
         - mountPath: "/mnt/pv"
@@ -50,9 +51,10 @@ spec:
         app: speedtest
         job: write
     spec:
+      # runtimeClassName: gvisor
       containers:
       - name: write
-        image: ubuntu:xenial
+        image: ubuntu:noble
         command: ["dd","if=/dev/zero","of=/mnt/pv/test.img","bs=1G","count=1","oflag=dsync"]
         volumeMounts:
         - mountPath: "/mnt/pv"
