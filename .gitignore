@@ -6,6 +6,7 @@
 secret*.yaml
 !**/secret*.enc.yaml
 !**/*generator*.yaml
+**/client-info.yml
 
 # Helm
 **/charts/
