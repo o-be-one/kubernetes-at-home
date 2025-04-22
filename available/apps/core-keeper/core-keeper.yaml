@@ -1,0 +1,144 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: core-keeper
+  namespace: core-keeper
+spec:
+  serviceName: core-keeper
+  replicas: 1
+  selector:
+    matchLabels:
+      app: core-keeper
+  template:
+    metadata:
+      labels:
+        app: core-keeper
+      annotations:
+        tailscale.com/proxy-class: gameserver-proxy
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+        seccompProfile:
+          type: RuntimeDefault
+      resources:
+        limits:
+          cpu: "2"
+          memory: "4096Mi"
+        requests:
+          cpu: "1"
+          memory: "1024Mi"
+      containers:
+      - name: ts-sidecar-exit
+        image: ghcr.io/tailscale/tailscale:latest
+        securityContext:
+          privileged: true
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "128Mi"
+          requests:
+            cpu: "0.5"
+            memory: "30Mi"
+        envFrom:
+        - secretRef:
+            name: tailscale-client
+        env:
+        - name: TS_EXIT_NODE
+          value: "100.126.43.123" # VPS Tailnet IP
+        - name: TS_USERSPACE
+          value: "false"
+        command:
+        - sh
+        - -c
+        - |
+          tailscaled &
+          sleep 3
+          tailscale up --authkey=${TS_AUTHKEY} --exit-node=${TS_EXIT_NODE} --hostname=exit-$(hostname)
+          tail -f /dev/null
+        volumeMounts:
+        - name: tailscale-var-lib
+          mountPath: /var/lib/tailscale
+      - name: core-keeper
+        image: escaping/core-keeper-dedicated:v2
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        env:
+        - name: SERVER_PORT
+          value: "27015"
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        ports:
+        - containerPort: 27015
+          protocol: UDP
+          name: game-udp
+        - containerPort: 27015
+          protocol: TCP
+          name: game-tcp
+        volumeMounts:
+        - name: core-keeper-system
+          mountPath: /home/steam/core-keeper-dedicated
+        - name: core-keeper-data
+          mountPath: /home/steam/core-keeper-data
+      volumes:
+      - name: tailscale-var-lib
+        emptyDir: {}
+  volumeClaimTemplates:
+  - metadata:
+      name: core-keeper-data
+      labels:
+        app.kubernetes.io/name: core-keeper
+        recurring-job-group.longhorn.io/auto-backup: enabled
+        backup-frequency: low
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 10Gi
+      volumeMode: Filesystem
+  - metadata:
+      name: core-keeper-system
+      labels:
+        app.kubernetes.io/name: core-keeper
+        recurring-job-group.longhorn.io/auto-backup: enabled
+        recurring-job-group.longhorn.io/auto-snapshot: enabled
+        backup-frequency: high
+        snapshot-frequency: high
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 2Gi
+      volumeMode: Filesystem
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: core-keeper
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  ports:
+    - name: game-udp
+      port: 27015
+      protocol: UDP
+    - name: game-tcp
+      port: 27015
+      protocol: TCP
+  selector:
+    app: core-keeper

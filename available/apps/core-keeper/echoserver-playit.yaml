@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: echoserver
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: echoserver
+spec:
+  serviceName: echoserver
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echoserver
+  template:
+    metadata:
+      labels:
+        app: echoserver
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: playit-tun
+        image: ghcr.io/playit-cloud/playit-agent:0.15.26
+        envFrom:
+        - secretRef:
+            name: playit-client
+        securityContext:
+          privileged: true
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+      - name: game-server
+        image: quay.io/cilium/echoserver-udp
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        ports:
+        - containerPort: 69
+          protocol: UDP
+          name: game
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echoserver
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  ports:
+    - name: game
+      port: 6969
+      targetPort: 69
+      protocol: UDP
+  selector:
+    app: echoserver
