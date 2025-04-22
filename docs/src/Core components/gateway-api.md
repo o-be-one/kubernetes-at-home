@@ -14,8 +14,9 @@ To verify if you have all CRDs installed and get their version, run:
 Summary of the installation from documentation, can be obsolete:
 
 Install Kubernetes Gateway APIs
-- https://docs.cilium.io/en/latest/network/servicemesh/gateway-api/gateway-api/
-- https://gateway-api.sigs.k8s.io/guides/?h=crds#getting-started-with-gateway-api
+
+- [https://docs.cilium.io/en/latest/network/servicemesh/gateway-api/gateway-api/](https://docs.cilium.io/en/latest/network/servicemesh/gateway-api/gateway-api/)
+- [https://gateway-api.sigs.k8s.io/guides/?h=crds#getting-started-with-gateway-api](https://gateway-api.sigs.k8s.io/guides/?h=crds#getting-started-with-gateway-api)
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.2.0/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml

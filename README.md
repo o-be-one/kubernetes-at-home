@@ -1,10 +1,10 @@
 # Kubernetes at Home on Bare Metal
 
 > [!WARNING]  
-> This is a WORK IN PROGRESS project, still experimental at this time.
+> This is a WORK IN PROGRESS project, experimental at this time.
 > Things may change without notice.
 
-Documentation, which is also a work in progress, is available here: https://o-be-one.github.io/kubernetes-at-home/.
+Documentation, which is also a work in progress and a bit lower priority for now, is available here: https://o-be-one.github.io/kubernetes-at-home/.
 
 ## Proposal
 
@@ -20,17 +20,12 @@ And the whole thing is operated from ArgoCD as a GitOps approach.
 - gitops is working using ArgoCD
 - few apps are deployed
 - storage using Longhorn is setup and running
+- storage using Synology NAS is setup and running
 - use of Cloudflare tunnel to open choosen app to public
+- use of Tailscale and playit.gg to access UDP ports from outside
+- a minor part of security was introduced (non privileged)
+- Postgres database operator is setup and deployed
 
 ## Future
 
-Not ordered list with some ideas for future:
-
-- [ ] Add image / diagram / illustration to the README
-- [ ] Setup observability using VictoriaMetrics
-- [ ] Setup a database operator
-- [ ] Maybe add gvisor for better security and performance
-- [ ] Maybe add trivy for vulnerability scanning
-- [ ] Complete upgrade documentation
-- [ ] Complete troubleshooting documentation
-- [ ] Complete any other documentation
+Please check issues to know more about the roadmap :).
