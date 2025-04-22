@@ -58,7 +58,7 @@ Every sensitive information are encrypted using [Mozilla SOPS](https://github.co
 
 I've often heard about Cilium from a friend who's BPF and XDP passionate, so I wanted to try it. What's interesting with Cilium is that they provide a Kubernetes experience with a strong focus on network, with lot of features and lot of tools. This cluster uses Cilium to manage network and to manage ingress in Gateway API format.
 
-[Know more about how I setup and maintain Cilium](Core%20components/cilium/).
+[Know more about how I setup and maintain Cilium](Core%20components/cilium.md).
 
 ### Ingress (Gateway API)
 
@@ -82,16 +82,16 @@ Longhorn will be our default storage solution. It was challenging to choose one 
 
 The project repository is organized as follows:
 
-- `apps/`: Contains the definitions of applications deployed on the cluster.
-  - Each subdirectory represents a specific application.
-- `core-components/`: Contains the essential components of the cluster.
-  - Includes subdirectories for components such as ArgoCD, Longhorn, etc.
-- `infra/`: Contains infrastructure-related configurations.
-  - For example, Cilium-specific configurations.
-- `available/`: Contains inactive resources that are not currently deployed.
-  - Contains apps and core components that are not currently in use but may be of interest to the audience.
-- `docs/`: Contains the project documentation, including this index.md file.
+| Folder | Description |
+| --- | --- |
+| `apps/` | Contains the definitions of applications deployed on the cluster. Each subdirectory represents a specific application. |
+| `core-components/` | Contains the essential components of the cluster. Includes subdirectories for components such as ArgoCD, Longhorn, etc. |
+| `infra/` | Contains infrastructure-related configurations like Cilium-specific configurations. |
+| `available/` | Contains apps and core components that are not currently in use but may be of interest to the audience. |
+| `operators/` | Contains operators like CloudNativePG for Postgres |
+| `docs/` | Contains the project documentation, including this index.md file. |
 
 Each main folder (`apps`, `core-components`, `infra`) typically contains an `applicationset.yaml` file. These files are used by ArgoCD to manage the deployment of applications and components in a declarative and automated manner.
+Sometime you will find a folder named `serverside`, this one is for ArgoCD Apps that are deployed with serverside strategy.
 
 This structure allows for a clear and modular organization of the cluster, facilitating the management and maintenance of various components and applications.
