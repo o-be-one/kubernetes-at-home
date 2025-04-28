@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: mariadb-operator
+
+resources:
+- namespace.yaml
+
+helmCharts:
+- name: mariadb-operator-crds
+  repo: https://helm.mariadb.com/mariadb-operator
+  releaseName: mariadb-operator-crds
+  namespace: mariadb-operator
+  version: 0.38.1
+- name: mariadb-operator
+  repo: https://helm.mariadb.com/mariadb-operator
+  releaseName: mariadb-operator
+  namespace: mariadb-operator
+  version: 0.38.1
+  valuesFile: values.yaml
