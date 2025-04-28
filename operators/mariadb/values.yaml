@@ -1,0 +1,31 @@
+metrics:
+  enabled: false
+
+webhook:
+  cert:
+    certManager:
+      enabled: true
+
+ha:
+  enabled: true
+  replicas: 2 # We only have 2 workers for now, enough to getting started with db
+  # replicas: 3
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: In
+          values:
+          - mariadb-operator
+        - key: app.kubernetes.io/instance
+          operator: In
+          values:
+          - mariadb-operator
+      topologyKey: kubernetes.io/hostname
+
+pdb:
+  enabled: true
+  maxUnavailable: 1
