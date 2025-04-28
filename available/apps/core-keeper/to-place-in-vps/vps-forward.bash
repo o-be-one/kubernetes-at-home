@@ -3,10 +3,10 @@
 # Firewall rules to setup a VPS or any Linux server to serve as entrypoint
 # to workload hosted somewhere else (like home in this case).
 # This is more to help than the only truth, but be sure you know what
-# you are doing before changing anything after global variables.
-
-# Define target IP (where traffic will be forwarded to)
-TARGET_IP="100.75.24.97"  # Change this to your home/target server IP
+# you are doing before changing anything.
+#
+# To setup the script, go to the end of the file and edit the "case"
+# part that acts as a menu.
 
 # Public interface (typically eth0 for VPS)
 PUB_IF="eth0"  # Change this to your public-facing interface
@@ -163,11 +163,13 @@ case $1 in
     list-rules
     ;;
   corekeeper)
+    TARGET_IP="100.75.24.97"
     forward-port tcp 27015
     forward-port udp 27015
     save-rules
     ;;
   minecraft)
+    TARGET_IP="100.95.143.37"
     forward-port tcp 25565
     forward-port udp 25565
     save-rules

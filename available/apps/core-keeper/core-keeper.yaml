@@ -50,7 +50,7 @@ spec:
             name: tailscale-client
         env:
         - name: TS_EXIT_NODE
-          value: "100.126.43.123" # VPS Tailnet IP
+          value: "100.126.80.31" # VPS Tailnet IP
         - name: TS_USERSPACE
           value: "false"
         command:
