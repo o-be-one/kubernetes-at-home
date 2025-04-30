@@ -6,4 +6,5 @@ metadata:
     argocd.argoproj.io/sync-options: ServerSideApply=true
 
 resources:
+  - namespace.yaml
   - https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.25/releases/cnpg-1.25.0.yaml
