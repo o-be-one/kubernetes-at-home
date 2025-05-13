@@ -1,0 +1,79 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: grafana-https
+spec:
+  hostnames:
+  - grafana.menia.cc
+  parentRefs:
+  - name: shared-gateway
+    namespace: default
+    sectionName: shared-https
+  rules:
+  - backendRefs:
+    - name: victoria-metrics-k8s-stack-grafana
+      port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vmagent-https
+spec:
+  hostnames:
+  - vmagent.menia.cc
+  parentRefs:
+  - name: shared-gateway
+    namespace: default
+    sectionName: shared-https
+  rules:
+  - backendRefs:
+    - name: vmagent-victoria-metrics-k8s-stack
+      port: 8429
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vmalertmanager-https
+spec:
+  hostnames:
+  - alertmanager.menia.cc
+  parentRefs:
+  - name: shared-gateway
+    namespace: default
+    sectionName: shared-https
+  rules:
+  - backendRefs:
+    - name: vmalert-victoria-metrics-k8s-stack
+      port: 9093
+---
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#   name: vmcluster-https
+# spec:
+#   hostnames:
+#   - vmcluster.menia.cc
+#   parentRefs:
+#   - name: shared-gateway
+#     namespace: default
+#     sectionName: shared-https
+#   rules:
+#   - backendRefs:
+#     - name: vmselect-victoria-metrics-k8s-stack
+#       port: 8481
+# ---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vmsingle-https
+spec:
+  hostnames:
+  - vm.menia.cc
+  parentRefs:
+  - name: shared-gateway
+    namespace: default
+    sectionName: shared-https
+  rules:
+  - backendRefs:
+    - name: vmsingle-victoria-metrics-k8s-stack
+      port: 8429
