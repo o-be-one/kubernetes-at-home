@@ -1,0 +1,49 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: rybbit-postgres
+  namespace: rybbit
+spec:
+  instances: 1
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "256MB"
+      effective_cache_size: "1GB"
+
+  bootstrap:
+    initdb:
+      database: rybbit
+      owner: rybbit
+      secret:
+        name: rybbit-postgres-credentials
+
+  storage:
+    size: 20Gi
+    storageClass: longhorn
+
+  # monitoring: # is it existing?
+  #   enabled: true
+
+  # backup:
+  #   retentionPolicy: "30d"
+  #   barmanObjectStore:
+  #     destinationPath: "s3://your-backup-bucket/rybbit-postgres"
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: backup-credentials
+  #         key: ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: backup-credentials
+  #         key: SECRET_ACCESS_KEY
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rybbit-postgres-credentials
+  namespace: rybbit
+type: Opaque
+stringData:
+  username: rybbit
+  password: "your-secure-password-here"

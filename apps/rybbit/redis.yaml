@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rybbit-redis
+  namespace: rybbit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rybbit-redis
+  template:
+    metadata:
+      labels:
+        app: rybbit-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: rybbit-redis-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rybbit-redis-pvc
+  namespace: rybbit
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: longhorn
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rybbit-redis
+  namespace: rybbit
+spec:
+  selector:
+    app: rybbit-redis
+  ports:
+    - port: 6379
+      targetPort: 6379

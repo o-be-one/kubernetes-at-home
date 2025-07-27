@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - https://github.com/Altinity/clickhouse-operator/releases/download/0.24.0/clickhouse-operator-install-bundle.yaml
+
+namespace: clickhouse-operator
+
+patchesStrategicMerge:
+  - operator-patch.yaml

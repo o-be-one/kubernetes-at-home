@@ -1,0 +1,29 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: rybbit-https
+  namespace: rybbit
+spec:
+  hostnames:
+    - rybbit.menia.cc
+  parentRefs:
+    - name: shared-gateway
+      namespace: default
+      sectionName: shared-https
+  rules:
+    # Frontend routes (client dashboard)
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: rybbit-service
+          port: 80
+    # API routes (backend)
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api
+      backendRefs:
+        - name: rybbit-backend
+          port: 3001

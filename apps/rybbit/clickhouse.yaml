@@ -1,0 +1,76 @@
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+metadata:
+  name: "rybbit-clickhouse"
+  namespace: rybbit
+spec:
+  defaults:
+    templates:
+      dataVolumeClaimTemplate: data-volume-template
+      logVolumeClaimTemplate: log-volume-template
+      serviceTemplate: service-template
+      podTemplate: clickhouse-pod-template
+  configuration:
+    users:
+      default/password: your-secure-clickhouse-password
+      default/networks/ip: "::/0"
+      rybbit/password: your-secure-clickhouse-password
+      rybbit/networks/ip: "::/0"
+    clusters:
+      - name: "simple"
+        layout:
+          shardsCount: 1
+          replicasCount: 1
+    settings:
+      logger/level: information
+      listen_host: "0.0.0.0"
+      http_port: 8123
+      tcp_port: 9000
+      max_connections: 100
+      max_concurrent_queries: 50
+  templates:
+    podTemplates:
+      - name: clickhouse-pod-template
+        spec:
+          containers:
+            - name: clickhouse
+              image: clickhouse/clickhouse-server:25.6
+              env:
+                - name: CLICKHOUSE_ALWAYS_RUN_INITDB_SCRIPTS
+                  value: "true"
+              volumeMounts:
+                - name: bootstrap-volume
+                  mountPath: /docker-entrypoint-initdb.d
+          volumes:
+            - name: bootstrap-volume
+              configMap:
+                name: clickhouse-bootstrap
+                defaultMode: 0755
+    volumeClaimTemplates:
+      - name: data-volume-template
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
+          storageClassName: longhorn
+      - name: log-volume-template
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: longhorn
+    serviceTemplates:
+      - name: service-template
+        spec:
+          ports:
+            - name: http
+              port: 8123
+              targetPort: 8123
+            - name: tcp
+              port: 9000
+              targetPort: 9000
+          type: ClusterIP

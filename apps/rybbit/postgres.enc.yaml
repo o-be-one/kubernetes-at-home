@@ -1,0 +1,92 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+    name: rybbit-postgres
+    namespace: rybbit
+spec:
+    instances: 1
+    postgresql:
+        parameters:
+            max_connections: "100"
+            shared_buffers: 256MB
+            effective_cache_size: 1GB
+    bootstrap:
+        initdb:
+            database: rybbit
+            owner: rybbit
+            secret:
+                name: ENC[AES256_GCM,data:c8KoyhguxT2C1K4WTQRIOYYmVzNEUqu6b8R7,iv:1TmyX9JV8cV44P3UqFJXcyh9bxfkfBwB0njvnKoa3v4=,tag:6A9i4FXi1Oz2Hv51MSoNnA==,type:str]
+    storage:
+        size: 20Gi
+        storageClass: longhorn
+        # monitoring: # is it existing?
+        #   enabled: true
+        # backup:
+        #   retentionPolicy: "30d"
+        #   barmanObjectStore:
+        #     destinationPath: "s3://your-backup-bucket/rybbit-postgres"
+        #     s3Credentials:
+        #       accessKeyId:
+        #         name: backup-credentials
+        #         key: ACCESS_KEY_ID
+        #       secretAccessKey:
+        #         name: backup-credentials
+        #         key: SECRET_ACCESS_KEY
+sops:
+    age:
+        - recipient: age1ngkdczpldhxhx8qchl0v7c9eq06vnc5yea3mhsuy0n20hvyescpqv3w2xy
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNMFU4VElPZm5aOWhnVHI3
+            WHZiQ3NiVVJvdmVyMjNVREd3cklpeFRyQmhRCjh0WDY2S3A5M2x6cmtxN1RXTmUy
+            UzlraGZtdlh0c2daWEowKy9iZDZxSFEKLS0tIG5pK0NEN1NmUmk1WE12SlpvZVc3
+            THBhTlZ2WFpHMkNxUXByTHR1N29qODQK5YrK29R5zsgz1FKll4K8LsEgaHaSeib4
+            cDiTZy1yS+MhfgtWnUJgDaSsPpmq3U/bww4vZ8/XLClkc4YKUxgMvQ==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1xzxw8fsvdz53aa3r8z6t4zns2cqadjm4ep88w5jf4zw3yhcflvesxgkxlc
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3Y3pGV2oxNnRPUGN4ZEN2
+            a09sVW10OEIxQmNuc1Q4aWVwSSt4M2xmUFRZCk1SR1pvamVDTVJMYWpjU3ZvbWRi
+            OWhkK3ZiRXJ5amhmT1VoNjBwcjBqT1UKLS0tIEVIUERqdGI5NmFYNkxvQWJlZ2cz
+            cVFHOU1VK3NVRHZMRXNzOGQzUkJGYlUKnEkPyiw/c/Z274S002P5Cq+Cj1V10F6O
+            tzwZHSZc+adAK9nvbWGr7TcRDUzgkreNDRKUlaSfF1zbDoSgCln7BQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-07-26T04:30:27Z"
+    mac: ENC[AES256_GCM,data:+i3SDyKMkzzYG7xu8GqEUkFpAj1655ot/vgW6R8Vq77LncyfEIln4Lv/i70ESWyiD0PwLDdTj6GtIo9JU4OmMgkrYb519PkEXJyGQ28EChQQRC4Klhx4ao+yARu7uflZNifIL1r8oOggEEanWlJBzNm0XJGgzM86QRKc8dHecY8=,iv:EQwFgRiR5n5xWwmnYXy7+m2WBey9B6WlaxNCRrLtYT0=,tag:Wb0dqSRjYgsx79v8znCTMA==,type:str]
+    encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
+    version: 3.10.2
+---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: rybbit-postgres-credentials
+    namespace: rybbit
+type: Opaque
+stringData:
+    username: ENC[AES256_GCM,data:LW4nndx1,iv:GZafwakMUqQSOkxhYb1Tjy4Xmc60Ljbih1fJ3YaQ8bY=,tag:vUwlMNWAvmJjqxGjLJXm/A==,type:str]
+    password: ENC[AES256_GCM,data:/4S3MEQFiDp8t+wlm6JfXl66Hrl9MavPIA==,iv:DTQ5v5VslftC59Foi7rkSBqOupZKQT9iUje5NmmkM2k=,tag:iMGqmmvUfqLhc1UaujrTOw==,type:str]
+sops:
+    age:
+        - recipient: age1ngkdczpldhxhx8qchl0v7c9eq06vnc5yea3mhsuy0n20hvyescpqv3w2xy
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNMFU4VElPZm5aOWhnVHI3
+            WHZiQ3NiVVJvdmVyMjNVREd3cklpeFRyQmhRCjh0WDY2S3A5M2x6cmtxN1RXTmUy
+            UzlraGZtdlh0c2daWEowKy9iZDZxSFEKLS0tIG5pK0NEN1NmUmk1WE12SlpvZVc3
+            THBhTlZ2WFpHMkNxUXByTHR1N29qODQK5YrK29R5zsgz1FKll4K8LsEgaHaSeib4
+            cDiTZy1yS+MhfgtWnUJgDaSsPpmq3U/bww4vZ8/XLClkc4YKUxgMvQ==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1xzxw8fsvdz53aa3r8z6t4zns2cqadjm4ep88w5jf4zw3yhcflvesxgkxlc
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3Y3pGV2oxNnRPUGN4ZEN2
+            a09sVW10OEIxQmNuc1Q4aWVwSSt4M2xmUFRZCk1SR1pvamVDTVJMYWpjU3ZvbWRi
+            OWhkK3ZiRXJ5amhmT1VoNjBwcjBqT1UKLS0tIEVIUERqdGI5NmFYNkxvQWJlZ2cz
+            cVFHOU1VK3NVRHZMRXNzOGQzUkJGYlUKnEkPyiw/c/Z274S002P5Cq+Cj1V10F6O
+            tzwZHSZc+adAK9nvbWGr7TcRDUzgkreNDRKUlaSfF1zbDoSgCln7BQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-07-26T04:30:27Z"
+    mac: ENC[AES256_GCM,data:+i3SDyKMkzzYG7xu8GqEUkFpAj1655ot/vgW6R8Vq77LncyfEIln4Lv/i70ESWyiD0PwLDdTj6GtIo9JU4OmMgkrYb519PkEXJyGQ28EChQQRC4Klhx4ao+yARu7uflZNifIL1r8oOggEEanWlJBzNm0XJGgzM86QRKc8dHecY8=,iv:EQwFgRiR5n5xWwmnYXy7+m2WBey9B6WlaxNCRrLtYT0=,tag:Wb0dqSRjYgsx79v8znCTMA==,type:str]
+    encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
+    version: 3.10.2

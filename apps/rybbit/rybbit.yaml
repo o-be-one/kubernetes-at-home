@@ -1,0 +1,220 @@
+# Rybbit Backend API (Fastify)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rybbit-backend
+  namespace: rybbit
+  labels:
+    app: rybbit-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rybbit-backend
+  template:
+    metadata:
+      labels:
+        app: rybbit-backend
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:17-alpine
+          command:
+            - sh
+            - -c
+            - |
+              until pg_isready -h rybbit-postgres-rw -p 5432; do
+                echo "Waiting for PostgreSQL..."
+                sleep 2
+              done
+        - name: wait-for-clickhouse
+          image: curlimages/curl:8.10.1
+          command:
+            - sh
+            - -c
+            - |
+              until curl -f http://chi-rybbit-clickhouse-simple-0-0:8123/ping; do
+                echo "Waiting for ClickHouse..."
+                sleep 2
+              done
+      containers:
+        - name: rybbit-backend
+          image: ghcr.io/rybbit-io/rybbit-backend:latest
+          ports:
+            - containerPort: 3001
+              name: backend
+          env:
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rybbit-secrets
+                  key: nextauth_secret
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rybbit-secrets
+                  key: jwt_secret
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rybbit-secrets
+                  key: encryption_key
+            - name: BETTER_AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rybbit-secrets
+                  key: better_auth_secret
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rybbit-postgres-credentials
+                  key: password
+            - name: CLICKHOUSE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rybbit-secrets
+                  key: clickhouse_password
+            - name: POSTGRES_USER
+              value: "rybbit"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rybbit-postgres-credentials
+                  key: password  
+            - name: POSTGRES_HOST
+              value: "rybbit-postgres-rw"
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_DB
+              value: "rybbit"
+          envFrom:
+            - configMapRef:
+                name: rybbit-backend-config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 5
+---
+# Rybbit Frontend Client (Next.js)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rybbit-client
+  namespace: rybbit
+  labels:
+    app: rybbit-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rybbit-client
+  template:
+    metadata:
+      labels:
+        app: rybbit-client
+    spec:
+      initContainers:
+        - name: wait-for-backend
+          image: curlimages/curl:8.10.1
+          command:
+            - sh
+            - -c
+            - |
+              until curl -f http://rybbit-backend:3001/api/health; do
+                echo "Waiting for Backend API..."
+                sleep 2
+              done
+      containers:
+        - name: rybbit-client
+          image: ghcr.io/rybbit-io/rybbit-client:latest
+          ports:
+            - containerPort: 3002
+              name: client
+          envFrom:
+            - configMapRef:
+                name: rybbit-client-config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3002
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 5
+---
+# Backend API Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: rybbit-backend
+  namespace: rybbit
+  labels:
+    app: rybbit-backend
+spec:
+  selector:
+    app: rybbit-backend
+  ports:
+    - name: backend
+      port: 3001
+      targetPort: 3001
+      protocol: TCP
+---
+# Frontend Client Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: rybbit-client
+  namespace: rybbit
+  labels:
+    app: rybbit-client
+spec:
+  selector:
+    app: rybbit-client
+  ports:
+    - name: client
+      port: 3002
+      targetPort: 3002
+      protocol: TCP
+---
+# Main Service (exposes client to ingress)
+apiVersion: v1
+kind: Service
+metadata:
+  name: rybbit-service
+  namespace: rybbit
+  labels:
+    app: rybbit
+spec:
+  selector:
+    app: rybbit-client
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3002
+      protocol: TCP

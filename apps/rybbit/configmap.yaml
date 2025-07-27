@@ -1,0 +1,42 @@
+# Backend API Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rybbit-backend-config
+  namespace: rybbit
+data:
+  NODE_ENV: "production"
+  BASE_URL: "https://rybbit.menia.cc"
+  DOMAIN_NAME: "rybbit.menia.cc"
+  
+  # ClickHouse Configuration
+  CLICKHOUSE_HOST: "http://chi-rybbit-clickhouse-simple-0-0:8123"
+  CLICKHOUSE_USER: "rybbit"
+  CLICKHOUSE_DB: "analytics"
+  
+  # Redis Configuration
+  REDIS_URL: "redis://rybbit-redis:6379"
+  
+  # Application Settings
+  DISABLE_SIGNUPS: "false"
+  REQUIRE_EMAIL_VERIFICATION: "false"
+  
+  # Backend specific
+  HOST_BACKEND_PORT: "3001"
+---
+# Frontend Client Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rybbit-client-config
+  namespace: rybbit
+data:
+  NODE_ENV: "production"
+  NEXT_PUBLIC_BASE_URL: "https://rybbit.menia.cc"
+  NEXT_PUBLIC_API_URL: "https://rybbit.menia.cc/api"
+  
+  # Internal API connection
+  API_URL: "http://rybbit-backend:3001"
+  
+  # Client specific
+  HOST_CLIENT_PORT: "3002"
