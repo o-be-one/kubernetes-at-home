@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: homeassistant
-          image: homeassistant/home-assistant:2025.7.1
+          image: homeassistant/home-assistant:2025.7.4
           env:
             - name: TZ
               value: "America/Montreal"
