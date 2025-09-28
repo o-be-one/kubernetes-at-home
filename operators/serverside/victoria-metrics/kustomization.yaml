@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: victoria-metrics-operator
+
+resources:
+- namespace.yaml
+- httproute.yaml
+
+helmCharts:
+- name: victoria-metrics-operator-crds
+  repo: https://victoriametrics.github.io/helm-charts/
+  releaseName: victoria-metrics-operator-crds
+  namespace: victoria-metrics-operator
+  version: 0.1.1
+- name: victoria-metrics-k8s-stack
+  repo: https://victoriametrics.github.io/helm-charts/
+  releaseName: victoria-metrics-k8s-stack
+  namespace: victoria-metrics-operator
+  version: 0.46.0
