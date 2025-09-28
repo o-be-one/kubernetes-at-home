@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: activepieces
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: activepieces-pvc
+  labels:
+    recurring-job-group.longhorn.io/auto-backup: enabled
+    recurring-job-group.longhorn.io/auto-snapshot: enabled
+    backup-frequency: high
+    snapshot-frequency: high
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: activepieces
+spec:
+  selector:
+    matchLabels:
+      app: activepieces
+  template:
+    metadata:
+      labels:
+        app: activepieces
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: activepieces-pvc
+      # initContainers:
+      #   - name: volume-permissions
+      #     image: busybox:1.37
+      #     command:
+      #       [
+      #         "sh",
+      #         "-c",
+      #         "mkdir -p /data/.cache /data/.activepieces && chown -R 1000:1000 /data && chmod 600 /data/.activepieces/config || true",
+      #       ]
+      #     volumeMounts:
+      #       - name: data
+      #         mountPath: /data
+      containers:
+        - name: activepieces
+          image: activepieces/activepieces:0.70.1
+          envFrom:
+            - secretRef:
+                name: activepieces-secret
+          env:
+            - name: TZ
+              value: America/Montreal
+            - name: AP_FRONTEND_URL
+              value: "https://ap.btrcloud.com"
+            - name: AP_DB_TYPE
+              value: "SQLITE3"
+            - name: AP_EXECUTION_MODE
+              value: "UNSANDBOXED" # Free self-hosted does not support multi-tenancy so pointless to sandbox it https://www.activepieces.com/docs/install/architecture/workers
+          ports:
+            - name: http
+              containerPort: 5678
+          volumeMounts:
+            - name: data
+              mountPath: /home/node
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "100m"
+            limits:
+              memory: "500Mi"
+              cpu: "300m"
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+            runAsUser: 1000
+            runAsGroup: 1000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: activepieces
+spec:
+  ports:
+    - name: http
+      port: 5678
+      targetPort: http
+  selector:
+    app: activepieces

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: activepieces-cloudflared
+spec:
+  ingressClassName: cloudflare-tunnel
+  rules:
+    - host: ap.btrcloud.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: activepieces
+                port:
+                  number: 5678
+            path: /
+            pathType: Prefix
