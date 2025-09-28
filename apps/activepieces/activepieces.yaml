@@ -34,7 +34,7 @@ spec:
         app: activepieces
     spec:
       volumes:
-        - name: data
+        - name: cache
           persistentVolumeClaim:
             claimName: activepieces-pvc
       # initContainers:
@@ -62,14 +62,18 @@ spec:
               value: "https://ap.btrcloud.com"
             - name: AP_DB_TYPE
               value: "SQLITE3"
+            - name: AP_REDIS_URL
+              value: "redis://redis:6379"
+            - name: AP_QUEUE_MODE
+              value: "REDIS"
             - name: AP_EXECUTION_MODE
               value: "UNSANDBOXED" # Free self-hosted does not support multi-tenancy so pointless to sandbox it https://www.activepieces.com/docs/install/architecture/workers
           ports:
             - name: http
               containerPort: 5678
           volumeMounts:
-            - name: data
-              mountPath: /home/node
+            - name: cache
+              mountPath: /usr/src/app/cache
           resources:
             requests:
               memory: "250Mi"
@@ -100,3 +104,37 @@ spec:
       targetPort: http
   selector:
     app: activepieces
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
