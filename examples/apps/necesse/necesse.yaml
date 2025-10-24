@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: necesse
+  namespace: necesse
+spec:
+  serviceName: necesse
+  replicas: 1
+  selector:
+    matchLabels:
+      app: necesse
+  template:
+    metadata:
+      labels:
+        app: necesse
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+        seccompProfile:
+          type: RuntimeDefault
+      resources:
+        limits:
+          cpu: "1"
+          memory: "2048Mi"
+        requests:
+          cpu: "0.5"
+          memory: "1024Mi"
+      containers:
+        - name: playit-sidecar
+          image: ghcr.io/playit-cloud/playit-agent:0.15.26
+          envFrom:
+            - secretRef:
+                name: playit-client
+          securityContext:
+            privileged: true
+            runAsUser: 0
+            seccompProfile:
+              type: RuntimeDefault
+        - name: necesse
+          image: gameservermanagers/gameserver:nec # https://github.com/GameServerManagers/LinuxGSM/blob/master/lgsm/data/serverlist.csv
+          securityContext: # LGSM Docker use gosu to switch to non privileged user when started
+            runAsUser: 0
+            privileged: true
+            runAsNonRoot: false
+            allowPrivilegeEscalation: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: SERVER_PORT
+              value: "14159"
+          ports:
+            - containerPort: 14159
+              protocol: UDP
+              name: game-udp
+          volumeMounts:
+            - name: necesse-data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: necesse-data
+        labels:
+          app.kubernetes.io/name: necesse
+          recurring-job-group.longhorn.io/auto-backup: enabled
+          recurring-job-group.longhorn.io/auto-snapshot: enabled
+          backup-frequency: low
+          snapshot-frequency: high
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 10Gi
+        volumeMode: Filesystem
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: necesse
+spec:
+  ports:
+    - name: game-udp
+      port: 14159
+      protocol: UDP
+  selector:
+    app: necesse
