@@ -7,6 +7,6 @@ resources:
   - mariadb.yaml
   - httproute.yaml
   - cloudflared.yaml
-  - secret.yaml
-# generators:
-#   - secret-generator.yaml
+
+generators:
+  - secret-generator.yaml
