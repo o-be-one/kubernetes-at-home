@@ -1,0 +1,73 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: mariadb
+spec:
+  rootPasswordSecretKeyRef:
+    name: wordpress-mariadb
+    key: ROOT_DB_PASSWORD
+    generate: true
+
+  username: wordpress
+  passwordSecretKeyRef:
+    name: wordpress
+    key: WORDPRESS_DB_PASSWORD
+    generate: false
+  database: wordpress
+
+  port: 3306
+
+  storage:
+    size: 1Gi
+    storageClassName: longhorn
+
+  # service:
+  #   type: LoadBalancer
+  #   metadata:
+  #     annotations:
+  #       metallb.universe.tf/loadBalancerIPs: 172.18.0.20
+
+  myCnf: |
+    [mariadb]
+    bind-address=*
+    default_storage_engine=InnoDB
+    binlog_format=row
+    innodb_autoinc_lock_mode=2
+    innodb_buffer_pool_size=1600M
+    max_allowed_packet=256M
+
+  resources:
+    requests:
+      cpu: 300m
+      memory: 128Mi
+    limits:
+      memory: 2Gi
+
+  metrics:
+    enabled: true
+
+  tls:
+    enabled: true
+    # Enforce TLS in all connections.
+    # required: true
+    # Issue certificates with an existing cert-manager ClusterIssuer.
+    # serverCertIssuerRef:
+    #   name: root-ca
+    #   kind: ClusterIssuer
+    # clientCertIssuerRef:
+    #   name: root-ca
+    #   kind: ClusterIssuer
+    # Bring your own Certificate Authority.
+    # serverCASecretRef:
+    #   name: mariadb-server-ca
+    # clientCASecretRef:
+    #   name: mariadb-client-ca
+    # Configure existing certificates available in a Secret.
+    # serverCASecretRef:
+    #   name: mariadb-server-ca
+    # serverCertSecretRef:
+    #   name: mariadb-server-tls
+    # clientCASecretRef:
+    #   name: mariadb-client-ca
+    # clientCertSecretRef:
+    #   name: mariadb-client-tls
