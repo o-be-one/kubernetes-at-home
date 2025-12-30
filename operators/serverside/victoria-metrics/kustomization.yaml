@@ -11,9 +11,9 @@ helmCharts:
   repo: https://victoriametrics.github.io/helm-charts/
   releaseName: victoria-metrics-operator-crds
   namespace: victoria-metrics-operator
-  version: 0.1.1
+  version: 0.6.1
 - name: victoria-metrics-k8s-stack
   repo: https://victoriametrics.github.io/helm-charts/
   releaseName: victoria-metrics-k8s-stack
   namespace: victoria-metrics-operator
-  version: 0.46.0
+  version: 0.66.1
