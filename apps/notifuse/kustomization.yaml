@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: notifuse
+
+resources:
+  - namespace.yaml
+  - postgres.yaml
+  - notifuse.yaml
+  - httproute.yaml
+  - cloudflared.yaml
+
+generators:
+  - secret-generator.yaml

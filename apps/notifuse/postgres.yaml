@@ -1,0 +1,54 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: notifuse-postgres
+spec:
+  instances: 1
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "256MB"
+      effective_cache_size: "1GB"
+
+  bootstrap:
+    initdb:
+      database: notifuse
+      owner: notifuse
+      secret:
+        name: notifuse-secret-pg
+
+  managed:
+    roles:
+      - name: notifuse
+        ensure: present
+        comment: Notifuse
+        login: true
+        superuser: true
+
+  storage:
+    size: 10Gi
+    storageClass: longhorn
+
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "1"
+    limits:
+      memory: "1Gi"
+      cpu: "2"
+
+  # monitoring: # is it existing?
+  #   enabled: true
+
+  # backup:
+  #   retentionPolicy: "30d"
+  #   barmanObjectStore:
+  #     destinationPath: "s3://your-backup-bucket/notifuse-postgres"
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: backup-credentials
+  #         key: ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: backup-credentials
+  #         key: SECRET_ACCESS_KEY
