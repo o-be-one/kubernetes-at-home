@@ -30,6 +30,32 @@ spec:
     size: 10Gi
     storageClass: longhorn
 
+  # backup:
+  #   barmanObjectStore:
+  #     destinationPath: s3://btrMenia/notifuse-postgres-backup/
+  #     endpointURL: https://s3.us-west-001.backblazeb2.com
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: notifuse-secret-pg-backup
+  #         key: ACCESS_KEY_ID
+  #       secretAccessKey:
+  #         name: notifuse-secret-pg-backup
+  #         key: ACCESS_SECRET_KEY
+  #     wal:
+  #       compression: gzip
+  #       encryption: AES256
+  #     data:
+  #       compression: gzip
+  #       encryption: AES256
+  #       immediateCheckpoint: false
+  #       jobs: 2
+  #     tags:
+  #       kubernetesCluster: "menia"
+  #       application: "notifuse"
+  #       environment: "production"
+  #       retention: "30d"
+  #   retentionPolicy: "30d"
+
   resources:
     requests:
       memory: "512Mi"
@@ -40,15 +66,14 @@ spec:
 
   # monitoring: # is it existing?
   #   enabled: true
-
-  # backup:
-  #   retentionPolicy: "30d"
-  #   barmanObjectStore:
-  #     destinationPath: "s3://your-backup-bucket/notifuse-postgres"
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: backup-credentials
-  #         key: ACCESS_KEY_ID
-  #       secretAccessKey:
-  #         name: backup-credentials
-  #         key: SECRET_ACCESS_KEY
+# ---
+# apiVersion: postgresql.cnpg.io/v1
+# kind: ScheduledBackup
+# metadata:
+#   name: notifuse-postgres-backup
+# spec:
+#   schedule: "0 0 0 * * *" # At midnight every day
+#   backupOwnerReference: self
+#   cluster:
+#     name: notifuse-postgres
+#   method: barmanObjectStore
