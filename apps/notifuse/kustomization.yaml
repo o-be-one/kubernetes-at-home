@@ -11,3 +11,6 @@ resources:
 
 generators:
   - secret-generator.yaml
+# If you want to use Backblaze B2 as medias storage, you must edit backblaze-cors.json and run the following command:
+# b2 bucket update --cors-rules "$(<./backblaze-cors.json)" bucketName allPublic
+# in case of b2 buffer overflow error, try: export COLUMNS=80 && export LINES=24
