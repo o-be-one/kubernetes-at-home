@@ -27,7 +27,7 @@ spec:
         superuser: true
 
   storage:
-    size: 10Gi
+    size: 11Gi
     storageClass: longhorn
 
   plugins:
@@ -62,11 +62,11 @@ spec:
       secretAccessKey:
         name: notifuse-secret-pg-backup
         key: ACCESS_SECRET_KEY
-    tags:
-      kubernetesCluster: "menia"
-      application: "notifuse"
-      environment: "production"
-      retention: "30d"
+    # tags: # not supported with Backblaze
+    #   kubernetesCluster: "menia"
+    #   application: "notifuse"
+    #   environment: "production"
+    #   retention: "30d"
     wal:
       compression: gzip
   retentionPolicy: "30d"
@@ -80,6 +80,6 @@ spec:
   backupOwnerReference: self
   cluster:
     name: notifuse-postgres
-    method: plugin
-    pluginConfiguration:
-      name: barman-cloud.cloudnative-pg.io
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
