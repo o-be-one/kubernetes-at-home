@@ -15,3 +15,13 @@ spec:
                   number: 8080
             path: /
             pathType: Prefix
+    - host: infolettre.taburnak.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: notifuse
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
