@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: notifuse
+spec:
+  selector:
+    matchLabels:
+      app: notifuse
+  template:
+    metadata:
+      labels:
+        app: notifuse
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: notifuse
+          image: notifuse/notifuse:v22.1
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          ports:
+            - name: web
+              containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: notifuse-secret
+          env:
+            - name: DB_HOST
+              value: "notifuse-postgres-rw"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "notifuse"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: notifuse-secret-pg
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: notifuse-secret-pg
+                  key: password
+          resources:
+            limits:
+              cpu: 400m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifuse
+spec:
+  ports:
+    - name: web
+      port: 8080
+      targetPort: web
+  selector:
+    app: notifuse

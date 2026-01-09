@@ -1,0 +1,8 @@
+[
+  {
+    "corsRuleName": "notifuse",
+    "allowedOrigins": ["https://ml2.btrcloud.com"],
+    "allowedHeaders": ["*"],
+    "allowedOperations": ["s3_head", "s3_put", "s3_delete", "s3_post", "s3_get"]
+  }
+]

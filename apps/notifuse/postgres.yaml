@@ -1,0 +1,85 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: notifuse-postgres
+spec:
+  instances: 1
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "256MB"
+      effective_cache_size: "1GB"
+
+  bootstrap:
+    initdb:
+      database: notifuse
+      owner: notifuse
+      secret:
+        name: notifuse-secret-pg
+
+  managed:
+    roles:
+      - name: notifuse
+        ensure: present
+        comment: Notifuse
+        login: true
+        superuser: true
+
+  storage:
+    size: 11Gi
+    storageClass: longhorn
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: notifuse-backblaze-store
+
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "1"
+    limits:
+      memory: "1Gi"
+      cpu: "2"
+
+  # monitoring: # is it existing?
+  #   enabled: true
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: notifuse-backblaze-store
+spec:
+  configuration:
+    destinationPath: s3://btrMenia/notifuse-postgres-backup/
+    endpointURL: https://s3.us-west-001.backblazeb2.com
+    s3Credentials:
+      accessKeyId:
+        name: notifuse-secret-pg-backup
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: notifuse-secret-pg-backup
+        key: ACCESS_SECRET_KEY
+    # tags: # not supported with Backblaze
+    #   kubernetesCluster: "menia"
+    #   application: "notifuse"
+    #   environment: "production"
+    #   retention: "30d"
+    wal:
+      compression: gzip
+  retentionPolicy: "30d"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: notifuse-postgres-backup
+spec:
+  schedule: "0 0 0 * * *" # At midnight every day
+  backupOwnerReference: self
+  cluster:
+    name: notifuse-postgres
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io

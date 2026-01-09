@@ -1,0 +1,15 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: notifuse-https
+spec:
+  hostnames:
+    - notifuse.menia.cc
+  parentRefs:
+    - name: shared-gateway
+      namespace: default
+      sectionName: shared-https
+  rules:
+    - backendRefs:
+        - name: notifuse
+          port: 8080

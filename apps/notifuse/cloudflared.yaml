@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notifuse-cloudflared
+spec:
+  ingressClassName: cloudflare-tunnel
+  rules:
+    - host: ml2.btrcloud.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: notifuse
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+    - host: infolettre.taburnak.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: notifuse
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
