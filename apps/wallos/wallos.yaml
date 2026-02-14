@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wallos
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wallos-db-pvc
+  labels:
+    recurring-job-group.longhorn.io/auto-backup: enabled
+    recurring-job-group.longhorn.io/auto-snapshot: enabled
+    backup-frequency: low
+    snapshot-frequency: low
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wallos-logos-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: syno-storage
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wallos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wallos
+  template:
+    metadata:
+      labels:
+        app: wallos
+    spec:
+      hostUsers: false
+      runtimeClassName: gvisor
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: wallos
+          image: ghcr.io/ellite/wallos:4.6.0
+          env:
+            - name: TZ
+              value: "America/Montreal"
+          volumeMounts:
+            - name: wallos-db
+              mountPath: /var/www/html/db
+            - name: wallos-logos
+              mountPath: /var/www/html/images/uploads/logos
+          ports:
+            - name: web
+              containerPort: 80
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: wallos-db
+          persistentVolumeClaim:
+            claimName: wallos-db-pvc
+        - name: wallos-logos
+          persistentVolumeClaim:
+            claimName: wallos-logos-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wallos
+spec:
+  selector:
+    app: wallos
+  ports:
+    - name: web
+      port: 80
+      targetPort: 80
