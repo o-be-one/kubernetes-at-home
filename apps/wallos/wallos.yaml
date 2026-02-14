@@ -46,7 +46,8 @@ spec:
       labels:
         app: wallos
     spec:
-      # hostUsers: false
+      hostUsers: false
+      runtimeClassName: gvisor
       securityContext:
         seccompProfile:
           type: RuntimeDefault
