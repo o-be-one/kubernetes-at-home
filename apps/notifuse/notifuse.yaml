@@ -19,7 +19,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: notifuse
-          image: notifuse/notifuse:v27.0
+          image: notifuse/notifuse:v27.2
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
