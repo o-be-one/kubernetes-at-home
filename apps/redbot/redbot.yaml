@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: redbot
-        image: ghcr.io/o-be-one/red-discordbot-container:v0.13-redbot3.5.22
+        image: ghcr.io/o-be-one/red-discordbot-container:v0.14-redbot3.5.24
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
