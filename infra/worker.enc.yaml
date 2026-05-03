@@ -8,10 +8,10 @@ machine:
     # Defines the role of the machine within the cluster.
     type: worker
     # The `token` is used by a machine to join the PKI of the cluster.
-    token: ENC[AES256_GCM,data:ARaamCihLx9FPdvnQ14WSb6RrjD6ufI=,iv:c2MszEs9xLoB9Mk9QCU0F8oZFVn7an6ysejL0GKSfa0=,tag:82WUwabORbr/4BD9p6odqg==,type:str]
+    token: ENC[AES256_GCM,data:vZxPUEU8RLmW3L1FbfjhvyNjWaLnyW4=,iv:kJTeMvmuswieTfbPlIoDQ42hEk3D00loCAHlUB2jZIA=,tag:7rk3iqoNnr0LzzQ05g4PWw==,type:str]
     # The root certificate authority of the PKI.
     ca:
-        crt: ENC[AES256_GCM,data:w2o6gQsTIrQqTPxihu2YUQw1GpWAC7tKtB3EIHaEwd0BoHds99eRxwy8mJayNf3h1z2QwA3ga0t/61F/uH6yYZ8HgCq0BDtpovkTN0jRc9TNG/E6EX5UWIFG1T3CT4tUnHx5+yhKDx4gNFnuQr+KJxQs0Xc3aiCCX3lhmSgcZ4WDrN5InTHUzWiigi4tjMHJlEgF6ONEkJ7l7Tyk0mF5MoeyFMMcLPnm7E2tGTrZGqjd6NWOTqg1i65gPOZAgwyUq0VN0A9uxxtJEg830Pa64oARZiaeNj0OqvRVSwqcn0BAPqi/0qHhT85grez+R4m54c/n5tXTaGgbNfQ4XCk60GtKNrk5ZcGVyUqAugnNnyexgh9JeS46ty5ZMC0H5bMWL4jpVDXAPhn21ZROmOludI2ZpKVmskLwub0RLCpW/79pdwi0lKXliXSbVDI7hX9RbQrHhvhvkUW9wIW/7K7QU+VFrMl0TOipNgViD8/+98U7DHhtcprP8rRflKHuOmAvqccx2McxtiQAuBA6/J79yu6FKzt3aIOYGyy73IZY33u1ocgRV+WzdWRwRzJtIYEbd6yXW4Oes8WwAekkBZAwHlTh0Q91bS4fSx/vfLc2dZgyNuQk6bVq0zBB0NTp6TpEAA1yJ9QwdMJPtfskINa01WuY2llADWojS48IK48+0hvnVDrAnVFvsZgf71otfcYigLdIcNDI5udBsqZkTw04E/gm7ctUSL/f+2+S7JsajesVVvxusmuM9HsMvDUaId/oR918GR+uUXzqReGhFV8NsHzR6rOTyzBwyLCgE0I2IWsi3TnKiM9BF+2JySuI86uF6YkYWQipCzP7vizEzQGajID+jm+n/waTzkW3lkWEMtQPMyyD,iv:JlNyes7HRHpq+ZpsP/RWPlH4Gon4ExmAgECmE5kCjvk=,tag:D8IGpyonwVDre+M7+rPE0g==,type:str]
+        crt: ENC[AES256_GCM,data:fCtfXZ60PQ6oYw0c5P+XE1POrENbsJR69UpGZ+9JF9pFqhaEthcvcnrBXXncUMVF1o9h7X5Z9EQnBNSyMytfhQokCKwxaLzYA883Rvz8xeAMOCl1ZdTXAaYen7upPqsfg+qP7XvbcXrsIbdKGx7IDBtdYkXi9/MoYq57XJvpE4EvMUO0ax52fvmTAJp0XLYlKs/3DGV39hEoMAHyrk8lcO9/z3gSGHDpf1obP7tqrxNmCSsIlip0V9sgATWKyWHH52e39K320kXJw5ZhB8CHFfyEIFZLxtJrt4LCMxyHlNuvFij8kJdCL10+Wv5dbDmqC6xEDITGy4s0xjV5xvX3++7I4PyJBQ207OrWVnaZ/gl0Cxa/mgMvIeTT0khuqhSqB/b1xR2ylM70YeuFqmetkL57WE06MDsEpR3CvKYw7Uq1KtxjqmzjtaAR8O+VkH0j5/NqQSynmsOmzbWJGjn9pl38WoA0Jy2qz5C12T6osguK5tCH3Ro7N/44TY7hCi4lyLJNCa5dTPGIQ7+CZBUijXO1AxMyqhrF3Z+JtTJIr151UD2CdcGHVzvUfr6QCruvdxhrb0b2DAcY8BhlltvCUzokSsaIbNeRxf5eo+Ajizt+k3YF2k/zJEo/ISxLRXu6T4ZDnGD/SOeK9I/a2EQumXfvCcAwCTfx+x6sP7Dg2iGIbxoF0SEsiDYaDJs9/pFa6rwyFoq4KM2CLB5PM7vkxbdGaZWXu0cnjl9R0ZHZrz2rwHSzwoBHc9AZawyzWY6oe+x8Y1vvJtjGzHk0EisXYQmi8QZKaY7psdqRVkQ6cVhsdAWU0m6WMmil5z276hitDp4dWp0KoIV8SqvCbRP5uHlbBUhBW8dlCflgUMkGLsAJEpbp,iv:ddUmiqGxppYkmAjCnDhPqrDaPdArP7rvf8NnHBq1GLE=,tag:5EMaDCjU1fgppu89/7NS7Q==,type:str]
         key: ""
     # Extra certificate subject alternative names for the machine's certificate.
     certSANs: []
@@ -75,6 +75,10 @@ machine:
                 #             - '*.dkr.ecr.us-iso-east-1.c2s.ic.gov'
                 #             - '*.dkr.ecr.us-isob-east-1.sc2s.sgov.gov'
                 #           name: ecr-credential-provider
+        extraConfig:
+            featureGates:
+                # Enables user namespaces support in Kubernetes.
+                UserNamespacesSupport: true
     # Provides machine specific network configuration options.
     network: {}
     # # `interfaces` is used to define the network interface configuration.
@@ -89,7 +93,7 @@ machine:
     #           gateway: 192.168.2.1 # The route's gateway (if empty, creates link scope route).
     #           metric: 1024 # The optional metric for the route.
     #       mtu: 1500 # The interface's MTU.
-    #       
+    #
     #       # # Picks a network device using the selector.
     #       # # select a device with bus prefix 00:*.
     #       # deviceSelector:
@@ -180,7 +184,8 @@ machine:
         # - iscsi-tools
         # - gVisor
         # - util-linux-tools
-        image: factory.talos.dev/installer/efb7577422715f84c716c3d30fee60858fb093841d1d539ca5db92ae99737bf8:v1.9.5
+        # - amdgpu (required for AMD APU)
+        image: factory.talos.dev/metal-installer/32d1eb06bd30ce34171ca4ee21011aa9b7dc0d4794f4ec29f57ecdf473115102:v1.13.0
         # Indicates if the installation disk should be wiped at installation time.
         wipe: false
         # # Look up disk using disk attributes like model, size, serial and others.
@@ -210,12 +215,12 @@ machine:
     #         # The TLS configuration for the registry.
     #         tls:
     #             insecureSkipVerify: true # Skip TLS server certificate verification (not recommended).
-    #             
+    #
     #             # # Enable mutual TLS authentication with the registry.
     #             # clientIdentity:
     #             #     crt: LS0tIEVYQU1QTEUgQ0VSVElGSUNBVEUgLS0t
     #             #     key: LS0tIEVYQU1QTEUgS0VZIC0tLQ==
-    #         
+    #
     #         # # The auth configuration for this registry.
     #         # auth:
     #         #     username: username # Optional registry authentication.
@@ -272,7 +277,7 @@ machine:
     #       # A list of partitions to create on the disk.
     #       partitions:
     #         - mountpoint: /var/mnt/extra # Where to mount the partition.
-    #           
+    #
     #           # # The size of partition: either bytes or human readable representation. If `size:` is omitted, the partition is sized to occupy the full disk.
     #           # # Human readable representation.
     #           # size: 100 MB
@@ -306,73 +311,76 @@ machine:
     #     bootTimeout: 2m0s # Specifies the timeout when the node time is considered to be in sync unlocking the boot sequence.
     # # Used to configure the machine's sysctls.
     # # MachineSysctls usage example.
-    # sysctls:
-    #     kernel.domainname: talos.dev
-    #     net.ipv4.ip_forward: "0"
-    #     net/ipv6/conf/eth0.100/disable_ipv6: "1"
-    # # Used to configure the machine's sysfs.
-    # # MachineSysfs usage example.
-    # sysfs:
-    #     devices.system.cpu.cpu0.cpufreq.scaling_governor: performance
-    # # Machine system disk encryption configuration.
-    # systemDiskEncryption:
-    #     # Ephemeral partition encryption.
-    #     ephemeral:
-    #         provider: luks2 # Encryption provider to use for the encryption.
-    #         # Defines the encryption keys generation and storage method.
-    #         keys:
-    #             - # Deterministically generated key from the node UUID and PartitionLabel.
-    #               nodeID: {}
-    #               slot: 0 # Key slot number for LUKS2 encryption.
-    #               
-    #               # # KMS managed encryption key.
-    #               # kms:
-    #               #     endpoint: https://192.168.88.21:4443 # KMS endpoint to Seal/Unseal the key.
-    #         
-    #         # # Cipher kind to use for the encryption. Depends on the encryption provider.
-    #         # cipher: aes-xts-plain64
-    #         # # Defines the encryption sector size.
-    #         # blockSize: 4096
-    #         # # Additional --perf parameters for the LUKS2 encryption.
-    #         # options:
-    #         #     - no_read_workqueue
-    #         #     - no_write_workqueue
-    # # Configures the udev system.
-    # udev:
-    #     # List of udev rules to apply to the udev system
-    #     rules:
-    #         - SUBSYSTEM=="drm", KERNEL=="renderD*", GROUP="44", MODE="0660"
-    # # Configures the logging system.
-    # logging:
-    #     # Logging destination.
-    #     destinations:
-    #         - endpoint: tcp://1.2.3.4:12345 # Where to send logs. Supported protocols are "tcp" and "udp".
-    #           format: json_lines # Logs format.
-    # # Configures the kernel.
-    # kernel:
-    #     # Kernel modules to load.
-    #     modules:
-    #         - name: brtfs # Module name.
-    # # Configures the seccomp profiles for the machine.
-    # seccompProfiles:
-    #     - name: audit.json # The `name` field is used to provide the file name of the seccomp profile.
-    #       # The `value` field is used to provide the seccomp profile.
-    #       value:
-    #         defaultAction: SCMP_ACT_LOG
-    # # Configures the node labels for the machine.
-    # # node labels example.
-    # nodeLabels:
-    #     exampleLabel: exampleLabelValue
-    # # Configures the node taints for the machine. Effect is optional.
-    # # node taints example.
-    # nodeTaints:
-    #     exampleTaint: exampleTaintValue:NoSchedule
+    sysctls:
+        # Enables user namespaces support in Kubernetes.
+        user.max_user_namespaces: "11255"
+        # sysctls:
+        #     kernel.domainname: talos.dev
+        #     net.ipv4.ip_forward: "0"
+        #     net/ipv6/conf/eth0.100/disable_ipv6: "1"
+        # # Used to configure the machine's sysfs.
+        # # MachineSysfs usage example.
+        # sysfs:
+        #     devices.system.cpu.cpu0.cpufreq.scaling_governor: performance
+        # # Machine system disk encryption configuration.
+        # systemDiskEncryption:
+        #     # Ephemeral partition encryption.
+        #     ephemeral:
+        #         provider: luks2 # Encryption provider to use for the encryption.
+        #         # Defines the encryption keys generation and storage method.
+        #         keys:
+        #             - # Deterministically generated key from the node UUID and PartitionLabel.
+        #               nodeID: {}
+        #               slot: 0 # Key slot number for LUKS2 encryption.
+        #
+        #               # # KMS managed encryption key.
+        #               # kms:
+        #               #     endpoint: https://192.168.88.21:4443 # KMS endpoint to Seal/Unseal the key.
+        #
+        #         # # Cipher kind to use for the encryption. Depends on the encryption provider.
+        #         # cipher: aes-xts-plain64
+        #         # # Defines the encryption sector size.
+        #         # blockSize: 4096
+        #         # # Additional --perf parameters for the LUKS2 encryption.
+        #         # options:
+        #         #     - no_read_workqueue
+        #         #     - no_write_workqueue
+        # # Configures the udev system.
+        # udev:
+        #     # List of udev rules to apply to the udev system
+        #     rules:
+        #         - SUBSYSTEM=="drm", KERNEL=="renderD*", GROUP="44", MODE="0660"
+        # # Configures the logging system.
+        # logging:
+        #     # Logging destination.
+        #     destinations:
+        #         - endpoint: tcp://1.2.3.4:12345 # Where to send logs. Supported protocols are "tcp" and "udp".
+        #           format: json_lines # Logs format.
+        # # Configures the kernel.
+        # kernel:
+        #     # Kernel modules to load.
+        #     modules:
+        #         - name: brtfs # Module name.
+        # # Configures the seccomp profiles for the machine.
+        # seccompProfiles:
+        #     - name: audit.json # The `name` field is used to provide the file name of the seccomp profile.
+        #       # The `value` field is used to provide the seccomp profile.
+        #       value:
+        #         defaultAction: SCMP_ACT_LOG
+        # # Configures the node labels for the machine.
+        # # node labels example.
+        # nodeLabels:
+        #     exampleLabel: exampleLabelValue
+        # # Configures the node taints for the machine. Effect is optional.
+        # # node taints example.
+        # nodeTaints:
+        #     exampleTaint: exampleTaintValue:NoSchedule
 # Provides cluster specific configuration options.
 cluster:
     # Globally unique identifier for this cluster (base64 encoded random 32 bytes).
-    id: ENC[AES256_GCM,data:8O29Jjcp7SJMNfuwyyfdGI7A8kvJ0Wx5FrehnxJnyIeqsQ0an0qNYcyVDEY=,iv:Jx5x020/iIIn9XZOscuzuuDFLUec3divtEyD7ZZTplE=,tag:c78hhKv1h1v7k/8E0d3klg==,type:str]
+    id: ENC[AES256_GCM,data:JWsI70UhdV+zxNKluccWHwtci3+Z0svuliZiTs0M9iWmx7X02wmgBgWA0rM=,iv:5XvKbLzWmPQqwTkmpziCG0tAqVwPvTklZdyNXJR9dxU=,tag:0gLDA8dO7lZB1LvJfy86iw==,type:str]
     # Shared secret of cluster (base64 encoded random 32 bytes).
-    secret: ENC[AES256_GCM,data:eKXphJvI+LA2VMtzENU35imTnwwEYe0YQfCa51tfs/X6gD1GianKCrU5OnM=,iv:XvUYyX5Ahl5Dy5vucoxOwukBD4q4xReTQhSEt6p/EE8=,tag:4b/y7ITwsBccsXMtvU8QNg==,type:str]
+    secret: ENC[AES256_GCM,data:DV9yzsDi8QifEw7QnJAj1a/eKaYFV9DjqXIC8/UY0qr1yYPF9A2KOO+kzX4=,iv:LrFEXFuV+x/H2I9YjCU/2eSwxZk30/oSM//huXsg8Cw=,tag:0LClpfu4+Lh1hTzEpdRoiQ==,type:str]
     # Provides control plane specific configuration options.
     controlPlane:
         # Endpoint is the canonical controlplane endpoint, which can be an IP address or a DNS hostname.
@@ -392,10 +400,10 @@ cluster:
         serviceSubnets:
             - 10.96.0.0/12
     # The [bootstrap token](https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/) used to join the cluster.
-    token: ENC[AES256_GCM,data:j3viGBqJbhTRvAzts+Fy1ZFZA9Nz3MA=,iv:VqVGUdzpzX4EX95KFvK/SlLzcowa8oeFmDrfoiH8ccw=,tag:iFHcX35c5i/d0Rq0Tv3y8w==,type:str]
+    token: ENC[AES256_GCM,data:r9zETpVJ5kZSvg3PyMTalHjToEDlu/M=,iv:QofnD9NZUA/tqL6Jgvzh7M4apd+ggWEo4wvvcQkCpsg=,tag:l3z7bsXrHbdp/xGXMz0BSA==,type:str]
     # The base64 encoded root certificate authority used by Kubernetes.
     ca:
-        crt: ENC[AES256_GCM,data:XJwrRsgsSIYCLyTtFo0122Lo7MugdQJW+KxTu0z1qM2hl8fbFI4HY3FxsXFIX6LWdBzegeTYUOXrMZMpgeWtv7qqvOgtcBBhMIZrcw7LN5kRIQgVR+IdyMyWOAmeTB30qIDegQOa3sqxS5ipxGZa/q3z6mIkGIYPVWQHs4mFfVmSr43MSR2DQ/RTBHGoMFnsx69yBIDfu/aVZCmhV6xwqwVabDB1wMDlZeoLlos+CUsoC0sZxsh8iQ63eZrkOt1A6CAyUNOnyTR0YlRCYrOZx8sxS+MPvR29ADwj6MIvRTzjuUVaJkkZobVl0tUzvou0/L1x1WWzSb0k4rda9mr30QwCK//3KA/0nxSDAjS+VfgVZwI4iVeCfvyPYrdMfzqIc28h4BiUQCC+u2NITnkrgvBYOhBj1TrAgv7yc1Q/AWZeGBuMBRvl+5XrP9BJBR4yxfVhLwmsIvKoomG1Aq2aAf0eIL1rIiB7JkU0TiSu3y1e4U9gh/HJjomOW6lQX8Wn6pZw0vvOAogWuFashQsmqMkzBkY3DcTWT/F2dXosRmbpoMBpf9NFmoU3UKRPqKQlGl8EN/gYFJ1+hWixA5xBPmur+Wk3UZ13WJ9phTc1gYUXRy6k+4brEROnWsyVYf5N/Q3RWn9lP3HdbbjipQh+m83wsyQUawMQs92bbZBhQgGNJRe0dV8pq+d4W1a4E0qTQtoPcfrmPq92zrL5UPB7UZa43Z1guDhEsbG+1873hCB27VjxUkt88WBZHfZ46cYX4gltkjzoOBx6TokFntLlD5dnSPJwLXUKCYlkYuonY+d8pbt3mpgIBsDsgCM0xQZoiRRtopEuUEaKGAFBvU7k5GhO98B2+OaGCh+uGhMtyFUJ53HX7/hvkNGRfmQmZJrGTYrj0Dk7Ey3AfSWqTaBKnsLGIQv5F7uQuvgE4g3+/OBSReKLJv1Yrfi0DRQX69EiZRO4XAW3VqTAelf6sYjvaPBYiugvrLRTO5YpeUXPiuoqiy/d4NS9IN7fGUTQBfCu13vAHX3KJHepFw2K5b0RapA0c4HK+zJjyuGm4Q==,iv:leQUbc+MHYqaHGIYKtfTLI/Qa8d/pOMiV+vJX0YoaOA=,tag:4MWcW3nYbypXbMXhMDob1w==,type:str]
+        crt: ENC[AES256_GCM,data:iKhFMwt5Fs/LusR1GfANHPOKrNhASOs9UAl8wZft/+puFpjqenfPsU64Afhm4OG1RXTngzW8lx9aHYEd40QHUv/LJRW7Hf/cu0Z8/tF1HHJ9dHsZYQi/zaZLMimplNIGrlFM/e3DiSceW2a66O9m6yrCiYovR27yCpA2DV97kbIKqQZowNP5m7eI2PNa70Qc6xWdEjX82VOWX84Om92L53AqBLlSyiAm1ZST6MHLYxlG1kOK8ZPL+0NmZi035dCyJYw74NH71etIuWyrguiu4yZ4OAUYOsuKE/nNBPx4Cz7NttK+0S7Vk6/ek8gloB1DQxBoHibjoNstWFiI07fMem/VXSz1hLeD11Uofgy6v0qYfBKRd6sEEdjuJCEA9WlIlrU5mPynRVcBms8j2newN1q26hH+4lfC5P2y5Iqr9GjY+4Kt2szfdD8P+BaNjA8Da6oixj6XchnpUTF2gi4boCF/8nKDc1E9HpeMaPUHDvpUdFH1cglbhXVsWWWSbPOmuSdmUwX88fx0AGASgx5zELXvwWHqAjRnocXZweesG/di8ovRnTIcyQ4ykXsAzeTM34irV5nvQ5kM5iLZFS3ECBLjWDtd9X0xNyyuoeFK8LEoPDasCDkxetQrLd0wSJBgKBGBsAnfgIh9DpdoVuJzKDNhb+JrwKi909h8KlItAW6ihFgJheux4Qmxr4ocok6/CSio4cwbaS8yUxaJd2LmdWrd2dqDu1ty851XcPZeXVtDiaHdZ6MSGuFrBJqKSDEYg2H8IKZTIz/QnYiR7xGef3ZMlXdcOTjwUMQhjcM1fQfsyR2Wdnq5UvVwHxZ+71ArKABBrZ3s21zYK/eSX7mpsa959VomspHcOpj/dfr7tOAYEtMm/HX4G1XkB/IkeS6xw0oiEvPPOFQcgueoeug8wT7hTuD0WUbwCiBlnoniTfZn4IcgLaWvgP1drSwQAv5L1v0OzL/4qbJ2cpXZRVW/cuhg3833wM7JfXPZP/VpjRerqHnoI4C5LW20bmcMHSN+GUFK3lACBfUoXKultH56gzc7sHXvLg6ttW47Gg==,iv:DEHQeVIxTq3pktpTP76oljymIR9G6sGDZ54FdDVi5kk=,tag:P+st6pyjSLz7TEbnGrGmfQ==,type:str]
         key: ""
     # Kube-proxy server-specific configuration options
     proxy:
@@ -417,22 +425,26 @@ cluster:
             service: {}
             # # External service endpoint.
             # endpoint: https://discovery.talos.dev/
-# # A key used for the [encryption of secret data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
-# # Decryption secret example (do not use in production!).
-# aescbcEncryptionSecret: z01mye6j16bspJYtTB/5SFX8j7Ph4JXxM2Xuu4vsBPM=
-# # A key used for the [encryption of secret data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
-# # Decryption secret example (do not use in production!).
-# secretboxEncryptionSecret: z01mye6j16bspJYtTB/5SFX8j7Ph4JXxM2Xuu4vsBPM=
-# # The base64 encoded aggregator certificate authority used by Kubernetes for front-proxy certificate generation.
-# # AggregatorCA example.
-# aggregatorCA:
-#     crt: LS0tIEVYQU1QTEUgQ0VSVElGSUNBVEUgLS0t
-#     key: LS0tIEVYQU1QTEUgS0VZIC0tLQ==
-# # The base64 encoded private key for service account token generation.
-# # AggregatorCA example.
-# serviceAccount:
-#     key: LS0tIEVYQU1QTEUgS0VZIC0tLQ==
-# # API server specific configuration options.
+    # # A key used for the [encryption of secret data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
+    # # Decryption secret example (do not use in production!).
+    # aescbcEncryptionSecret: z01mye6j16bspJYtTB/5SFX8j7Ph4JXxM2Xuu4vsBPM=
+    # # A key used for the [encryption of secret data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
+    # # Decryption secret example (do not use in production!).
+    # secretboxEncryptionSecret: z01mye6j16bspJYtTB/5SFX8j7Ph4JXxM2Xuu4vsBPM=
+    # # The base64 encoded aggregator certificate authority used by Kubernetes for front-proxy certificate generation.
+    # # AggregatorCA example.
+    # aggregatorCA:
+    #     crt: LS0tIEVYQU1QTEUgQ0VSVElGSUNBVEUgLS0t
+    #     key: LS0tIEVYQU1QTEUgS0VZIC0tLQ==
+    # # The base64 encoded private key for service account token generation.
+    # # AggregatorCA example.
+    # serviceAccount:
+    #     key: LS0tIEVYQU1QTEUgS0VZIC0tLQ==
+    # # API server specific configuration options.
+    apiServer:
+        extraArgs:
+            # Enables user namespaces support in Kubernetes.
+            feature-gates: UserNamespacesSupport=true
 # apiServer:
 #     image: registry.k8s.io/kube-apiserver:v1.30.1 # The container image used in the API server manifest.
 #     # Extra arguments to supply to the API server.
@@ -525,31 +537,26 @@ cluster:
 # # Allows running workload on control-plane nodes.
 # allowSchedulingOnControlPlanes: true
 sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
     age:
         - recipient: age1ngkdczpldhxhx8qchl0v7c9eq06vnc5yea3mhsuy0n20hvyescpqv3w2xy
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5SzI1azlGV1JWODJ1MmZS
-            NjM4cisyYnZNeU9wdzZ2NGgzamQxcnVkU0YwCkdBN01reFMxSjlURkF5SDFROHNY
-            RWpyaXpsM1FmQ1RoZFFObEg5WE5WMW8KLS0tIC9ibStQTThsendIcFVUaGpsaG41
-            RlE5b3djUnZ2RG5EQlpNbklNVTBmdXcKDHA4w/h4cmzWmWGY7kPVsPZpmChETHEc
-            GalWe0YFXP7ssxS0ARqWsRRdYfgKgIC08VLX05gD0VVGHnRCa7c3rw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBONC9tYVM2Tjg0cHhFbk1L
+            WnM0dDNGR1BTTm1qcGJVQ0YrNk15Si9sclZFCnpuK3EzNjZIdFRTaDh4OWI1MUEy
+            VTlTVUl0WHZ6Ukc2MDJ5aDVuKy9HR0EKLS0tIDhoSk5ZOGJpRmFKb0Iyazk5UWEx
+            eTg1Q0J3QkRxUWhzclFPUVJOWnh6ODQKsfOgTkTu2e1StVwD4h+98bsUC8Opsyu/
+            EocIV7XroKhtuccX6aNapA0K8U5m7KHok4Aohk1AticUdNkMxr7NmQ==
             -----END AGE ENCRYPTED FILE-----
         - recipient: age1xzxw8fsvdz53aa3r8z6t4zns2cqadjm4ep88w5jf4zw3yhcflvesxgkxlc
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWU29LSWl1WFhWQW9GTkQ0
-            eXhsUnRpUmJUMmovZXNteGowUVFwTnVkY25jCkd2QzdlckoxcjRublY4R3dzbS9m
-            dEpFSkc4ckE1dHZsQVF4bFVDR051S2MKLS0tIDhkejNKbWZmNHRKVzdJV1R6VW05
-            R3B0K0V6NGJhTUxJUkZRYmxzTkJxOWsKhRGaQFa/F9kltAgYQo2K+OdErHeWA9c3
-            nCoVd/rdeSsMjbZ8qNWz2JqDAEA4eChIr3hZY8Fgkhq0MUllM7vs4g==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0ZkFXSnZoUjlBYWV4YTIz
+            V0F5ellEY0N6Wmx5cWcramgvc00xS01ueGwwClpmNTVoN20yMWlXSnBQblY1V1Bw
+            QlN6Y1c4K081OHJDdG9rTVVZZlYxcFEKLS0tIEdzOEVoM0ZXZWVIZ1hLM0RmbWVC
+            amVaSDVKUmFTaEFIRlFERENXdS9DQzQKFPaTpObAG16Py8T+79gYQEdCLyCGU5IK
+            mH+24rExU3JbwmgHuBObJFbwSF5Yt59rPz9fJnAOQAGppJi3qBO0wQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-04-10T20:15:07Z"
-    mac: ENC[AES256_GCM,data:loP6Bjl/bE9/Uwlt4b5bPo5q4e5A4mpJ15+cVYijwy1NqL/qJebhB+6TzcY7xBUj9l4i/rvqYSHW7gfqDp5cwyw/wtz3dnd217sRQP8x2K1skXkWnMaDRbhOGTtd56K/G+B8DmByXfha9QKL8riN/14M535iTtQ88BK9YWWrTHo=,iv:qRupMhn7OGFQHwjmugXZZCw159e6m0IV1TQAjEo3YPU=,tag:nkDYY22UcTPkHeR9lVCkqA==,type:str]
-    pgp: []
+    lastmodified: "2026-05-03T03:02:16Z"
+    mac: ENC[AES256_GCM,data:QXPrXWzwpywlrkamTZhuRlss6H0IraeXmWLMIiNL8SP3F9FqAKIZYrQubjKJdoxOHk203VwCuWZ2SHQeYVlumAH1/VMs6oDZPoDhVlILGUgrbkvLbZHevKYMIjpwT1SdHbJiGMsFMjXBGQhelS44n6VagBLu2eCnXW4CFCe2Wac=,iv:khuPuGv189PLSLJFU/CT7af0BibtM+uZW0XoyJEL2bg=,tag:m98QrexOV8lQ0jtmXRTUig==,type:str]
     encrypted_regex: ^(data|stringData|ca|crt|key|id|secret|token|aggregatorCA|serviceAccount|bootstraptoken|secretboxencryptionsecret|secretboxEncryptionSecret|clientSecret|clientId)$
-    version: 3.9.4
+    version: 3.12.1
