@@ -16,9 +16,6 @@ patches:
       kind: DaemonSet
       name: synology-csi-node
     patch: |
-      # - op: add
-      #   path: /spec/template/spec/containers/1/args/-
-      #   value: --chroot-dir=/host
       - op: add
         path: /spec/template/spec/containers/1/args/-
         value: --iscsiadm-path=/usr/local/sbin/iscsiadm
