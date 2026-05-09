@@ -17,7 +17,7 @@ spec:
               path: key.txt
       initContainers:
         - name: install-ksops
-          image: viaductoss/ksops:v4.4.0
+          image: viaductoss/ksops:v4.5.1
           command: ["/bin/sh", "-c"]
           securityContext:
             allowPrivilegeEscalation: false
