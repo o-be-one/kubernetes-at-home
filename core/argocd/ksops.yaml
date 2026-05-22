@@ -13,25 +13,19 @@ spec:
             secretName: argocd-age-key
             defaultMode: 420
             items:
-            - key: age-key
-              path: key.txt
+              - key: age-key
+                path: key.txt
       initContainers:
         - name: install-ksops
           image: viaductoss/ksops:v4.5.1
-          command: ["/bin/sh", "-c"]
+          command: ["/usr/local/bin/ksops", "install", "/custom-tools"]
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-            runAsNonRoot: false 
+            runAsNonRoot: false
             seccompProfile:
               type: RuntimeDefault
-          args:
-            - |
-                echo "Installing KSOPS..."
-                cp ksops /custom-tools/
-                cp kustomize /custom-tools/
-                echo "Done."
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
@@ -41,9 +35,6 @@ spec:
             - name: SOPS_AGE_KEY_FILE
               value: /.config/sops/age/key.txt
           volumeMounts:
-            - mountPath: /usr/local/bin/kustomize
-              name: custom-tools
-              subPath: kustomize
             - mountPath: /usr/local/bin/ksops
               name: custom-tools
               subPath: ksops
