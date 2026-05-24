@@ -63,3 +63,10 @@ helm install cilium cilium/cilium --version 1.15.5 \
 ```
 
 See the live manifests in `infra/cilium/` for the current truth.
+
+## References
+
+- [Cilium Official Documentation](https://docs.cilium.io/)
+- [Cilium + Talos](https://docs.cilium.io/en/stable/installation/k8s-install-talos/)
+- [Cilium Gateway API](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/)
+- [Cilium Helm Chart](https://github.com/cilium/charts)

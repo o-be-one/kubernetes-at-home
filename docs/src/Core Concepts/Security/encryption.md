@@ -87,3 +87,10 @@ Decrypt them with `sops -d` when you need to feed them to `talosctl`.
 **Always** edit via `sops *.enc.yaml`.
 
 This is enforced by gitleaks in CI and by the project's `.gitignore`.
+
+## References
+
+- [Mozilla SOPS Documentation](https://github.com/getsops/sops)
+- [KSOPS (Kustomize-SOPS)](https://github.com/viaduct-ai/kustomize-sops)
+- [age encryption tool](https://github.com/FiloSottile/age)
+- [SOPS + age best practices](https://github.com/getsops/sops#encrypting-using-age)

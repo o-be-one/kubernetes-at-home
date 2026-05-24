@@ -14,7 +14,7 @@ The recommended Talos images for this cluster include the following kernel exten
 - `siderolabs/iscsi-tools`
 - `siderolabs/util-linux-tools`
 
-See the preset links in [Longhorn](../Core components/longhorn.md) and [Upgrading](../Maintenance/upgrading.md).
+See the preset links in [Longhorn](../Core%20Concepts/Storage/longhorn.md) and [Upgrading](../Maintenance/upgrading.md).
 
 ## Machine configuration
 
@@ -55,7 +55,14 @@ The `secrets.enc.yaml` contains the sensitive cluster-wide secrets (tokens, CA k
 
 ## Next steps after installation
 
-- Configure ArgoCD access and push the age key (see [ArgoCD](../Core components/argocd.md))
+- Configure ArgoCD access and push the age key (see [ArgoCD](../Core%20Concepts/GitOps/argocd.md))
 - Let ArgoCD deploy the rest of `core/`, `operators/`, and `apps/`
 
 For ongoing node upgrades (Talos or Kubernetes), see [Upgrading](../Maintenance/upgrading.md).
+
+## References
+
+- [Talos Official Documentation](https://www.talos.dev/)
+- [Talos Image Factory](https://factory.talos.dev/)
+- [Talos + Kubernetes Installation Guide](https://www.talos.dev/v1.7/introduction/getting-started/)
+- [Talos Configuration Reference](https://www.talos.dev/v1.7/reference/configuration/)

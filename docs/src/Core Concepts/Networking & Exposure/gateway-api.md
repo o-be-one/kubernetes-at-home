@@ -46,7 +46,8 @@ If a Gateway stays in "Unknown" or "Pending":
 ## References
 
 - Current implementation: `infra/cilium/gateway.yaml`
-- Cilium Gateway API docs: https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/
-- Upstream Gateway API: https://gateway-api.sigs.k8s.io/
+- [Cilium Gateway API Guide](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/)
+- [Kubernetes Gateway API Official Documentation](https://gateway-api.sigs.k8s.io/)
+- [Gateway API with Cilium – Concepts](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/)
 
 Older direct CRD `kubectl apply` commands are no longer needed (they are now part of the Cilium kustomize).

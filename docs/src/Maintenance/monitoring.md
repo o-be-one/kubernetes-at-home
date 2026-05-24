@@ -24,3 +24,14 @@ The stack includes:
 All these services are exposed via HTTPRoutes on the LAN (they are not publicly accessible).
 
 This setup was chosen as a high-performance, Prometheus-compatible replacement for the classic Prometheus + Alertmanager + Grafana stack, with much better storage efficiency.
+
+## References
+
+**Netdata**
+- [Netdata Documentation](https://learn.netdata.cloud/)
+- [Netdata Kubernetes Monitoring](https://learn.netdata.cloud/docs/collecting-metrics/kubernetes-k8s)
+
+**VictoriaMetrics**
+- [VictoriaMetrics Official Documentation](https://docs.victoriametrics.com/)
+- [VictoriaMetrics Operator](https://docs.victoriametrics.com/operator/)
+- [victoria-metrics-k8s-stack Helm Chart](https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack)

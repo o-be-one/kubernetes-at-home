@@ -52,50 +52,26 @@ And that's how I ended up with [Talos OS](https://www.talos.dev/). Talos is one 
 
 Every sensitive information are encrypted using [Mozilla SOPS](https://github.com/getsops/sops) with age plus [KSOPS](https://github.com/viaduct-ai/kustomize-sops) to handle those secrets from the Kubernetes cluster during Kustomize builds.
 
-## Core components
+## Core Concepts
 
-### Network (Cilium)
+The major architectural choices are documented in the dedicated **[Core Concepts](Core%20Concepts/GitOps/argocd.md)** section:
 
-Cilium manages the entire cluster network (CNI + Gateway API ingress).
-
-See [Cilium](Core%20components/cilium.md) and [Gateway API](Core%20components/gateway-api.md).
-
-### GitOps (ArgoCD)
-
-All workloads and components are managed declaratively via ArgoCD ApplicationSets.
-
-See [ArgoCD](Core%20components/argocd.md) for access and troubleshooting.
-
-### Storage (Longhorn + Synology CSI)
-
-Longhorn is the primary storage solution. It was chosen for its simplicity and good Kubernetes integration, despite still being considered beta and having some Talos-specific limitations.
-See [Longhorn](Core components/longhorn.md) for more details on the Longhorn setup.
-
-Synology CSI is deployed alongside Longhorn to provide an additional storage class backed by the home NAS. This offers a complementary tier with different capacity, performance, and backup characteristics for workloads that benefit from NAS storage.
-(Synology CSI configuration lives in `core/synology-csi/`).
-
-### Other core components
-
-- cert-manager
-- external-dns
-- cloudflared (Cloudflare Tunnel ingress controller)
-- metrics-server
-- netdata (local monitoring)
-- Victoria Metrics + CNPG (operators)
-
-All live under `core/`.
+- GitOps with ArgoCD
+- Networking & Exposure (Cilium, Gateway API, Cloudflared, external access)
+- Storage (Longhorn + Synology CSI)
+- Security
 
 ## Operators
 
 Kubernetes operators (CloudNativePG, MariaDB operator, VictoriaMetrics, etc.) are deployed via the `operators/` directory and the `operators` + `operators-serverside` ApplicationSets.
 
-See [Operators overview](operators.md) for the current list and deployment notes.
+See [Operators overview](Operators/operators.md) for the current list and deployment notes.
 
 ## Examples
 
 Preview, demo, and experimental workloads live in `examples/`. They are not auto-deployed by the main ApplicationSets (useful for testing and PR previews).
 
-See [Examples](examples.md).
+See [Examples](Examples/examples.md).
 
 ## Repository Structure
 

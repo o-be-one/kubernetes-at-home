@@ -24,7 +24,7 @@ for app in $(kubectl get apps -n argocd -o name); do
 done
 ```
 
-See also [ArgoCD](../Core components/argocd.md).
+See also [ArgoCD](../Core%20Concepts/GitOps/argocd.md).
 
 ## Secret decryption problems
 

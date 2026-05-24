@@ -48,3 +48,10 @@ done
 ## Further reading
 
 - The ApplicationSets live in `core/argocd/`
+
+## References
+
+- [ArgoCD Official Documentation](https://argo-cd.readthedocs.io/)
+- [ArgoCD ApplicationSet](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/)
+- [ArgoCD HA Installation](https://argo-cd.readthedocs.io/en/stable/operator-manual/high_availability/)
+- [KSOPS (Kustomize-SOPS)](https://github.com/viaduct-ai/kustomize-sops)
