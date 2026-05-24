@@ -53,4 +53,34 @@ validation:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Architecture: Architecture.md
+  - Getting Started:
+      - Installation: Getting Started/installation.md
+  - Core Concepts:
+      - GitOps:
+          - ArgoCD: Core Concepts/GitOps/argocd.md
+      - Networking & Exposure:
+          - Cilium: Core Concepts/Networking & Exposure/cilium.md
+          - Gateway API: Core Concepts/Networking & Exposure/gateway-api.md
+          - cert-manager: Core Concepts/Networking & Exposure/cert-manager.md
+          - Cloudflared (Public HTTP): Core Concepts/Networking & Exposure/cloudflared.md
+          - External Access (UDP): Core Concepts/Networking & Exposure/external-access.md
+      - Storage:
+          - Longhorn: Core Concepts/Storage/longhorn.md
+          - Synology CSI: Core Concepts/Storage/synology-csi.md
+      - Security:
+          - Encryption: Core Concepts/Security/encryption.md
+  - Operators: Operators/operators.md
+  - Maintenance:
+      - Monitoring: Maintenance/monitoring.md
+      - Troubleshooting: Maintenance/troubleshooting.md
+      - Upgrading: Maintenance/upgrading.md
+  - Examples: Examples/examples.md

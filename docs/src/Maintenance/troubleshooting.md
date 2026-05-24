@@ -2,11 +2,32 @@
 
 ## Web returning 404
 
-- ensure Cilium is running
-- if you have uninstalled Cilium and then reinstalled it, it removed all http routes you had configured
+- Ensure Cilium is running
+- If you have uninstalled and reinstalled Cilium, it removes all HTTPRoutes — re-apply `infra/cilium/`
 
 ## Network issues
 
-- check Cilium pods are healthy: `kubectl get pods -n kube-system | grep cilium`
-- use `cilium connectivity test` to check reachability between nodes
-  - this requires privileged namespace, deploy the one in `infra/cilium/namespace.yaml`
+- Check Cilium pods: `kubectl get pods -n kube-system | grep cilium`
+- Run connectivity test:
+  ```bash
+  cilium connectivity test
+  ```
+  (requires the privileged namespace from `infra/cilium/namespace.yaml`)
+
+## ArgoCD finalizers stuck
+
+If Applications or ArgoCD itself won't delete:
+
+```bash
+for app in $(kubectl get apps -n argocd -o name); do
+  kubectl patch $app -p '{"metadata": {"finalizers": null}}' --type merge
+done
+```
+
+See also [ArgoCD](../Core%20Concepts/GitOps/argocd.md).
+
+## Secret decryption problems
+
+- Make sure your age key is in the `argocd-age-key` secret
+- Locally: ensure `SOPS_AGE_KEY_FILE` is set and `ksops` is in PATH
+- Never commit plain `secret*.yaml` — only edit `*.enc.yaml` with `sops`

@@ -13,7 +13,7 @@ Controlplane will need to be upgraded first, then worker nodes.
 If you have **only one controlplane node**, don't forget to always use the `--preserve` flag to keep data related to etcd.
 
 !!! warning
-    Longhorh requires you to use `-preserve` flag to keep data related to persistent volumes. Don't forget to use it for any nodes involved in Longhorn cluster.
+    Longhorn requires you to use `--preserve` flag to keep data related to persistent volumes. Don't forget to use it for any nodes involved in Longhorn cluster.
     Failure to do so will result in data loss.
 
 Example of upgrade command:
@@ -42,4 +42,40 @@ References:
 
 ## Cilium
 
+Cilium is upgraded by changing the version in `infra/cilium/kustomization.yaml` (under `helmCharts`) and re-applying the kustomize:
+
+```bash
+kubectl kustomize infra/cilium/ --enable-helm | kubectl apply -f -
+```
+
+After the upgrade, restart the Cilium components:
+
+```bash
+kubectl -n kube-system rollout restart ds/cilium
+kubectl -n kube-system rollout restart deployment/cilium-operator
+```
+
+See [Cilium](../Core%20Concepts/Networking%20&%20Exposure/cilium.md) for the current version and values.
+
 ## Longhorn
+
+Longhorn upgrades are performed via its own Helm chart or the manifests under `core/longhorn-system/`.
+
+Always follow the official Longhorn upgrade documentation for the target version, especially the notes about Talos and the `--preserve` flag during node upgrades.
+
+Reference: [Longhorn upgrade guide](https://longhorn.io/docs/1.7.0/deploy/upgrade/upgrade-with-helm/)
+
+## References
+
+**Talos**
+- [Talos Upgrade Guide](https://www.talos.dev/v1.7/talos-guides/upgrading-talos/)
+- [Talos + Longhorn considerations](https://longhorn.io/docs/latest/advanced-resources/os-distro-specific/talos-linux-support/)
+
+**Kubernetes**
+- [Kubernetes Upgrade with Talos](https://www.talos.dev/v1.7/kubernetes-guides/upgrading-kubernetes/)
+
+**Cilium**
+- [Cilium Upgrade Documentation](https://docs.cilium.io/en/stable/operations/upgrade/)
+
+**Longhorn**
+- [Longhorn Upgrade Guide](https://longhorn.io/docs/latest/deploy/upgrade/upgrade-with-helm/)

@@ -27,7 +27,7 @@ And the cluster hardware is:
 
 - 3 x Control Plane: Trigkey G4 with Intel N100 (4 cores, 4 threads), 16GB DDR4, and 500GB NVMe
 - 2 x Workers: Beelink SER5 with AMD 5560U (6 cores, 12 threads), 16GB DDR4, and 500GB NVMe - I may had a third at some point
-- (future) why not a NAS to keep backups and stateless workload data locally as well
+- 1 x NAS: Synology DS423 with 4x8tb disks in RAID1
 
 ### Network
 
@@ -48,50 +48,61 @@ And that's how I ended up with [Talos OS](https://www.talos.dev/). Talos is one 
 
 ## Security
 
-### Mozilla SOPS
+### Mozilla SOPS + KSOPS
 
-Every sensitive information are encrypted using [Mozilla SOPS](https://github.com/getsops/sops) with age plus [KSOPS](https://github.com/viaduct-ai/kustomize-sops) to handle those secrets from the Kubernetes cluster.
+Every sensitive information are encrypted using [Mozilla SOPS](https://github.com/getsops/sops) with age plus [KSOPS](https://github.com/viaduct-ai/kustomize-sops) to handle those secrets from the Kubernetes cluster during Kustomize builds.
 
-## Core components
+## Core Concepts
 
-### Network (Cilium)
+The major architectural choices are documented in the dedicated **[Core Concepts](Core%20Concepts/GitOps/argocd.md)** section:
 
-I've often heard about Cilium from a friend who's BPF and XDP passionate, so I wanted to try it. What's interesting with Cilium is that they provide a Kubernetes experience with a strong focus on network, with lot of features and lot of tools. This cluster uses Cilium to manage network and to manage ingress in Gateway API format.
+- GitOps with ArgoCD
+- Networking & Exposure (Cilium, Gateway API, Cloudflared, external access)
+- Storage (Longhorn + Synology CSI)
+- Security
 
-[Know more about how I setup and maintain Cilium](Core%20components/cilium.md).
+## Operators
 
-### Ingress (Gateway API)
+Kubernetes operators (CloudNativePG, MariaDB operator, VictoriaMetrics, etc.) are deployed via the `operators/` directory and the `operators` + `operators-serverside` ApplicationSets.
 
-My first experiences with ingress have been using Ingress Controller from Traefik Labs. I've used Traefik for a while with Docker and really loved it. And then I heard about Gateway API, which is in beta under Cilium. As Kubernetes push to standardize Gateway API, I wanted to try it; and because I'm using Cilium, it was a good fit.
+See [Operators overview](Operators/operators.md) for the current list and deployment notes.
 
-[Know more about how I setup and maintain Gateway API](Core%20components/gateway-api.md).
+## Examples
 
-### GitOps (ArgoCD)
+Preview, demo, and experimental workloads live in `examples/`. They are not auto-deployed by the main ApplicationSets (useful for testing and PR previews).
 
-I've heard about ArgoCD at some point (who into Kubernetes did not?) and I used it in a past professional experience. I really enjoyed the tool so I decided to use it for this cluster. GitOps is interesting as it allows to have a declarative approach to infrastructure and application management from a source of truth.
-
-[Know more about how I setup and maintain ArgoCD](Core%20components/argocd.md).
-
-### Storage (Longhorn)
-
-Longhorn will be our default storage solution. It was challenging to choose one but considering how small is my clsuter and how little experience I have with storage layer, this one looked the most relevant. It's also important to consider that it's still considered in beta and comes with limitation when used with Talos (see [here](https://longhorn.io/docs/1.7.0/advanced-resources/os-distro-specific/talos-linux-support/)).
-
-[Know more about how I setup and maintain Longhorn](Core%20components/longhorn.md).
+See [Examples](Examples/examples.md).
 
 ## Repository Structure
 
-The project repository is organized as follows:
+The project is a pure declarative GitOps repository. Source of truth = the YAML files + ApplicationSets (not prose).
 
-| Folder | Description |
-| --- | --- |
-| `apps/` | Contains the definitions of applications deployed on the cluster. Each subdirectory represents a specific application. |
-| `core-components/` | Contains the essential components of the cluster. Includes subdirectories for components such as ArgoCD, Longhorn, etc. |
-| `infra/` | Contains infrastructure-related configurations like Cilium-specific configurations. |
-| `available/` | Contains apps and core components that are not currently in use but may be of interest to the audience. |
-| `operators/` | Contains operators like CloudNativePG for Postgres |
-| `docs/` | Contains the project documentation, including this index.md file. |
+| Folder          | Description |
+| ---             | --- |
+| `apps/`         | User workloads. Each subdirectory = one ArgoCD Application (namespace = dir basename). Includes `apps/serverside/*` for ServerSideApply workloads. |
+| `core/`         | Essential cluster components (ArgoCD, Cilium is under infra, Longhorn, cert-manager, external-dns, cloudflared, netdata, etc.). |
+| `operators/`    | Kubernetes operators (CNPG, MariaDB, VictoriaMetrics, ...). Includes `operators/serverside/*`. |
+| `infra/`        | Infrastructure configs. Contains the encrypted Talos controlplane and worker machine configs (`controlplane.enc.yaml`, `worker.enc.yaml`, `secrets.enc.yaml`) plus the `infra/cilium/` subdirectory (CNI + Gateway + L2 announcements). |
+| `examples/`     | Preview / non-production examples (not auto-deployed by the main ApplicationSets). |
+| `docs/`         | MkDocs documentation sources (`src/`). |
 
-Each main folder (`apps`, `core-components`, `infra`) typically contains an `applicationset.yaml` file. These files are used by ArgoCD to manage the deployment of applications and components in a declarative and automated manner.
-Sometime you will find a folder named `serverside`, this one is for ArgoCD Apps that are deployed with serverside strategy.
+Deployment is driven centrally by ApplicationSets in `core/argocd/`:
 
-This structure allows for a clear and modular organization of the cluster, facilitating the management and maintenance of various components and applications.
+- `appset-apps.yaml`
+- `appset-core.yaml`
+- `appset-operators.yaml`
+- `appset-cilium.yaml`
+
+**Adding a new app**: create `apps/<name>/kustomization.yaml` (with resources, configMapGenerators, optional `secret-generator.yaml` + `*.enc.yaml`), commit. ArgoCD discovers it automatically.
+
+**In the future** I may switch to a per-directory `applicationset.yaml` files.
+
+## Local development & validation
+
+- Render any component: `kubectl kustomize <path>/ --enable-helm`
+- Edit secrets: `sops path/to/xxx.enc.yaml` (only `*.enc.yaml` are committed)
+- Talos machine configs: stored encrypted as `infra/*.enc.yaml`; decrypt with sops when feeding to `talosctl`
+
+## Future / Roadmap
+
+Check the [GitHub issues](https://github.com/o-be-one/kubernetes-at-home/issues) for the current roadmap.
