@@ -9,4 +9,6 @@ For Longhorn to work, we need to ensure that:
 
 ## Installation
 
-For all installation information, see [Longhorn docs](https://longhorn.io/docs/1.7.0/deploy/install/install-with-helm/).
+Longhorn is deployed via the manifest in `core/longhorn-system/`.
+
+For all installation and upgrade information, see the official [Longhorn docs](https://longhorn.io/docs/1.7.0/deploy/install/install-with-helm/).

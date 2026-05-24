@@ -9,7 +9,7 @@ As my network will allow local area network access by default, I've setup a [Clo
 ### UDP access
 
 I use a [Tailscale](https://tailscale.com/) tunnel to be able to access UDP ports from the outside, using a remote server (VPS for example) as entrypoint and exit node; the exit node part is required for example with games like Core Keeper that only allows to join the game using a "Game ID" and it's not possible to join using an IP and port.
-For games allowing access using IP/dns and port but still in UDP, I use [playit.gg](https://playit.gg/). There is examples available in `available/apps/core-keeper` folder.
+For games allowing access using IP/dns and port but still in UDP, I use [playit.gg](https://playit.gg/). There are examples available in `examples/apps/core-keeper` folder.
 
 #### Tailscale
 

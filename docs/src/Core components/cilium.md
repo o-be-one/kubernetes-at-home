@@ -1,50 +1,65 @@
 # Cilium
 
-## Prerequisites
+Cilium is the CNI and also provides the Gateway API ingress controller for the cluster.
 
-- Cilium CLI: check cilium status
+## Current deployment
 
-## Installation
-
-[https://docs.cilium.io/en/stable/installation/k8s-install-helm/](https://docs.cilium.io/en/stable/installation/k8s-install-helm/)
-
-Following is related to my first experience with Cilium, but since I've made a Kustomization to handle and deploy Cilium, I'll keep it here for future reference.
+Everything is managed declaratively via Kustomize:
 
 ```bash
-helm repo add cilium https://helm.cilium.io/
-helm repo update
+kubectl kustomize infra/cilium/ --enable-helm | kubectl apply -f -
+```
 
-helm install \
-          cilium \
-          cilium/cilium \
-          --version 1.15.5 \
-          --namespace kube-system \
-          --set=ipam.mode=kubernetes \
-          --set=kubeProxyReplacement=true \
-          --set=securityContext.capabilities.ciliumAgent="{CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID}" \
-          --set=securityContext.capabilities.cleanCiliumState="{NET_ADMIN,SYS_ADMIN,SYS_RESOURCE}" \
-          --set=cgroup.autoMount.enabled=false \
-          --set=ingressController.enabled=true \
-          --set=ingressController.default=true \
-          --set=ingressController.loadbalancerMode=shared \
-          --set=cgroup.hostRoot=/sys/fs/cgroup \
-          --set=k8sServiceHost=localhost \
-          --set=k8sServicePort=7445
+The definition lives in `infra/cilium/kustomization.yaml`:
+
+- Gateway API CRDs (v1.2.0 standard + experimental)
+- Cilium Helm chart (v1.16.3) using `values.yaml`
+- CiliumLoadBalancerIPPool (`ip-pool.yaml`)
+- CiliumL2AnnouncementPolicy (`announce.yaml`)
+- GatewayClass + Gateway + HTTP redirect (`gateway.yaml`)
+
+## Key settings (from values.yaml)
+
+- `kubeProxyReplacement: true`
+- Gateway API enabled (`gatewayAPI.enabled: true`)
+- Ingress controller enabled in shared load-balancer mode
+- Hubble + UI + relay enabled
+- L2 announcements for LoadBalancer IPs
+- Custom securityContext capabilities required for Talos
+- `k8sServiceHost: localhost` + port 7445 (Talos specific)
+
+## Useful commands
+
+Check Cilium status:
+```bash
+cilium status
+cilium connectivity test   # (requires the privileged namespace from infra/cilium/namespace.yaml)
+```
+
+See installed Gateway API CRD versions:
+```bash
+kubectl get crd -o jsonpath='{range .items[?(@.spec.group=="gateway.networking.k8s.io")]}{.metadata.name}: {.metadata.annotations.gateway\.networking\.k8s\.io/bundle-version}{"\n"}{end}'
 ```
 
 ## Upgrade
 
-Reminder: helm can upgrade deployed stack. Example:
+Update the version in `infra/cilium/kustomization.yaml` (helmCharts section) and re-apply the kustomize command above.
+
+After Cilium changes, it is often useful to restart the cilium pods:
+```bash
+kubectl -n kube-system rollout restart ds/cilium
+kubectl -n kube-system rollout restart deployment/cilium-operator
+```
+
+## Historical note
+
+The old pure-Helm install commands are kept below only for reference (pre-Kustomize era).
 
 ```bash
-helm upgrade cilium cilium/cilium --version 1.15.5 \
-    --namespace kube-system \
-    --reuse-values \
-    --set ingressController.loadbalancerMode=shared
+# Old way (no longer used)
+helm install cilium cilium/cilium --version 1.15.5 \
+  --namespace kube-system \
+  ... (many --set flags now in values.yaml)
+```
 
-kubectl -n kube-system rollout restart deployment/cilium-operator
-kubectl -n kube-system rollout restart ds/cilium
-``` 
-
-And to get current values:
-`helm get values cilium -n kube-system -o yaml`
+See the live manifests in `infra/cilium/` for the current truth.
