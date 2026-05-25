@@ -39,7 +39,7 @@ spec:
             claimName: n8n-pvc
       initContainers:
         - name: volume-permissions
-          image: busybox:1.37
+          image: busybox:1.38
           command:
             [
               "sh",
