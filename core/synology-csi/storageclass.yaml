@@ -8,9 +8,25 @@ metadata:
 provisioner: csi.san.synology.com
 parameters:
   # fsType: 'btrfs'
-  fsType: 'ext4'
-  dsm: '192.168.200.222'
-  location: '/volume2'
+  fsType: "ext4"
+  dsm: "192.168.200.222"
+  location: "/volume2"
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+  name: synostorage-nfs
+provisioner: csi.san.synology.com
+parameters:
+  protocol: "nfs"
+  dsm: "192.168.200.222"
+  location: "/volume2"
+mountOptions:
+  - nfsvers=4.1
 reclaimPolicy: Retain
 allowVolumeExpansion: true
 ---
