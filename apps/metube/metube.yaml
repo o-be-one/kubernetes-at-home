@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metube
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: metube-pv
+spec:
+  storageClassName: synostorage-nfs
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.200.222
+    path: /volume2/YouTube
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: metube-pvc
+spec:
+  storageClassName: synostorage-nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  volumeName: metube-pv
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metube
+  template:
+    metadata:
+      labels:
+        app: metube
+    spec:
+      securityContext:
+        runAsUser: 1026
+        runAsGroup: 1026
+        fsGroup: 1026
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: metube
+          image: ghcr.io/alexta69/metube:2026.05.30
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          ports:
+            - name: web
+              containerPort: 8081
+          env:
+            - name: PUID
+              value: "1026"
+            - name: DOWNLOAD_DIR
+              value: "/downloads"
+          volumeMounts:
+            - name: downloads
+              mountPath: /downloads
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: metube-pvc
+        - name: tmp
+          emptyDir:
+            medium: ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metube
+spec:
+  selector:
+    app: metube
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: web
