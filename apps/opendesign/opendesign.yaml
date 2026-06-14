@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: opendesign
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: opendesign-pvc
+  labels:
+    recurring-job-group.longhorn.io/auto-backup: enabled
+    recurring-job-group.longhorn.io/auto-snapshot: enabled
+    backup-frequency: high
+    snapshot-frequency: high
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: opendesign
+spec:
+  serviceName: opendesign
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opendesign
+  template:
+    metadata:
+      labels:
+        app: opendesign
+    spec:
+      securityContext:
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: volume-permissions
+          image: busybox:1.38
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /data/.od /data/projects /data/media || true
+              chown -R 1000:1000 /data
+              chmod 700 /data || true
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      containers:
+        - name: opendesign
+          image: vanjayak/open-design:latest
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+          ports:
+            - name: web
+              containerPort: 7456
+          env:
+            - name: OD_DATA_DIR
+              value: "/data"
+            - name: TZ
+              value: "America/Montreal"
+            - name: OD_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: opendesign-secret
+                  key: OD_API_TOKEN
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: web
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: web
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            failureThreshold: 3
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: opendesign-pvc
+        - name: tmp
+          emptyDir:
+            medium: ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opendesign
+spec:
+  selector:
+    app: opendesign
+  ports:
+    - protocol: TCP
+      port: 7456
+      targetPort: web
