@@ -5,7 +5,6 @@ namespace: opendesign
 resources:
   - opendesign.yaml
   - httproute.yaml
-  - secret.yaml
 
 generators:
   - secret-generator.yaml
