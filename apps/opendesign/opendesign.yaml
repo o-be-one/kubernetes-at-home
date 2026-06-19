@@ -36,7 +36,7 @@ spec:
         app: opendesign
     spec:
       securityContext:
-        fsGroup: 1000
+        fsGroup: 1001
         seccompProfile:
           type: RuntimeDefault
       initContainers:
@@ -47,7 +47,7 @@ spec:
             - -c
             - |
               mkdir -p /data/.od /data/projects /data/media || true
-              chown -R 1000:1000 /data
+              chown -R 1001:1001 /data
               chmod 700 /data || true
           volumeMounts:
             - name: data
@@ -56,8 +56,8 @@ spec:
         - name: opendesign
           image: vanjayak/open-design:latest
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 1001
+            runAsGroup: 1001
             runAsNonRoot: true
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -70,6 +70,14 @@ spec:
             - name: web
               containerPort: 7456
           env:
+            - name: OD_BIND_HOST
+              value: "0.0.0.0"
+            - name: OD_PORT
+              value: "7456"
+            - name: OD_WEB_PORT
+              value: "7456"
+            - name: OD_ALLOWED_ORIGINS
+              value: "http://localhost,http://127.0.0.1,https://opendesign.menia.cc"
             - name: OD_DATA_DIR
               value: "/data"
             - name: TZ
