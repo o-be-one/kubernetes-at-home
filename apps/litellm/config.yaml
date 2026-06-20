@@ -1,0 +1,10 @@
+environment_variables:
+  LITELLM_NON_ROOT: true
+general_settings:
+  master_key: os.environ/MASTER_KEY
+model_list:
+  - model_name: glm-5.2
+    litellm_params:
+      model: z-ai/glm-5.2
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY

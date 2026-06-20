@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: litellm
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litellm-deployment
+  labels:
+    app: litellm
+spec:
+  selector:
+    matchLabels:
+      app: litellm
+  template:
+    metadata:
+      labels:
+        app: litellm
+    spec:
+      containers:
+        - name: litellm
+          image: ghcr.io/berriai/litellm-non_root:v1.89.2
+          securityContext:
+            runAsUser: 101
+            runAsGroup: 101
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+          args:
+            - "--config"
+            - "/app/config.yaml"
+          ports:
+            - name: web
+              containerPort: 4000
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config.yaml
+              subPath: config.yaml
+          # readOnly: true
+          # env:
+          #   - name: LITELLM_NON_ROOT
+          #     value: "true"
+          envFrom:
+            - secretRef:
+                name: litellm-secrets
+          resources:
+            requests:
+              cpu: "1" # should be 1*num_workers
+              memory: "4Gi" # should be 4*num_workers
+            limits:
+              cpu: "1"
+              memory: "4Gi"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: litellm-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: litellm
+spec:
+  ports:
+    - name: web
+      port: 4000
+      targetPort: web
+  selector:
+    app: litellm
