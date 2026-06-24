@@ -1,5 +1,7 @@
 # Upgrading
 
+For backup strategy and etcd recovery, see [Backup](backup.md).
+
 ## Talos
 
 Because of Longhorn, it's really important to use images from Talos factory that embeds following kernel extensions:
