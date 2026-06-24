@@ -1,0 +1,75 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: talos-backup
+spec:
+  schedule: "0 2 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: talos-backup
+              image: ghcr.io/siderolabs/talos-backup:v0.1.0-beta.3-10-gb9fd478
+              imagePullPolicy: IfNotPresent
+              workingDir: /tmp
+              command:
+                - /talos-backup
+              env:
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: talos-backup-storage
+                      key: AWS_ACCESS_KEY_ID
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: talos-backup-storage
+                      key: AWS_SECRET_ACCESS_KEY
+                - name: AWS_REGION
+                  value: us-west-001
+                - name: CUSTOM_S3_ENDPOINT
+                  value: https://s3.us-west-001.backblazeb2.com
+                - name: USE_PATH_STYLE
+                  value: "true"
+                - name: BUCKET
+                  value: btrMenia
+                - name: CLUSTER_NAME
+                  value: btrkube
+                - name: S3_PREFIX
+                  value: etcd-backup/btrkube
+                - name: AGE_RECIPIENT_PUBLIC_KEY
+                  value: "age1nv57jlttgrmctwyjf32unel4ahugl4azk9nksexmkqwvp0sxrdeqj4pma3"
+                - name: ENABLE_COMPRESSION
+                  value: "true"
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
+              volumeMounts:
+                - mountPath: /tmp
+                  name: tmp
+                - mountPath: /.talos
+                  name: talos
+                - mountPath: /var/run/secrets/talos.dev
+                  name: talos-secrets
+          volumes:
+            - name: tmp
+              emptyDir: {}
+            - name: talos
+              emptyDir: {}
+            - name: talos-secrets
+              secret:
+                secretName: talos-backup-secrets

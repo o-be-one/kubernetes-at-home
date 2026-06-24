@@ -82,5 +82,6 @@ nav:
   - Maintenance:
       - Monitoring: Maintenance/monitoring.md
       - Troubleshooting: Maintenance/troubleshooting.md
+      - Backup: Maintenance/backup.md
       - Upgrading: Maintenance/upgrading.md
   - Examples: Examples/examples.md
