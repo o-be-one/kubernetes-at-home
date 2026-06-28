@@ -1,0 +1,23 @@
+# https://forums.kleientertainment.com/forums/topic/64552-dedicated-server-settings-guide/
+# /data/.klei/DoNotStarveTogether/Cluster_1/cluster.ini (LinuxGSM 161118)
+[GAMEPLAY]
+game_mode = survival
+pause_when_empty = true
+pvp = false
+vote_enabled = true
+
+
+[MISC]
+console_enabled = true
+max_snapshots = 6
+
+
+[NETWORK]
+tick_rate = 15
+
+
+[SHARD]
+shard_enabled = true
+master_ip = 127.0.0.1
+master_port = 10888
+cluster_key = CLUSTERKEY # Define a custom cluster key, copy it in each shard

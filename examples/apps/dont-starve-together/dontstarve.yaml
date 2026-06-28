@@ -1,0 +1,199 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dontstarve-data-master
+  labels:
+    app.kubernetes.io/name: dontstarve
+    recurring-job-group.longhorn.io/auto-backup: enabled
+    recurring-job-group.longhorn.io/auto-snapshot: enabled
+    backup-frequency: low
+    snapshot-frequency: high
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dontstarve-data-caves
+  labels:
+    app.kubernetes.io/name: dontstarve
+    recurring-job-group.longhorn.io/auto-backup: enabled
+    recurring-job-group.longhorn.io/auto-snapshot: enabled
+    backup-frequency: low
+    snapshot-frequency: high
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dontstarve
+  namespace: dontstarve
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: dontstarve
+  template:
+    metadata:
+      labels:
+        app: dontstarve
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: dontstarve-cluster-token # Token for the cluster generated on Klei website
+          secret:
+            secretName: dontstarve-cluster-token
+        - name: dontstarve-data-master # Volume for the master shard data
+          persistentVolumeClaim:
+            claimName: dontstarve-data-master
+        - name: dontstarve-data-caves # Volume for the caves shard data
+          persistentVolumeClaim:
+            claimName: dontstarve-data-caves
+        - name: dontstarve-cluster-master-clusterini # Cluster.ini for the master shard
+          secret:
+            secretName: dontstarve-cluster-master
+        - name: dontstarve-cluster-caves-clusterini # Cluster.ini for the caves shard
+          secret:
+            secretName: dontstarve-cluster-caves
+        - name: dontstarve-master-config # Config for the master shard
+          configMap:
+            name: dontstarve-master-config
+        - name: dontstarve-caves-config # Config for the caves shard
+          configMap:
+            name: dontstarve-caves-config
+      containers:
+        - name: playit-sidecar
+          image: ghcr.io/playit-cloud/playit-agent:1.0.10
+          envFrom:
+            - secretRef:
+                name: playit-client
+          securityContext:
+            privileged: true
+            runAsUser: 0
+            seccompProfile:
+              type: RuntimeDefault
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "1024Mi"
+            requests:
+              cpu: "0.25"
+              memory: "512Mi"
+        - name: dontstarve-master
+          image: gameservermanagers/gameserver:dst # https://github.com/GameServerManagers/LinuxGSM/blob/master/lgsm/data/serverlist.csv
+          securityContext: # LGSM Docker use gosu to switch to non privileged user when started
+            runAsUser: 0
+            privileged: true
+            runAsNonRoot: false
+            allowPrivilegeEscalation: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2048Mi"
+            requests:
+              cpu: "0.5"
+              memory: "1024Mi"
+          ports:
+            - containerPort: 11000
+              protocol: UDP
+              name: game-udp-master
+          volumeMounts:
+            - name: dontstarve-data-master
+              mountPath: /data
+            - name: dontstarve-cluster-token
+              readOnly: true
+              mountPath: /data/.klei/DoNotStarveTogether/Cluster_1/cluster_token.txt
+              subPath: cluster_token.txt
+            - name: dontstarve-cluster-master-clusterini
+              readOnly: true
+              mountPath: /data/.klei/DoNotStarveTogether/Cluster_1/cluster.ini
+              subPath: cluster.ini
+            - name: dontstarve-master-config
+              readOnly: true
+              mountPath: /data/.klei/DoNotStarveTogether/Cluster_1/Master/server.ini
+              subPath: server.ini
+            - name: dontstarve-master-config
+              readOnly: true
+              mountPath: /data/config-lgsm/dstserver/dstserver.cfg
+              subPath: dstserver.cfg
+        - name: dontstarve-caves
+          image: gameservermanagers/gameserver:dst # https://github.com/GameServerManagers/LinuxGSM/blob/master/lgsm/data/serverlist.csv
+          securityContext: # LGSM Docker use gosu to switch to non privileged user when started
+            runAsUser: 0
+            privileged: true
+            runAsNonRoot: false
+            allowPrivilegeEscalation: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2048Mi"
+            requests:
+              cpu: "0.5"
+              memory: "1024Mi"
+          ports:
+            - containerPort: 11001
+              protocol: UDP
+              name: game-udp-caves
+          volumeMounts:
+            - name: dontstarve-data-caves
+              mountPath: /data
+            - name: dontstarve-cluster-token
+              readOnly: true
+              mountPath: /data/.klei/DoNotStarveTogether/Cluster_1/cluster_token.txt
+              subPath: cluster_token.txt
+            - name: dontstarve-cluster-caves-clusterini
+              readOnly: true
+              mountPath: /data/.klei/DoNotStarveTogether/Cluster_1/cluster.ini
+              subPath: cluster.ini
+            - name: dontstarve-caves-config
+              readOnly: true
+              mountPath: /data/.klei/DoNotStarveTogether/Cluster_1/Caves/server.ini
+              subPath: server.ini
+            - name: dontstarve-caves-config
+              readOnly: true
+              mountPath: /data/config-lgsm/dstserver/dstserver.cfg
+              subPath: dstserver.cfg
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dontstarve
+spec:
+  ports:
+    - name: game-udp-master
+      port: 11000
+      protocol: UDP
+    - name: game-udp-caves
+      port: 11001
+      protocol: UDP
+  selector:
+    app: dontstarve
