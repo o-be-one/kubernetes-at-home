@@ -71,6 +71,8 @@ spec:
               value: "production"
             - name: WEBHOOK_URL
               value: "https://n8n.btrcloud.com/"
+            - name: N8N_PROXY_HOPS
+              value: "1"
           ports:
             - name: http
               containerPort: 5678
