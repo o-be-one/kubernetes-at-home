@@ -21,10 +21,13 @@ spec:
       storage: 2Gi
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: n8n
 spec:
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: n8n
@@ -51,7 +54,7 @@ spec:
               mountPath: /data
       containers:
         - name: n8n
-          image: docker.n8n.io/n8nio/n8n:2.27.4
+          image: docker.n8n.io/n8nio/n8n:2.28.4
           envFrom:
             - secretRef:
                 name: n8n-secret
@@ -76,11 +79,11 @@ spec:
               mountPath: /home/node
           resources:
             requests:
-              memory: "250Mi"
-              cpu: "100m"
+              memory: "300Mi"
+              cpu: "400m"
             limits:
-              memory: "500Mi"
-              cpu: "300m"
+              memory: "600Mi"
+              cpu: "800m"
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
