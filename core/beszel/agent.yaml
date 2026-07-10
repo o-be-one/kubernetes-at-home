@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: beszel-agent
+spec:
+  selector:
+    matchLabels:
+      app: beszel-agent
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: beszel-agent
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      automountServiceAccountToken: false
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+          operator: Exists
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: beszel-agent
+          image: henrygd/beszel-agent:0.18.7
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          env:
+            - name: HUB_URL
+              value: http://beszel.beszel.svc.cluster.local:8090
+            - name: LISTEN
+              value: "45876"
+            # WebSocket-only; no need to expose SSH on the host network.
+            - name: DISABLE_SSH
+              value: "true"
+            # Talos uses containerd; Beszel only supports Docker/Podman sockets.
+            - name: DOCKER_HOST
+              value: ""
+            - name: TZ
+              value: America/Montreal
+            - name: SYSTEM_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: KEY
+              valueFrom:
+                secretKeyRef:
+                  name: beszel-agent
+                  key: KEY
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: beszel-agent
+                  key: TOKEN
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/beszel-agent
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          # Docs: `/agent health`, interval >= 60s
+          readinessProbe:
+            exec:
+              command: ["/agent", "health"]
+            initialDelaySeconds: 5
+            periodSeconds: 60
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command: ["/agent", "health"]
+            initialDelaySeconds: 15
+            periodSeconds: 120
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
