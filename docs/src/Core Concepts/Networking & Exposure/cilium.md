@@ -43,13 +43,10 @@ kubectl get crd -o jsonpath='{range .items[?(@.spec.group=="gateway.networking.k
 
 ## Upgrade
 
-Update the version in `infra/cilium/kustomization.yaml` (helmCharts section) and re-apply the kustomize command above.
+Upgrades are documented in the maintenance section: see [Upgrading → Cilium](../../Maintenance/upgrading.md#cilium).
 
-After Cilium changes, it is often useful to restart the cilium pods:
-```bash
-kubectl -n kube-system rollout restart ds/cilium
-kubectl -n kube-system rollout restart deployment/cilium-operator
-```
+!!! warning "Read before bumping the version"
+    Cilium must be upgraded **one minor at a time**, the Gateway API CRDs must be bumped to match the target Cilium version (not "the latest"), and some CRDs (e.g. `CiliumLoadBalancerIPPool`) require an `apiVersion` migration first. All of this is detailed on the [Upgrading](../../Maintenance/upgrading.md#cilium) page.
 
 ## Historical note
 
