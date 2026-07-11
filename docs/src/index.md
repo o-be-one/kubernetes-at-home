@@ -80,7 +80,7 @@ The project is a pure declarative GitOps repository. Source of truth = the YAML 
 | Folder          | Description |
 | ---             | --- |
 | `apps/`         | User workloads. Each subdirectory = one ArgoCD Application (namespace = dir basename). Includes `apps/serverside/*` for ServerSideApply workloads. |
-| `core/`         | Essential cluster components (ArgoCD, Cilium is under infra, Longhorn, cert-manager, external-dns, cloudflared, netdata, etc.). |
+| `core/`         | Essential cluster components (ArgoCD, Cilium is under infra, Longhorn, cert-manager, external-dns, cloudflared, beszel, etc.). |
 | `operators/`    | Kubernetes operators (CNPG, MariaDB, VictoriaMetrics, ...). Includes `operators/serverside/*`. |
 | `infra/`        | Infrastructure configs. Contains the encrypted Talos controlplane and worker machine configs (`controlplane.enc.yaml`, `worker.enc.yaml`, `secrets.enc.yaml`) plus the `infra/cilium/` subdirectory (CNI + Gateway + L2 announcements). |
 | `examples/`     | Preview / non-production examples (not auto-deployed by the main ApplicationSets). |
