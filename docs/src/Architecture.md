@@ -68,6 +68,7 @@ Here are some common paths depending on what you want to understand:
 | How storage is organized                      | [Storage](Core%20Concepts/Storage/longhorn.md) (Longhorn primary + Synology CSI) |
 | How GitOps is set up                          | [GitOps / ArgoCD](Core%20Concepts/GitOps/argocd.md) |
 | How operators are managed                     | [Operators](Operators/operators.md) |
+| How monitoring is set up                      | [Maintenance / Monitoring](Maintenance/monitoring.md) |
 | How secrets are handled                       | [Security / Encryption](Core%20Concepts/Security/encryption.md) |
 
 ## Summary

@@ -12,7 +12,7 @@ They are **not** automatically deployed by the main ApplicationSets (`apps`, `co
 
 ## Structure
 
-- `examples/apps/` — application examples
+- `examples/apps/` — application examples (e.g. game servers, whoami, Netdata)
 - `examples/core/` — core component examples (e.g. Tailscale)
 
 Many examples include `secret-generator.yaml` + `*.enc.yaml` to demonstrate the SOPS + KSOPS pattern.
