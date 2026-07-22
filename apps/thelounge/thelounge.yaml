@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: thelounge
-        image: ghcr.io/thelounge/thelounge:4.5.0
+        image: ghcr.io/thelounge/thelounge:4.5.2
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
