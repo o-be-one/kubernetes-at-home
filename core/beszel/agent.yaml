@@ -33,7 +33,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: beszel-agent
-          image: henrygd/beszel-agent:0.18.7
+          image: henrygd/beszel-agent:0.18.8
           securityContext:
             runAsNonRoot: true
             allowPrivilegeEscalation: false
