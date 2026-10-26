@@ -39,7 +39,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: beszel
-          image: henrygd/beszel:0.21.0
+          image: henrygd/beszel:0.21.1
           securityContext:
             runAsNonRoot: true
             allowPrivilegeEscalation: false
