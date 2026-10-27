@@ -1,0 +1,14 @@
+# TODO(2026-10-27): temporary workaround, remove this patch (and its entry in
+# kustomization.yaml) once worker talos-m6o-p5r is back from RMA.
+# With a single schedulable worker, the HA install's required pod anti-affinity
+# leaves the second repo-server Pending and blocks rollouts.
+- op: replace
+  path: /spec/template/spec/affinity/podAntiAffinity
+  value:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: argocd-repo-server
+          topologyKey: kubernetes.io/hostname

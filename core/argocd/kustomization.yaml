@@ -24,6 +24,11 @@ configMapGenerator:
 
 patches:
   - path: ksops.yaml
+  # TODO: temporary, remove once talos-m6o-p5r is back (see file)
+  - path: repo-server-affinity.yaml
+    target:
+      kind: Deployment
+      name: argocd-repo-server
 
 # generators: # works only when ArgoCD is deployed
 #   - secret-generator.yaml
