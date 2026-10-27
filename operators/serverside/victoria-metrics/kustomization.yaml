@@ -6,6 +6,17 @@ resources:
 - namespace.yaml
 - httproute.yaml
 
+# Grafana sidecar only watches this namespace: app dashboards live here.
+configMapGenerator:
+- name: grafana-dashboards-cloudflare-tunnel
+  files:
+  - dashboards/cloudflare-tunnel-controller.json
+  - dashboards/cloudflare-tunnel-traffic.json
+  options:
+    disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"
+
 helmCharts:
 - name: victoria-metrics-operator-crds
   repo: https://victoriametrics.github.io/helm-charts/
