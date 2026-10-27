@@ -1,0 +1,8 @@
+# TODO(2026-10-27): temporary workaround, remove this patch (and its entry in
+# kustomization.yaml) once worker talos-m6o-p5r is back from RMA.
+# With a single schedulable worker, the HA install's required pod anti-affinity
+# leaves the extra replicas of repo-server, server, redis-ha-haproxy and
+# redis-ha-server Pending and blocks rollouts. Dropping it keeps the default
+# (soft) topology spreading.
+- op: remove
+  path: /spec/template/spec/affinity/podAntiAffinity/requiredDuringSchedulingIgnoredDuringExecution
