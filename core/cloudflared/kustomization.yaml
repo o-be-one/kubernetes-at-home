@@ -2,6 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cloudflared-ingress-controller
 
+resources:
+- vmservicescrape.yaml
+- vmrule.yaml
+
 helmCharts:
 - name: cloudflare-tunnel-ingress-controller
   repo: https://helm.strrl.dev

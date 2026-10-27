@@ -1,0 +1,25 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: cloudflare-tunnel-ingress-controller
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: cloudflare-tunnel-ingress-controller
+      app.kubernetes.io/component: controller
+  endpoints:
+    - port: metrics
+      path: /metrics
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: controlled-cloudflared-connector
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: cloudflare-tunnel-ingress-controller
+      app.kubernetes.io/component: controlled-cloudflared
+  endpoints:
+    - port: metrics
+      path: /metrics
