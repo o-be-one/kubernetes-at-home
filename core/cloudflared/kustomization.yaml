@@ -2,12 +2,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cloudflared-ingress-controller
 
+resources:
+- vmservicescrape.yaml
+- vmrule.yaml
+
 helmCharts:
 - name: cloudflare-tunnel-ingress-controller
   repo: https://helm.strrl.dev
   releaseName: cloudflare-tunnel-ingress-controller
   namespace: cloudflared-ingress-controller
-  version: 0.0.13
+  version: 0.1.0
   valuesInline:
     cloudflare:
       secretRef:
@@ -15,6 +19,12 @@ helmCharts:
         apiTokenKey: api_token
         accountIDKey: account_id
         tunnelNameKey: tunnel_name
+    cloudflared:
+      # podAntiAffinity: true only once >= 2 schedulable workers (else 2nd pod Pending)
+      replicaCount: 2
+      pdb:
+        enabled: true
+        minAvailable: 1
 
 generators:
   - secret-generator.yaml
