@@ -24,6 +24,9 @@ configMapGenerator:
 
 patches:
   - path: ksops.yaml
+  - path: crd-server-side-apply.yaml
+    target:
+      kind: CustomResourceDefinition
   # TODO: temporary, remove once talos-m6o-p5r is back (see file)
   - path: ha-antiaffinity.yaml
     target:
