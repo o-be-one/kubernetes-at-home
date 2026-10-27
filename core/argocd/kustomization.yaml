@@ -16,6 +16,8 @@ configMapGenerator:
   - name: argocd-cm
     literals:
       - kustomize.buildOptions=--enable-alpha-plugins --enable-exec
+      # Argo CD 3.0 no longer ignores this deprecated CRD field (Longhorn CRDs set it)
+      - 'resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition=jsonPointers: ["/spec/preserveUnknownFields"]'
     behavior: merge
   - name: argocd-cmd-params-cm
     literals:
