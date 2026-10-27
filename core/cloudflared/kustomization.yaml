@@ -26,5 +26,17 @@ helmCharts:
         enabled: true
         minAvailable: 1
 
+# Kustomize >= 5.8 (Argo CD 3.3+) no longer applies `namespace:` to Helm output
+# whose templates omit metadata.namespace (this chart's case): without this
+# patch the chart lands in the ArgoCD destination namespace (`cloudflared`).
+patches:
+- target:
+    kind: ServiceAccount|Role|RoleBinding|ConfigMap|Service|Deployment|PodDisruptionBudget
+    labelSelector: app.kubernetes.io/instance=cloudflare-tunnel-ingress-controller
+  patch: |-
+    - op: add
+      path: /metadata/namespace
+      value: cloudflared-ingress-controller
+
 generators:
   - secret-generator.yaml
