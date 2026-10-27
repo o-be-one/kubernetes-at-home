@@ -24,6 +24,11 @@ configMapGenerator:
 
 patches:
   - path: ksops.yaml
+  # TODO: temporary, remove once talos-m6o-p5r is back (see file)
+  - path: ha-antiaffinity.yaml
+    target:
+      kind: Deployment|StatefulSet
+      name: argocd-(repo-server|server|redis-ha-haproxy|redis-ha-server)
 
 # generators: # works only when ArgoCD is deployed
 #   - secret-generator.yaml
