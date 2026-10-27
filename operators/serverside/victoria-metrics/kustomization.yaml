@@ -17,3 +17,13 @@ helmCharts:
   releaseName: victoria-metrics-k8s-stack
   namespace: victoria-metrics-operator
   version: 0.66.1
+  valuesInline:
+    victoria-metrics-operator:
+      admissionWebhooks:
+        # helm genCA re-runs on every render: let cert-manager own the webhook CA
+        certManager:
+          enabled: true
+    grafana:
+      rbac:
+        # sidecar only reads its own namespace: no cluster-wide secrets access
+        namespaced: true
