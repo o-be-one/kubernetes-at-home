@@ -63,6 +63,7 @@ spec:
             timeoutSeconds: 10
             failureThreshold: 3
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       volumes:
         - name: homeassistant-data
           persistentVolumeClaim:

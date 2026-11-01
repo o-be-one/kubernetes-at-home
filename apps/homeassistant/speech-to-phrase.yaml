@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: speech-to-phrase-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: syno-storage
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: speech-to-phrase
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: speech-to-phrase
+  template:
+    metadata:
+      labels:
+        app: speech-to-phrase
+    spec:
+      containers:
+        - name: speech-to-phrase
+          image: rhasspy/wyoming-speech-to-phrase:1.4.3
+          args:
+            - --hass-websocket-uri=ws://homeassistant:8123/api/websocket
+            - --hass-token=$(HASS_TOKEN)
+            - --retrain-on-start
+            - --retrain-seconds=86400
+          env:
+            - name: HASS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: speech-to-phrase-secret
+                  key: hass-token
+          ports:
+            - containerPort: 10300
+          volumeMounts:
+            - name: speech-to-phrase-data
+              mountPath: /models
+              subPath: models
+            - name: speech-to-phrase-data
+              mountPath: /train
+              subPath: train
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2Gi
+            requests:
+              cpu: "0.1"
+              memory: 256Mi
+          readinessProbe:
+            tcpSocket:
+              port: 10300
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      volumes:
+        - name: speech-to-phrase-data
+          persistentVolumeClaim:
+            claimName: speech-to-phrase-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: speech-to-phrase
+spec:
+  selector:
+    app: speech-to-phrase
+  ports:
+    - protocol: TCP
+      port: 10300
+      targetPort: 10300
