@@ -6,6 +6,7 @@ resources:
   - configmap.yaml
   - homeassistant.yaml
   - httproute.yaml
+  - piper.yaml
   - speech-to-phrase.yaml
 
 generators:
